@@ -1,0 +1,32 @@
+
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
+class UnderlineTextField extends StatelessWidget {
+
+  final String text;
+
+  const UnderlineTextField({super.key, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      style: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
+      cursorColor: Colors.white,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.only(bottom: 10.0),
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white.withOpacity(0.6), width: 1.0),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white.withOpacity(1), width: 1.0),
+        ),
+        labelStyle: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
+        fillColor: Colors.white,
+        focusColor: Colors.white,
+        labelText: text,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+      ),
+    );
+  }
+}

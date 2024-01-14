@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shine/components/Buttons/DefaultElevatedButton.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -10,7 +11,7 @@ class Welcome extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/background-main.jpg"),
+            image: AssetImage("assets/images/main-bg.png"),
             fit: BoxFit.cover,
           ),
         ),
@@ -47,61 +48,13 @@ class Welcome extends StatelessWidget {
                     )
                   ],
                 ),
-                Column(
+                const Column(
                   children: [
-                    SizedBox(
-                      width: 270,
-                      height: 40,
-                      child: ElevatedButton(
-                          onPressed: (null),
-                          style: ElevatedButton.styleFrom(
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                            ),
-                            backgroundColor: const Color.fromRGBO(20, 20, 20, 100),
-                            disabledBackgroundColor: const Color.fromRGBO(20, 20, 20, 100),
-                          ),
-                          child: const Text(
-                            "Вход",
-                            style: TextStyle(
-                                height: 1,
-                                fontFamily: 'Montserrat',
-                                fontSize: 24,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white
-                            ),
-
-                          ),
-                      ),
-                    ),
+                    DefaultElevatedButton(text: 'Вход', action: 'login', width: 270, height: 40),
                     SizedBox(
                       height: 40,
                     ),
-                    SizedBox(
-                      width: 270,
-                      height: 40,
-                      child: ElevatedButton(
-                        onPressed: (null),
-                        style: ElevatedButton.styleFrom(
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          backgroundColor: const Color.fromRGBO(20, 20, 20, 100),
-                          disabledBackgroundColor: const Color.fromRGBO(20, 20, 20, 100),
-                        ),
-                        child: const Text(
-                          "Регистрация",
-                          style: TextStyle(
-                              height: 1,
-                              fontFamily: 'Montserrat',
-                              fontSize: 24,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white
-                          ),
-
-                        ),
-                      ),
-                    ),
+                    DefaultElevatedButton(text: 'Регистрация', action: 'registration', width: 270, height: 40),
                   ],
                 ),
                 const Padding(
