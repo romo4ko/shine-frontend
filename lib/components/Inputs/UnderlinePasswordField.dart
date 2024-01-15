@@ -18,7 +18,6 @@ class _UnderlinePasswordFieldState extends State<UnderlinePasswordField> {
 
   void changePasswordField() {
     isPasswordHidden = !isPasswordHidden;
-    print(1);
     setState(() { });
   }
 
@@ -35,6 +34,11 @@ class _UnderlinePasswordFieldState extends State<UnderlinePasswordField> {
       cursorColor: Colors.white,
       decoration: InputDecoration(
         suffixIcon: IconButton(
+          color: Colors.transparent,
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          hoverColor: Colors.transparent,
           icon: isPasswordHidden ?
           Icon(
               Icons.visibility_off,
@@ -50,7 +54,6 @@ class _UnderlinePasswordFieldState extends State<UnderlinePasswordField> {
             changePasswordField()
           },
         ),
-
         contentPadding: const EdgeInsets.only(bottom: 10.0),
         border: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white.withOpacity(0.6), width: 1.0),

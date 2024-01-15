@@ -13,7 +13,16 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Column(
       children: [
         Container(
-          color: Colors.black,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[
+                Colors.black,
+                Colors.transparent
+              ],
+            ),
+          ),
           height: 100,
           padding: const EdgeInsets.only(top: 50),
           child: Row(
@@ -43,23 +52,10 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
             ],
           ),
         ),
-        Container(
-          height: 50,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[
-                Colors.black,
-                Colors.transparent
-              ],
-            ),
-          ),
-        )
       ],
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(120);
+  Size get preferredSize => const Size.fromHeight(100);
 }

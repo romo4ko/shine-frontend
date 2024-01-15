@@ -29,9 +29,9 @@ class DefaultElevatedButton extends StatelessWidget {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
-          backgroundColor: const Color.fromRGBO(20, 20, 20, 100),
-          foregroundColor: const Color.fromRGBO(20, 20, 20, 100),
-          disabledBackgroundColor: const Color.fromRGBO(20, 20, 20, 100),
+          backgroundColor: Colors.black.withOpacity(0.4),
+          foregroundColor: Colors.black.withOpacity(0.5),
+          disabledBackgroundColor: Colors.black.withOpacity(1),
         ),
         child: Text(
           text,
