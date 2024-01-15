@@ -30,7 +30,7 @@ class Login extends StatelessWidget {
               children: [
                 UnderlineTextField(text: 'Логин'),
                 SizedBox(height: 20),
-                UnderlinePasswordField(),
+                UnderlinePasswordField(text: 'Пароль'),
                 SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,

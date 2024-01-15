@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class UnderlinePasswordField extends StatefulWidget {
-  const UnderlinePasswordField({super.key});
+
+  final String text;
+
+  const UnderlinePasswordField({super.key, required this.text});
 
   @override
   _UnderlinePasswordFieldState createState() => _UnderlinePasswordFieldState();
@@ -32,7 +35,17 @@ class _UnderlinePasswordFieldState extends State<UnderlinePasswordField> {
       cursorColor: Colors.white,
       decoration: InputDecoration(
         suffixIcon: IconButton(
-          icon: isPasswordHidden ? Icon(Icons.visibility_off_outlined, size: 30) : Icon(Icons.visibility, size: 30),
+          icon: isPasswordHidden ?
+          Icon(
+              Icons.visibility_off,
+              size: 30,
+              color: Colors.black.withOpacity(0.4)
+          ) :
+          Icon(
+              Icons.visibility,
+              size: 30,
+              color: Colors.black.withOpacity(0.4)
+          ),
           onPressed: () => {
             changePasswordField()
           },
@@ -48,7 +61,7 @@ class _UnderlinePasswordFieldState extends State<UnderlinePasswordField> {
         labelStyle: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
         fillColor: Colors.white,
         focusColor: Colors.white,
-        labelText: "Пароль",
+        labelText: widget.text,
         floatingLabelBehavior: FloatingLabelBehavior.never,
       ),
     );

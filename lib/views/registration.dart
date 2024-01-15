@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shine/components/DefaultAppBar.dart';
+import 'package:shine/components/Buttons/DefaultElevatedButton.dart';
+import 'package:shine/components/Inputs/UnderlineTextField.dart';
+import 'package:shine/components/Inputs/UnderlinePasswordField.dart';
+import 'package:shine/components/Inputs/UnderlineBirthdateField.dart';
 
 class Registration extends StatelessWidget {
   const Registration({super.key});
@@ -7,134 +12,35 @@ class Registration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: const DefaultAppBar(title: "ЗАРЕГИСТРИРОВАТЬСЯ"),
       body: Container(
+        padding: const EdgeInsets.only(top: 150, left: 20, right: 20, bottom: 60),
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/main-bg.jpg"),
+            image: AssetImage("assets/images/main-bg.png"),
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
               children: [
-                Container(),
-                const Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "СИЯНИЕ1",
-                      style: TextStyle(
-                          height: 1,
-                          fontFamily: 'Dejavu',
-                          fontSize: 90,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white
-                      ),
-                    ),
-                    Text(
-                      "найди свой свет",
-                      style: TextStyle(
-                          height: 1,
-                          fontFamily: 'kistyac',
-                          fontSize: 36,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white
-                      ),
-                    )
-                  ],
-                ),
-                Column(
-                  children: [
-                    SizedBox(
-                      width: 270,
-                      height: 40,
-                      child: ElevatedButton(
-                        onPressed: (null),
-                        style: ElevatedButton.styleFrom(
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          backgroundColor: const Color.fromRGBO(20, 20, 20, 100),
-                          disabledBackgroundColor: const Color.fromRGBO(20, 20, 20, 100),
-                        ),
-                        child: const Text(
-                          "Вход",
-                          style: TextStyle(
-                              height: 1,
-                              fontFamily: 'Montserrat',
-                              fontSize: 24,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white
-                          ),
-
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    SizedBox(
-                      width: 270,
-                      height: 40,
-                      child: ElevatedButton(
-                        onPressed: (null),
-                        style: ElevatedButton.styleFrom(
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          backgroundColor: const Color.fromRGBO(20, 20, 20, 100),
-                          disabledBackgroundColor: const Color.fromRGBO(20, 20, 20, 100),
-                        ),
-                        child: const Text(
-                          "Регистрация",
-                          style: TextStyle(
-                              height: 1,
-                              fontFamily: 'Montserrat',
-                              fontSize: 24,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white
-                          ),
-
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50),
-                  child: Column(
-                    children: [
-                      Text(
-                          'Продолжая пользоваться нашим приложение вы соглашаетесь с политикой конфиденциальности и правилами пользования',
-                          style: TextStyle(
-                              fontFamily: 'Krub',
-                              color: Colors.white,
-                              fontSize: 10
-                          ),
-                          textAlign: TextAlign.center
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                          'Проблемы со входом',
-                          style: TextStyle(
-                              fontFamily: 'Krub',
-                              color: Colors.white,
-                              fontSize: 10
-                          ),
-                          textAlign: TextAlign.center
-                      ),
-                    ],
-                  ),
-                )
+                UnderlineTextField(text: 'Логин'),
+                SizedBox(height: 20),
+                UnderlineTextField(text: 'Ваш Email'),
+                SizedBox(height: 20),
+                UnderlinePasswordField(text: 'Пароль'),
+                SizedBox(height: 20),
+                UnderlinePasswordField(text: 'Подтвердите пароль'),
+                SizedBox(height: 20),
+                UnderlineBirthdateField(text: 'Дата рождения'),
               ],
             ),
-          ),
+            DefaultElevatedButton(text: 'Регистрация', action: 'login', width: 270, height: 40),
+          ],
         ),
       ),
     );
