@@ -18,7 +18,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: <Color>[
-                Colors.black,
+                // Colors.black,
+                Colors.transparent,
                 Colors.transparent
               ],
             ),

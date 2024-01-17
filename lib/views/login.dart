@@ -6,9 +6,14 @@ import 'package:shine/components/Buttons/DefaultElevatedButton.dart';
 import 'package:shine/components/Inputs/UnderlineTextField.dart';
 import 'package:shine/components/Inputs/UnderlinePasswordField.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +48,7 @@ class Login extends StatelessWidget {
                   )
                 ],
               ),
-              DefaultElevatedButton(text: 'Войти', action: '', width: 270, height: 40),
+              DefaultElevatedButton(text: 'Войти', action: 'purpose', width: 270, height: 40),
             ],
           ),
         ),

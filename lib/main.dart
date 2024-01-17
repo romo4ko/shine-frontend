@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shine/views/purpose.dart';
 import 'views/welcome.dart';
 import 'views/registration.dart';
 import 'views/login.dart';
@@ -23,6 +24,7 @@ class App extends StatelessWidget {
         'welcome': (context) => const Welcome(),
         'login': (context) => const Login(),
         'registration': (context) => const Registration(),
+        'purpose': (context) => const Purpose(),
       },
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.black

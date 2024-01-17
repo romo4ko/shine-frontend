@@ -33,24 +33,27 @@ class _RegistrationState extends State<Registration> {
               fit: BoxFit.cover,
             ),
           ),
-          child: const Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(
-                children: [
-                  UnderlineTextField(text: 'Логин'),
-                  SizedBox(height: 20),
-                  UnderlineTextField(text: 'Ваш Email'),
-                  SizedBox(height: 20),
-                  UnderlinePasswordField(text: 'Пароль'),
-                  SizedBox(height: 20),
-                  UnderlinePasswordField(text: 'Подтвердите пароль'),
-                  SizedBox(height: 20),
-                  UnderlineBirthdateField(text: 'Дата рождения'),
-                ],
+              Form(
+                key: _formKey,
+                child: const Column(
+                  children: [
+                    UnderlineTextField(text: 'Логин'),
+                    SizedBox(height: 20),
+                    UnderlineTextField(text: 'Ваш Email'),
+                    SizedBox(height: 20),
+                    UnderlinePasswordField(text: 'Пароль'),
+                    SizedBox(height: 20),
+                    UnderlinePasswordField(text: 'Подтвердите пароль'),
+                    SizedBox(height: 20),
+                    UnderlineBirthdateField(text: 'Дата рождения'),
+                  ],
+                ),
               ),
-              DefaultElevatedButton(text: 'Регистрация', action: '', width: 270, height: 40),
+              const DefaultElevatedButton(text: 'Регистрация', action: 'purpose', width: 270, height: 40),
             ],
           ),
         ),

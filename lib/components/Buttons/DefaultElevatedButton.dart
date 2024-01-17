@@ -35,6 +35,7 @@ class DefaultElevatedButton extends StatelessWidget {
         ),
         child: Text(
           text,
+          textAlign: TextAlign.start,
           style: const TextStyle(
               height: 1,
               fontFamily: 'Montserrat',
@@ -42,7 +43,6 @@ class DefaultElevatedButton extends StatelessWidget {
               fontWeight: FontWeight.w400,
               color: Colors.white
           ),
-
         ),
       ),
     );
