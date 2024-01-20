@@ -8,7 +8,7 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: Container(
         constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
         decoration: const BoxDecoration(

@@ -49,11 +49,10 @@ class _TapeState extends State<Tape> {
                   OptionElevatedButton(text: 'Дружба', action: '', width: 350, height: 40, aligment: Alignment.centerLeft),
                   SizedBox(height: 20),
                   OptionElevatedButton(text: 'Виртуальное общение', action: '', width: 350, height: 40, aligment: Alignment.centerLeft),
-
                 ],
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
                   "Ваши цели смогут увидеть только те люди, у которых указаны такие же цели.",
                   textAlign: TextAlign.start,

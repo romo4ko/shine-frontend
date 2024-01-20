@@ -19,7 +19,7 @@ class _PurposeState extends State<Purpose> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       appBar: const DefaultAppBar(title: "ЦЕЛЬ ЗНАКОМСТВА"),
       body: SingleChildScrollView(
         child: Container(
@@ -27,7 +27,7 @@ class _PurposeState extends State<Purpose> {
               minHeight: MediaQuery.of(context).size.height,
               minWidth: MediaQuery.of(context).size.width
           ),
-          padding: const EdgeInsets.only(top: 150, left: 20, right: 20, bottom: 30),
+          padding: const EdgeInsets.only(top: 150),
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/purpose-bg.png"),
@@ -38,32 +38,51 @@ class _PurposeState extends State<Purpose> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Column(
-                children: [
-                  OptionElevatedButton(text: 'Свидание', action: '', width: 350, height: 40, aligment: Alignment.centerLeft),
-                  SizedBox(height: 20),
-                  OptionElevatedButton(text: 'Флирт', action: '', width: 350, height: 40, aligment: Alignment.centerLeft),
-                  SizedBox(height: 20),
-                  OptionElevatedButton(text: 'Отношения', action: '', width: 350, height: 40, aligment: Alignment.centerLeft),
-                  SizedBox(height: 20),
-                  OptionElevatedButton(text: 'Дружба', action: '', width: 350, height: 40, aligment: Alignment.centerLeft),
-                  SizedBox(height: 20),
-                  OptionElevatedButton(text: 'Виртуальное общение', action: '', width: 350, height: 40, aligment: Alignment.centerLeft),
-
-                ],
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: const Column(
+                  children: [
+                    OptionElevatedButton(text: 'Свидание', action: 'information', width: 350, height: 40, aligment: Alignment.centerLeft),
+                    SizedBox(height: 20),
+                    OptionElevatedButton(text: 'Флирт', action: 'information', width: 350, height: 40, aligment: Alignment.centerLeft),
+                    SizedBox(height: 20),
+                    OptionElevatedButton(text: 'Отношения', action: 'information', width: 350, height: 40, aligment: Alignment.centerLeft),
+                    SizedBox(height: 20),
+                    OptionElevatedButton(text: 'Дружба', action: 'information', width: 350, height: 40, aligment: Alignment.centerLeft),
+                    SizedBox(height: 20),
+                    OptionElevatedButton(text: 'Виртуальное общение', action: 'information', width: 350, height: 40, aligment: Alignment.centerLeft),
+                  ],
+                ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                child: Text(
-                  "Ваши цели смогут увидеть только те люди, у которых указаны такие же цели.",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      height: 1,
-                      fontFamily: 'kistyac',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white.withOpacity(0.6),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 150,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/bottom-shadow.png"),
+                    fit: BoxFit.cover,
                   ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(),
+                    Padding(
+                      padding: EdgeInsets.only(left: 20, right: 20, bottom: 30),
+                      child: Text(
+                        "Ваши цели смогут увидеть только те люди, у которых указаны такие же цели.",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            height: 1,
+                            fontFamily: 'kistyac',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white.withOpacity(0.6),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

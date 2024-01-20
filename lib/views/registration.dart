@@ -21,7 +21,7 @@ class _RegistrationState extends State<Registration> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       appBar: const DefaultAppBar(title: "ЗАРЕГИСТРИРОВАТЬСЯ"),
       body: SingleChildScrollView(
         child: Container(

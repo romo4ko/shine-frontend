@@ -18,7 +18,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       appBar: const DefaultAppBar(title: "АВТОРИЗОВАТЬСЯ"),
       body: SingleChildScrollView(
         child: Container(
