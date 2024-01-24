@@ -42,7 +42,7 @@ class _PurposeState extends State<Purpose> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: const Column(
                   children: [
-                    OptionElevatedButton(text: 'Свидание', action: 'information', width: 350, height: 40, aligment: Alignment.centerLeft),
+                    OptionElevatedButton(text: 'Свидания', action: 'information', width: 350, height: 40, aligment: Alignment.centerLeft),
                     SizedBox(height: 20),
                     OptionElevatedButton(text: 'Флирт', action: 'information', width: 350, height: 40, aligment: Alignment.centerLeft),
                     SizedBox(height: 20),
@@ -71,7 +71,7 @@ class _PurposeState extends State<Purpose> {
                     Padding(
                       padding: EdgeInsets.only(left: 20, right: 20, bottom: 30),
                       child: Text(
-                        "Ваши цели смогут увидеть только те люди, у которых указаны такие же цели.",
+                        "Ваши цели смогут увидеть только те люди, у которых так же указаны цели.",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                             height: 1,

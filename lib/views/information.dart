@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:shine/components/Buttons/OptionElevatedButton.dart';
 import 'package:shine/components/DefaultAppBar.dart';
 import 'package:shine/components/Inputs/FilledTextField.dart';
+import 'package:shine/components/Dropdowns/DefaultDropdown.dart';
 
 import '../components/Buttons/DefaultElevatedButton.dart';
 
@@ -38,21 +39,36 @@ class _InformationState extends State<Information> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Column(
+              Column(
                 children: [
                   FilledTextField(title: 'Как вас зовут?', placeholder: 'Имя'),
                   SizedBox(height: 20),
-                  FilledTextField(title: 'Когда у вас день рождения?', placeholder: 'Введите дату рождения'),
-                  SizedBox(height: 20),
                   FilledTextField(title: 'Местоположение', placeholder: 'Укажите город для поиска'),
                   SizedBox(height: 20),
-                  FilledTextField(title: 'Семейное положение', placeholder: 'Выбрать семейное положение '),
+                  DefaultDropdown(values: [
+                    "Женат/замужем",
+                    "Свободен/свободна",
+                    "В свободных отношениях"
+                  ],
+                    title: 'Семейное положение',
+                    placeholder: 'Выбрать семейное положение '
+                  ),
                   SizedBox(height: 20),
-                  FilledTextField(title: 'Field', placeholder: 'Text'),
+                  DefaultDropdown(values: [
+                    "Женат/замужем",
+                    "Свободен/свободна",
+                    "В свободных отношениях"
+                  ],
+                    title: 'У вас есть дети?',
+                  ),
                   SizedBox(height: 20),
-                  FilledTextField(title: 'Field', placeholder: 'Text'),
-                  SizedBox(height: 20),
-                  FilledTextField(title: 'Field', placeholder: 'Text'),
+                  DefaultDropdown(values: [
+                    "Женат/замужем",
+                    "Свободен/свободна",
+                    "В свободных отношениях"
+                  ],
+                    title: 'Алкоголь?',
+                  ),
                 ],
               ),
               Padding(

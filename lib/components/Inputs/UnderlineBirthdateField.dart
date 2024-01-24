@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:masked_text/masked_text.dart';
 
-class UnderlineBirthdateField extends StatelessWidget {
+class UnderlineBirthdateField extends StatefulWidget {
 
   final String text;
 
   const UnderlineBirthdateField({super.key, required this.text});
 
+  @override
+  State<UnderlineBirthdateField> createState() => _UnderlineBirthdateFieldState();
+}
+
+class _UnderlineBirthdateFieldState extends State<UnderlineBirthdateField> {
   @override
   Widget build(BuildContext context) {
     return MaskedTextField(
@@ -26,7 +31,7 @@ class UnderlineBirthdateField extends StatelessWidget {
         labelStyle: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
         fillColor: Colors.white,
         focusColor: Colors.white,
-        labelText: text,
+        labelText: widget.text,
         floatingLabelBehavior: FloatingLabelBehavior.never,
       ),
     );

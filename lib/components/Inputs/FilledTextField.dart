@@ -2,13 +2,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class FilledTextField extends StatelessWidget {
+class FilledTextField extends StatefulWidget {
 
   final String title;
   final String placeholder;
 
   const FilledTextField({super.key, required this.title, required this.placeholder});
 
+  @override
+  State<FilledTextField> createState() => _FilledTextFieldState();
+}
+
+class _FilledTextFieldState extends State<FilledTextField> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -17,7 +22,7 @@ class FilledTextField extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: Text(
-            title,
+            widget.title,
             textAlign: TextAlign.start,
             style: TextStyle(
                 color: Colors.black.withOpacity(0.6),
@@ -30,7 +35,7 @@ class FilledTextField extends StatelessWidget {
           style: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
           cursorColor: Colors.white,
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(left: 10.0),
+            contentPadding: const EdgeInsets.only(left: 10.0),
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(10.0),
@@ -43,7 +48,7 @@ class FilledTextField extends StatelessWidget {
             fillColor: const Color.fromRGBO(20, 20, 20, 0.8),
             filled: true,
             focusColor: Colors.white,
-            labelText: placeholder,
+            labelText: widget.placeholder,
             floatingLabelBehavior: FloatingLabelBehavior.never,
           ),
         ),

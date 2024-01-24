@@ -1,13 +1,17 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class UnderlineTextField extends StatelessWidget {
+class UnderlineTextField extends StatefulWidget {
 
   final String text;
 
   const UnderlineTextField({super.key, required this.text});
 
+  @override
+  State<UnderlineTextField> createState() => _UnderlineTextFieldState();
+}
+
+class _UnderlineTextFieldState extends State<UnderlineTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -24,7 +28,7 @@ class UnderlineTextField extends StatelessWidget {
         labelStyle: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
         fillColor: Colors.white,
         focusColor: Colors.white,
-        labelText: text,
+        labelText: widget.text,
         floatingLabelBehavior: FloatingLabelBehavior.never,
       ),
     );

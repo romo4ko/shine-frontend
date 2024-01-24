@@ -34,3 +34,12 @@ class App extends StatelessWidget {
     );
   }
 }
+
+Route _createRoute(widget) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => widget,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return child;
+    },
+  );
+}
