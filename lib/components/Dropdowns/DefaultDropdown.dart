@@ -53,8 +53,8 @@ class _DefaultDropdownState extends State<DefaultDropdown> {
               hint: Text(
                   widget.placeholder,
                   textAlign: TextAlign.start,
-                  style: const TextStyle(
-                      color: Colors.white,
+                  style: TextStyle(
+                      color: Colors.white.withOpacity(0.6),
                       fontSize: 18,
                       fontFamily: 'Inter'
                   )
