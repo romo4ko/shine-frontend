@@ -1,11 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shine/components/Buttons/OptionElevatedButton.dart';
 import 'package:shine/components/DefaultAppBar.dart';
-import 'package:shine/components/Buttons/DefaultElevatedButton.dart';
-import 'package:shine/components/Inputs/UnderlineTextField.dart';
-import 'package:shine/components/Inputs/UnderlinePasswordField.dart';
+import '../components/Common/Buttons/buttons.dart';
 
 class Purpose extends StatefulWidget {
   const Purpose({super.key});
@@ -30,7 +27,7 @@ class _PurposeState extends State<Purpose> {
           padding: const EdgeInsets.only(top: 150),
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/purpose-bg.png"),
+              image: AssetImage("assets/images/backgrounds/purpose-bg.png"),
               fit: BoxFit.cover,
             ),
           ),

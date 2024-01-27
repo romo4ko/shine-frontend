@@ -2,14 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shine/components/DefaultAppBar.dart';
-import 'package:shine/components/Inputs/CityTextField.dart';
-import 'package:shine/components/Inputs/FilledTextField.dart';
-import 'package:shine/components/Dropdowns/DefaultDropdown.dart';
-import 'package:shine/components/Inputs/GenderCheckbox.dart';
-import 'package:shine/components/Inputs/ImagesForm.dart';
-import 'package:shine/components/Inputs/TagsArea.dart';
-import 'package:shine/components/Inputs/TextArea.dart';
-import '../components/Buttons/DefaultElevatedButton.dart';
+
+import '../components/Common/Buttons/buttons.dart';
+import '../components/Common/Dropdowns/dropdowns.dart';
+import '../components/Common/Inputs/inputs.dart';
+
 
 class Information extends StatefulWidget {
   const Information({super.key});
@@ -34,7 +31,7 @@ class _InformationState extends State<Information> {
           padding: const EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 40),
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/info-bg.png"),
+              image: AssetImage("assets/images/backgrounds/info-bg.png"),
               fit: BoxFit.fitHeight,
             ),
           ),
@@ -94,7 +91,7 @@ class _InformationState extends State<Information> {
                   ),
                   SizedBox(height: 20),
                   ImagesForm(
-                    title: 'Ваши фото',
+                    title: 'Ваши фото*',
                   ),
                 ],
               ),

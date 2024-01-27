@@ -37,8 +37,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
                   Navigator.pop(context);
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: SvgPicture.asset('assets/icons/arrow-back.svg'),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: SvgPicture.asset('assets/icons/arrow-back.svg', width: 12),
                 ),
               ),
               Text(
@@ -51,7 +51,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
                     color: Colors.white
                 ),
               ),
-              Container(width: 40,)
+              Container(width: 52,)
             ],
           ),
         ),

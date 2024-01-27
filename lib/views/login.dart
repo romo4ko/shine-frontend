@@ -2,9 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shine/components/DefaultAppBar.dart';
-import 'package:shine/components/Buttons/DefaultElevatedButton.dart';
-import 'package:shine/components/Inputs/UnderlineTextField.dart';
-import 'package:shine/components/Inputs/UnderlinePasswordField.dart';
+import '../components/Common/Buttons/buttons.dart';
+import '../components/Common/Inputs/inputs.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -26,7 +25,7 @@ class _LoginState extends State<Login> {
           padding: const EdgeInsets.only(top: 140, left: 20, right: 20, bottom: 60),
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/login-bg.png"),
+              image: AssetImage("assets/images/backgrounds/login-bg.png"),
               fit: BoxFit.cover,
             ),
           ),

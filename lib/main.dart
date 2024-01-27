@@ -31,7 +31,8 @@ class App extends StatelessWidget {
         'filters': (context) => const Filters(),
       },
       theme: ThemeData(
-          scaffoldBackgroundColor: Colors.black
+        scaffoldBackgroundColor: Colors.black,
+        primaryColor: const Color.fromRGBO(20, 20, 20, 1),
       ),
     );
   }

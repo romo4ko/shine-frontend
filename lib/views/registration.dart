@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shine/components/DefaultAppBar.dart';
-import 'package:shine/components/Buttons/DefaultElevatedButton.dart';
-import 'package:shine/components/Inputs/UnderlineTextField.dart';
-import 'package:shine/components/Inputs/UnderlinePasswordField.dart';
-import 'package:shine/components/Inputs/UnderlineBirthdateField.dart';
+import '../components/Common/Buttons/buttons.dart';
+import '../components/Common/Inputs/inputs.dart';
 
 class Registration extends StatefulWidget {
   const Registration({super.key});
@@ -29,7 +27,7 @@ class _RegistrationState extends State<Registration> {
           padding: const EdgeInsets.only(top: 140, left: 20, right: 20, bottom: 60),
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/register-bg.png"),
+              image: AssetImage("assets/images/backgrounds/register-bg.png"),
               fit: BoxFit.cover,
             ),
           ),

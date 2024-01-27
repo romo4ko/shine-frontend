@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shine/components/Buttons/DefaultElevatedButton.dart';
+import '../components/Common/Buttons/buttons.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -13,7 +13,7 @@ class Welcome extends StatelessWidget {
         constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/main-bg.png"),
+            image: AssetImage("assets/images/backgrounds/main-bg.png"),
             fit: BoxFit.cover,
           ),
         ),

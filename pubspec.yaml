@@ -40,6 +40,7 @@ dependencies:
   masked_text: ^1.1.2
   path_provider: ^2.1.2
   image_picker: ^1.0.7
+  flutter_xlider: ^3.5.0
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/backgrounds/
     - assets/icons/add-image.svg
     - assets/icons/arrow-back.svg
 
