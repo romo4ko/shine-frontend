@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shine/views/filters.dart';
 import 'package:shine/views/information.dart';
 import 'package:shine/views/purpose.dart';
 import 'views/welcome.dart';
@@ -27,6 +28,7 @@ class App extends StatelessWidget {
         'registration': (context) => const Registration(),
         'purpose': (context) => const Purpose(),
         'information': (context) => const Information(),
+        'filters': (context) => const Filters(),
       },
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.black

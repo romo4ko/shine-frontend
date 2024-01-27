@@ -1,15 +1,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shine/components/Buttons/OptionElevatedButton.dart';
 import 'package:shine/components/DefaultAppBar.dart';
 import 'package:shine/components/Inputs/CityTextField.dart';
 import 'package:shine/components/Inputs/FilledTextField.dart';
 import 'package:shine/components/Dropdowns/DefaultDropdown.dart';
+import 'package:shine/components/Inputs/GenderCheckbox.dart';
 import 'package:shine/components/Inputs/ImagesForm.dart';
 import 'package:shine/components/Inputs/TagsArea.dart';
 import 'package:shine/components/Inputs/TextArea.dart';
-
 import '../components/Buttons/DefaultElevatedButton.dart';
 
 class Information extends StatefulWidget {
@@ -32,7 +31,7 @@ class _InformationState extends State<Information> {
               minHeight: MediaQuery.of(context).size.height,
               minWidth: MediaQuery.of(context).size.width
           ),
-          padding: const EdgeInsets.only(top: 150, left: 20, right: 20, bottom: 40),
+          padding: const EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 40),
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/info-bg.png"),
@@ -45,9 +44,11 @@ class _InformationState extends State<Information> {
             children: [
               const Column(
                 children: [
-                  FilledTextField(title: 'Как вас зовут?', placeholder: 'Имя'),
+                  FilledTextField(title: 'Как вас зовут?*', placeholder: 'Имя'),
                   SizedBox(height: 20),
-                  CityTextField(title: 'Местоположение', placeholder: 'Укажите город для поиска'),
+                  GenderCheckbox(title: 'Пол*'),
+                  SizedBox(height: 20),
+                  CityTextField(title: 'Местоположение*', placeholder: 'Укажите город для поиска'),
                   SizedBox(height: 20),
                   DefaultDropdown(values: [
                     'Женат/замужем',
@@ -93,8 +94,7 @@ class _InformationState extends State<Information> {
                   ),
                   SizedBox(height: 20),
                   ImagesForm(
-                    title: 'Хобби/Интересы',
-                    placeholder: '#музыка #спорт #рисование #растения #IT #татуировки #искусство #машины #дизайн #еда #кино #театры #фильмы #сериалы',
+                    title: 'Ваши фото',
                   ),
                 ],
               ),
@@ -112,7 +112,7 @@ class _InformationState extends State<Information> {
                   ),
                 ),
               ),
-              const DefaultElevatedButton(text: 'Сохранить', action: 'purpose', width: 270, height: 40),
+              const DefaultElevatedButton(text: 'Сохранить', action: 'filters', width: 270, height: 40),
             ],
           ),
         ),

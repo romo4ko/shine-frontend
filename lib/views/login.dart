@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
       body: SingleChildScrollView(
         child: Container(
           constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
-          padding: const EdgeInsets.only(top: 150, left: 20, right: 20, bottom: 60),
+          padding: const EdgeInsets.only(top: 140, left: 20, right: 20, bottom: 60),
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/login-bg.png"),

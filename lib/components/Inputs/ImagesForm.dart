@@ -1,16 +1,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class ImagesForm extends StatefulWidget {
 
   final String title;
-  final String placeholder;
 
   const ImagesForm({
     super.key,
     required this.title,
-    required this.placeholder,
   });
 
   @override
@@ -18,6 +18,7 @@ class ImagesForm extends StatefulWidget {
 }
 
 class _ImagesFormState extends State<ImagesForm> {
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,29 +43,50 @@ class _ImagesFormState extends State<ImagesForm> {
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               color: Color.fromRGBO(20, 20, 20, 0.8),
-            )
+            ),
+            child: Center(
+              child: SvgPicture.asset('assets/icons/add-image.svg', width: 50),
+            ),
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           Column(children: [
-            Container(
-              height: 115,
-              width: MediaQuery.of(context).size.width/2-30,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                color: Color.fromRGBO(20, 20, 20, 0.8),
-              ),
+            GestureDetector(
+              onTap: () {
+                print(1);
+              },
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: SvgPicture.asset('assets/icons/add-image.svg'),
+                height: 115,
+                width: MediaQuery.of(context).size.width/2-30,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  color: Color.fromRGBO(20, 20, 20, 0.8),
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: Center(
+                        child: SvgPicture.asset('assets/icons/add-image.svg', width: 50),
+                    ),
+                  ),
+                ),
               ),
             ),
-            SizedBox(height: 20),
-            Container(
-              height: 115,
-              width: MediaQuery.of(context).size.width/2-30,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                color: Color.fromRGBO(20, 20, 20, 0.8),
+            const SizedBox(height: 20),
+            GestureDetector(
+              onTap: () {
+              },
+              child: Container(
+                height: 115,
+                width: MediaQuery.of(context).size.width/2-30,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  color: Color.fromRGBO(20, 20, 20, 0.8),
+                ),
+                child: Center(
+                  child: SvgPicture.asset('assets/icons/add-image.svg', width: 50),
+                ),
               ),
             )
           ],)

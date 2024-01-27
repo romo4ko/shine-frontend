@@ -14,10 +14,18 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       children: [
         Container(
           decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/appbar-bg.png"),
-              fit: BoxFit.cover,
-            ),
+            // image: DecorationImage(
+            //   image: AssetImage("assets/images/appbar-bg.png"),
+            //   fit: BoxFit.cover,
+            // ),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.black,
+                Colors.black,
+                Colors.transparent
+              ]),
           ),
           height: 150,
           child: Row(
@@ -29,7 +37,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
                   Navigator.pop(context);
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: SvgPicture.asset('assets/icons/arrow-back.svg'),
                 ),
               ),
@@ -52,5 +60,5 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(150);
+  Size get preferredSize => const Size.fromHeight(120);
 }

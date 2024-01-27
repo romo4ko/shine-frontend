@@ -27,7 +27,7 @@ class _TapeState extends State<Tape> {
               minHeight: MediaQuery.of(context).size.height,
               minWidth: MediaQuery.of(context).size.width
           ),
-          padding: const EdgeInsets.only(top: 150, left: 20, right: 20, bottom: 30),
+          padding: const EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 30),
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/purpose-bg.png"),

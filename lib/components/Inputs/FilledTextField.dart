@@ -44,7 +44,7 @@ class _FilledTextFieldState extends State<FilledTextField> {
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(10.0),
             ),
-            labelStyle: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
+            labelStyle: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 18, fontFamily: 'Inter'),
             fillColor: const Color.fromRGBO(20, 20, 20, 0.8),
             filled: true,
             focusColor: Colors.white,
