@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
+class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final String title;
 
-  const DefaultAppBar({super.key, required this.title});
+  const MainAppBar({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {

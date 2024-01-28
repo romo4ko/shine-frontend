@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shine/views/bot.dart';
 import 'package:shine/views/filters.dart';
 import 'package:shine/views/information.dart';
 import 'package:shine/views/purpose.dart';
@@ -29,6 +30,7 @@ class App extends StatelessWidget {
         'purpose': (context) => const Purpose(),
         'information': (context) => const Information(),
         'filters': (context) => const Filters(),
+        'bot': (context) => const Bot(),
       },
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.black,

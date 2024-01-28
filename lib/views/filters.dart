@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shine/components/DefaultAppBar.dart';
+import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
 
+import '../components/Common/Buttons/buttons.dart';
 import '../components/Filters/filters.dart';
 
 class Filters extends StatefulWidget {
@@ -25,7 +26,7 @@ class _FiltersState extends State<Filters> {
               minHeight: MediaQuery.of(context).size.height,
               minWidth: MediaQuery.of(context).size.width
           ),
-          padding: const EdgeInsets.only(top: 150),
+          padding: const EdgeInsets.only(top: 150, left: 20, right: 20, bottom: 40),
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/backgrounds/filters-bg.png"),
@@ -37,7 +38,6 @@ class _FiltersState extends State<Filters> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
                     GenderSelectButtonGroup(),
@@ -47,6 +47,25 @@ class _FiltersState extends State<Filters> {
                     RangeDistanceSlider()
                    ],
                 ),
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8, right: 4, bottom: 20),
+                    child: Text(
+                      "Найди свою половинку, не потеряв себя в фильтрах!",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        height: 1,
+                        fontFamily: 'kistyac',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white.withOpacity(0.8),
+                      ),
+                    ),
+                  ),
+                  const DefaultElevatedButton(text: 'Сохранить', action: 'bot', width: 270, height: 40),
+                ],
               ),
             ],
           ),

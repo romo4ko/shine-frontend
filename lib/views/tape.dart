@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shine/components/DefaultAppBar.dart';
+import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
 import '../components/Common/Buttons/buttons.dart';
 
 class Tape extends StatefulWidget {

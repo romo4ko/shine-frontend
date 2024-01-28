@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shine/components/DefaultAppBar.dart';
+import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
 
 import '../components/Common/Buttons/buttons.dart';
 import '../components/Common/Dropdowns/dropdowns.dart';
@@ -105,7 +105,7 @@ class _InformationState extends State<Information> {
                     fontFamily: 'kistyac',
                     fontSize: 20,
                     fontWeight: FontWeight.w400,
-                    color: Colors.white.withOpacity(0.6),
+                    color: Colors.white.withOpacity(0.8),
                   ),
                 ),
               ),
