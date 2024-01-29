@@ -5,7 +5,7 @@ import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
 
 import '../components/Common/Buttons/buttons.dart';
 import '../components/Common/Dropdowns/dropdowns.dart';
-import '../components/Common/Inputs/inputs.dart';
+import 'package:shine/components/Information/information.dart';
 
 
 class Information extends StatefulWidget {
