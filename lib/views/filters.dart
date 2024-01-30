@@ -64,7 +64,7 @@ class _FiltersState extends State<Filters> {
                       ),
                     ),
                   ),
-                  const DefaultElevatedButton(text: 'Сохранить', action: 'bot', width: 270, height: 40),
+                  const DefaultElevatedButton(text: 'Сохранить', action: 'tape', width: 270, height: 40),
                 ],
               ),
             ],

@@ -4,6 +4,7 @@ import 'package:shine/views/bot.dart';
 import 'package:shine/views/filters.dart';
 import 'package:shine/views/information.dart';
 import 'package:shine/views/purpose.dart';
+import 'package:shine/views/tape.dart';
 import 'views/welcome.dart';
 import 'views/registration.dart';
 import 'views/login.dart';
@@ -31,6 +32,7 @@ class App extends StatelessWidget {
         'information': (context) => const Information(),
         'filters': (context) => const Filters(),
         'bot': (context) => const Bot(),
+        'tape': (context) => const Tape(),
       },
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.black,

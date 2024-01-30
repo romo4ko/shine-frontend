@@ -69,6 +69,7 @@ flutter:
     - assets/images/
     - assets/images/backgrounds/
     - assets/icons/add-image.svg
+    - assets/icons/star-bot.svg
     - assets/icons/arrow-back.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
