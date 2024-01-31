@@ -24,7 +24,7 @@ class _PurposeState extends State<Purpose> {
               minHeight: MediaQuery.of(context).size.height,
               minWidth: MediaQuery.of(context).size.width
           ),
-          padding: const EdgeInsets.only(top: 150),
+          padding: const EdgeInsets.only(top: 140),
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/backgrounds/purpose-bg.png"),

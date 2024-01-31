@@ -69,8 +69,12 @@ flutter:
     - assets/images/
     - assets/images/backgrounds/
     - assets/icons/add-image.svg
-    - assets/icons/star-bot.svg
     - assets/icons/arrow-back.svg
+    - assets/icons/star-bot.svg
+    - assets/icons/heart.svg
+    - assets/icons/cards.svg
+    - assets/icons/chats.svg
+    - assets/icons/human.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

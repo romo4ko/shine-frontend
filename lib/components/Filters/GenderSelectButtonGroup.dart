@@ -43,7 +43,7 @@ class _GenderSelectButtonGroupState extends State<GenderSelectButtonGroup> {
                 shadowColor: Colors.transparent,
                 surfaceTintColor: Colors.transparent,
               ),
-              child: const Align(
+              child: Align(
                 child: Text(
                   "Парни",
                   textAlign: TextAlign.start,
@@ -52,7 +52,7 @@ class _GenderSelectButtonGroupState extends State<GenderSelectButtonGroup> {
                       fontFamily: 'Inter',
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
-                      color: Colors.white
+                      color: (selected == 'men' ? Colors.white : Colors.white.withOpacity(0.6))
                   ),
                 ),
               ),
@@ -77,7 +77,7 @@ class _GenderSelectButtonGroupState extends State<GenderSelectButtonGroup> {
                 shadowColor: Colors.transparent,
                 surfaceTintColor: Colors.transparent,
               ),
-              child: const Align(
+              child: Align(
                 child: Text(
                   "Девушки",
                   textAlign: TextAlign.start,
@@ -86,7 +86,7 @@ class _GenderSelectButtonGroupState extends State<GenderSelectButtonGroup> {
                       fontFamily: 'Inter',
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
-                      color: Colors.white
+                      color: (selected == 'women' ? Colors.white : Colors.white.withOpacity(0.6))
                   ),
                 ),
               ),
@@ -111,7 +111,7 @@ class _GenderSelectButtonGroupState extends State<GenderSelectButtonGroup> {
                 shadowColor: Colors.transparent,
                 surfaceTintColor: Colors.transparent,
               ),
-              child: const Align(
+              child: Align(
                 child: Text(
                   "Не важно",
                   textAlign: TextAlign.start,
@@ -120,7 +120,7 @@ class _GenderSelectButtonGroupState extends State<GenderSelectButtonGroup> {
                       fontFamily: 'Inter',
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
-                      color: Colors.white
+                      color: (selected == 'all' ? Colors.white : Colors.white.withOpacity(0.6))
                   ),
                 ),
               ),

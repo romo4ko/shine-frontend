@@ -13,7 +13,7 @@ class RangeDistanceSlider extends StatefulWidget {
 class _RangeDistanceSliderState extends State<RangeDistanceSlider> {
 
   double _lowerValue = 1;
-  double _upperValue = 1000;
+  double _upperValue = 100;
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +50,9 @@ class _RangeDistanceSliderState extends State<RangeDistanceSlider> {
           values: [_lowerValue, _upperValue],
           rangeSlider: true,
           min: 1,
-          max: 1000,
-          step: FlutterSliderStep(step: 1),
-          minimumDistance: 1,
+          max: 100,
+          // step: const FlutterSliderStep(step: 5),
+          minimumDistance: 4,
           disabled: false,
           tooltip: FlutterSliderTooltip(
               disabled: true
