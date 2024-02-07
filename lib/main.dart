@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shine/views/bot.dart';
+import 'package:shine/views/chats.dart';
 import 'package:shine/views/filters.dart';
 import 'package:shine/views/information.dart';
+import 'package:shine/views/likes.dart';
+import 'package:shine/views/profile.dart';
 import 'package:shine/views/purpose.dart';
 import 'package:shine/views/tape.dart';
 import 'views/welcome.dart';
@@ -33,6 +36,9 @@ class App extends StatelessWidget {
         'filters': (context) => const Filters(),
         'bot': (context) => const Bot(),
         'tape': (context) => const Tape(),
+        'profile': (context) => const Profile(),
+        'chats': (context) => const Chats(),
+        'likes': (context) => const Likes(),
       },
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.black,

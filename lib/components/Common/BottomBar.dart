@@ -5,7 +5,7 @@ class BottomBar extends StatelessWidget {
 
   final String active;
   final Color currentColor = Colors.white;
-  final Color activeColor = Colors.pink;
+  final Color activeColor = const Color.fromRGBO(249, 178, 8, 1.0);
 
   const BottomBar({
     super.key,
@@ -39,52 +39,52 @@ class BottomBar extends StatelessWidget {
                 child: SvgPicture.asset(
                     'assets/icons/star-bot.svg',
                     height: 75,
-                    color: Colors.white
+                    color: currentColor,
                 ),
               ),
             ),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, 'bot');
+                Navigator.pushNamed(context, 'likes');
               },
               child: Container(
                 width: (MediaQuery.of(context).size.width)/5,
                 child: SvgPicture.asset(
                     'assets/icons/heart.svg',
                     height: 40,
-                    color: Colors.white
+                    color: active == "likes" ? activeColor : currentColor,
                 ),
               ),
             ),
             InkWell(
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, 'tape');
               },
               child: Container(
                 width: (MediaQuery.of(context).size.width)/5,
                 child: SvgPicture.asset(
                     'assets/icons/cards.svg',
                     height: 80,
-                    color: Colors.white
+                    color: active == "tape" ? activeColor : currentColor,
                 ),
               ),
             ),
             InkWell(
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, 'chats');
               },
               child: Container(
                 width: (MediaQuery.of(context).size.width)/5,
                 child: SvgPicture.asset(
                     'assets/icons/chats.svg',
                     height: 40,
-                    color: active == "profile" ? activeColor : currentColor,
+                    color: active == "chats" ? activeColor : currentColor,
                 ),
               ),
             ),
             InkWell(
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, 'profile');
               },
               child: Container(
                 width: (MediaQuery.of(context).size.width)/5,
