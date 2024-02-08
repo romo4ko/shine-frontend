@@ -18,34 +18,24 @@ class TapeAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Column(
       children: [
         Container(
+          padding: const EdgeInsets.only(top: 45),
           decoration: const BoxDecoration(
-            // image: DecorationImage(
-            //   image: AssetImage("assets/images/appbar-bg.png"),
-            //   fit: BoxFit.cover,
-            // ),
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.black,
-                  Colors.black,
-                  Colors.transparent
-                ]),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 50.0,
+                spreadRadius: 50,
+                offset: Offset(
+                  0,
+                  -20,
+                ),
+              ),
+            ],
           ),
-          height: 150,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: SvgPicture.asset('assets/icons/arrow-back.svg', width: 12),
-                ),
-              ),
+              Container(width: 52),
               Text(
                 title,
                 style: TextStyle(
@@ -56,7 +46,17 @@ class TapeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     color: Colors.white
                 ),
               ),
-              Container(width: 52,)
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'filters');
+                },
+                icon: const Icon(
+                    Icons.filter_list,
+                    size: 32,
+                    color: Colors.white,
+                    weight: 10.0,
+                )
+              )
             ],
           ),
         ),
@@ -65,5 +65,5 @@ class TapeAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(120);
+  Size get preferredSize => const Size.fromHeight(60);
 }

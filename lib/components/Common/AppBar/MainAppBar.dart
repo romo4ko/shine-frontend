@@ -2,56 +2,60 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
+class TapeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final String title;
+  final double titleSize;
 
-  const MainAppBar({super.key, required this.title});
+  const TapeAppBar({
+    super.key,
+    required this.title,
+    this.titleSize = 20.0
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
+          padding: const EdgeInsets.only(top: 45),
           decoration: const BoxDecoration(
-            // image: DecorationImage(
-            //   image: AssetImage("assets/images/appbar-bg.png"),
-            //   fit: BoxFit.cover,
-            // ),
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.black,
-                Colors.black,
-                Colors.transparent
-              ]),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 50.0,
+                spreadRadius: 50,
+                offset: Offset(
+                  0,
+                  -20,
+                ),
+              ),
+            ],
           ),
-          height: 150,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Container(width: 52),
+              Text(
+                title,
+                style: TextStyle(
+                    height: 1,
+                    fontFamily: 'Dejavu',
+                    fontSize: titleSize,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white
+                ),
+              ),
               InkWell(
                 onTap: () {
                   Navigator.pop(context);
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: SvgPicture.asset('assets/icons/arrow-back.svg', width: 12),
+                  color: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: SvgPicture.asset('assets/icons/options.svg', height: 20),
                 ),
               ),
-              Text(
-                title,
-                style: const TextStyle(
-                    height: 1,
-                    fontFamily: 'Dejavu',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white
-                ),
-              ),
-              Container(width: 52,)
             ],
           ),
         ),
@@ -60,5 +64,5 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(120);
+  Size get preferredSize => const Size.fromHeight(60);
 }

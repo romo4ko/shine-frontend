@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
 import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
+import 'package:shine/components/Tape/TapeAppBar.dart';
 import '../components/Common/BottomBar.dart';
 
 class Tape extends StatefulWidget {
@@ -46,18 +47,6 @@ class _TapeState extends State<Tape> {
 
   var cards = [];
 
-  createCards() {
-    for (var element in users) {
-      cards.add(
-        Container(
-          alignment: Alignment.center,
-          color: Colors.purple,
-          child: Text(element['name']),
-        )
-      );
-    }
-  }
-
   @override
   void dispose() {
     controller.dispose();
@@ -75,7 +64,7 @@ class _TapeState extends State<Tape> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
-      appBar: const DefaultAppBar(title: "С И Я Н И Е", titleSize: 32),
+      appBar: const TapeAppBar(title: "С И Я Н И Е", titleSize: 32),
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
@@ -83,7 +72,7 @@ class _TapeState extends State<Tape> {
               minHeight: MediaQuery.of(context).size.height,
               minWidth: MediaQuery.of(context).size.width
           ),
-          padding: const EdgeInsets.only(top: 80),
+          padding: const EdgeInsets.only(top: 90),
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/backgrounds/tape-bg.png"),
@@ -99,5 +88,20 @@ class _TapeState extends State<Tape> {
       ),
       // bottomNavigationBar: BottomBar(active: "tape"),
     );
+  }
+
+  createCards() {
+    for (var element in users) {
+      cards.add(
+          Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              color: Colors.white,
+            ),
+            alignment: Alignment.center,
+            child: Text(element['name']),
+          )
+      );
+    }
   }
 }
