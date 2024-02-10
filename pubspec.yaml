@@ -35,7 +35,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  http: ^1.1.2
+  http: ^1.2.0
   flutter_svg: ^2.0.9
   masked_text: ^1.1.2
   path_provider: ^2.1.2
@@ -70,6 +70,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/backgrounds/
+    - assets/images/test/
     - assets/icons/add-image.svg
     - assets/icons/arrow-back.svg
     - assets/icons/star-bot.svg
@@ -78,6 +79,11 @@ flutter:
     - assets/icons/chats.svg
     - assets/icons/human.svg
     - assets/icons/options.svg
+    - assets/icons/back-button.svg
+    - assets/icons/dislike.svg
+    - assets/icons/like.svg
+    - assets/icons/message.svg
+    - assets/icons/star.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

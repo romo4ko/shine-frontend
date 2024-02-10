@@ -7,6 +7,7 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
 import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
 import 'package:shine/components/Tape/TapeAppBar.dart';
+import 'package:shine/components/Tape/UserCard.dart';
 import '../components/Common/BottomBar.dart';
 
 class Tape extends StatefulWidget {
@@ -28,7 +29,8 @@ class _TapeState extends State<Tape> {
         "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000008881.jpg?alt=media&token=cca5f27d-62f1-43c9-93ac-08f786149ecc",
         "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000011393.jpg?alt=media&token=45a29840-9348-4c88-8cf9-ad5560daba69",
         "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000011391.jpg?alt=media&token=a93af62b-fb73-4144-9380-ebc7d5428b6b"
-      ]
+      ],
+      'distance': '2 км'
     },
     {
       'id': 1,
@@ -39,7 +41,8 @@ class _TapeState extends State<Tape> {
         "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000008881.jpg?alt=media&token=cca5f27d-62f1-43c9-93ac-08f786149ecc",
         "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000011393.jpg?alt=media&token=45a29840-9348-4c88-8cf9-ad5560daba69",
         "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000011391.jpg?alt=media&token=a93af62b-fb73-4144-9380-ebc7d5428b6b"
-      ]
+      ],
+      'distance': '2 км'
     }
   ];
 
@@ -86,21 +89,14 @@ class _TapeState extends State<Tape> {
           ),
         ),
       ),
-      // bottomNavigationBar: BottomBar(active: "tape"),
+      bottomNavigationBar: BottomBar(active: "tape"),
     );
   }
 
   createCards() {
-    for (var element in users) {
+    for (var user in users) {
       cards.add(
-          Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              color: Colors.white,
-            ),
-            alignment: Alignment.center,
-            child: Text(element['name']),
-          )
+          UserCard(user: user)
       );
     }
   }
