@@ -30,29 +30,37 @@ class _TapeState extends State<Tape> {
         "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000011393.jpg?alt=media&token=45a29840-9348-4c88-8cf9-ad5560daba69",
         "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000011391.jpg?alt=media&token=a93af62b-fb73-4144-9380-ebc7d5428b6b"
       ],
-      'distance': '2 км'
+      'distance': '2 км',
+      'tags': [
+        'Музыка', 'Спорт', 'Дизайн'
+      ],
+      'sign': 'Телец'
     },
     {
       'id': 1,
       'name': 'Лена',
       'age': 23,
-      'text': 'В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера',
+      'text': 'В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера. В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера. В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера',
       'images': [
         "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000008881.jpg?alt=media&token=cca5f27d-62f1-43c9-93ac-08f786149ecc",
         "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000011393.jpg?alt=media&token=45a29840-9348-4c88-8cf9-ad5560daba69",
         "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000011391.jpg?alt=media&token=a93af62b-fb73-4144-9380-ebc7d5428b6b"
       ],
-      'distance': '2 км'
+      'distance': '2 км',
+      'tags': [
+        'Музыка', 'Спорт', 'Дизайн'
+      ],
+      'sign': 'Телец'
     }
   ];
 
-  final CardSwiperController controller = CardSwiperController();
+  final CardSwiperController swipeController = CardSwiperController();
 
   var cards = [];
 
   @override
   void dispose() {
-    controller.dispose();
+    swipeController.dispose();
     super.dispose();
   }
 
@@ -83,7 +91,10 @@ class _TapeState extends State<Tape> {
             ),
           ),
           child: CardSwiper(
+            controller: swipeController,
             cardsCount: cards.length,
+            onSwipe: _onSwipe,
+            onUndo: _onUndo,
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             cardBuilder: (context, index, percentThresholdX, percentThresholdY) => cards[index],
           ),
@@ -93,10 +104,32 @@ class _TapeState extends State<Tape> {
     );
   }
 
+  bool _onSwipe(
+      int previousIndex,
+      int? currentIndex,
+      CardSwiperDirection direction,
+      ) {
+    debugPrint(
+      'The card $previousIndex was swiped to the ${direction.name}. Now the card $currentIndex is on top',
+    );
+    return true;
+  }
+
+  bool _onUndo(
+      int? previousIndex,
+      int currentIndex,
+      CardSwiperDirection direction,
+      ) {
+    debugPrint(
+      'The card $currentIndex was undod from the ${direction.name}',
+    );
+    return true;
+  }
+
   createCards() {
     for (var user in users) {
       cards.add(
-          UserCard(user: user)
+          UserCard(user: user, swipeController: swipeController)
       );
     }
   }
