@@ -76,31 +76,35 @@ class _TapeState extends State<Tape> {
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
       appBar: const TapeAppBar(title: "С И Я Н И Е", titleSize: 32),
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height,
-              minWidth: MediaQuery.of(context).size.width
-          ),
-          padding: const EdgeInsets.only(top: 90),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/backgrounds/tape-bg.png"),
-              fit: BoxFit.cover,
+      body: Stack(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height,
+            constraints: BoxConstraints(
+                minHeight: MediaQuery.of(context).size.height,
+                minWidth: MediaQuery.of(context).size.width
+            ),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/backgrounds/tape-bg.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: CardSwiper(
+              controller: swipeController,
+              cardsCount: cards.length,
+              onSwipe: _onSwipe,
+              onUndo: _onUndo,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              cardBuilder: (context, index, percentThresholdX, percentThresholdY) => cards[index],
             ),
           ),
-          child: CardSwiper(
-            controller: swipeController,
-            cardsCount: cards.length,
-            onSwipe: _onSwipe,
-            onUndo: _onUndo,
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            cardBuilder: (context, index, percentThresholdX, percentThresholdY) => cards[index],
-          ),
-        ),
+          Container(
+            alignment: Alignment.bottomCenter,
+            child: const BottomBar(active: "tape"),
+          )
+        ],
       ),
-      bottomNavigationBar: BottomBar(active: "tape"),
     );
   }
 

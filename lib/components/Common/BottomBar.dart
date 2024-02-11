@@ -14,89 +14,90 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      height: 100,
-      padding: EdgeInsets.all(0),
-      color: Colors.black,
-      elevation: 10,
-      child: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/backgrounds/main-bottom-bar-bg.png"),
-            fit: BoxFit.cover,
-          )
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, 'bot');
-              },
-              child: Container(
-                width: (MediaQuery.of(context).size.width)/5,
-                child: SvgPicture.asset(
-                    'assets/icons/star-bot.svg',
-                    height: 75,
-                    color: currentColor,
-                ),
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.transparent,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 50.0,
+            spreadRadius: 50,
+            offset: Offset(
+              0,
+              20,
+            ),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, 'bot');
+            },
+            child: Container(
+              width: (MediaQuery.of(context).size.width)/5,
+              child: SvgPicture.asset(
+                'assets/icons/star-bot.svg',
+                height: 75,
+                color: currentColor,
               ),
             ),
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, 'likes');
-              },
-              child: Container(
-                width: (MediaQuery.of(context).size.width)/5,
-                child: SvgPicture.asset(
-                    'assets/icons/heart.svg',
-                    height: 40,
-                    color: active == "likes" ? activeColor : currentColor,
-                ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, 'likes');
+            },
+            child: Container(
+              width: (MediaQuery.of(context).size.width)/5,
+              child: SvgPicture.asset(
+                'assets/icons/heart.svg',
+                height: 40,
+                color: active == "likes" ? activeColor : currentColor,
               ),
             ),
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, 'tape');
-              },
-              child: Container(
-                width: (MediaQuery.of(context).size.width)/5,
-                child: SvgPicture.asset(
-                    'assets/icons/cards.svg',
-                    height: 80,
-                    color: active == "tape" ? activeColor : currentColor,
-                ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, 'tape');
+            },
+            child: Container(
+              width: (MediaQuery.of(context).size.width)/5,
+              child: SvgPicture.asset(
+                'assets/icons/cards.svg',
+                height: 80,
+                color: active == "tape" ? activeColor : currentColor,
               ),
             ),
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, 'chats');
-              },
-              child: Container(
-                width: (MediaQuery.of(context).size.width)/5,
-                child: SvgPicture.asset(
-                    'assets/icons/chats.svg',
-                    height: 40,
-                    color: active == "chats" ? activeColor : currentColor,
-                ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, 'chats');
+            },
+            child: Container(
+              width: (MediaQuery.of(context).size.width)/5,
+              child: SvgPicture.asset(
+                'assets/icons/chats.svg',
+                height: 40,
+                color: active == "chats" ? activeColor : currentColor,
               ),
             ),
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, 'profile');
-              },
-              child: Container(
-                width: (MediaQuery.of(context).size.width)/5,
-                child: SvgPicture.asset(
-                  'assets/icons/human.svg',
-                  height: 40,
-                  color: active == "profile" ? activeColor : currentColor,
-                ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, 'profile');
+            },
+            child: Container(
+              width: (MediaQuery.of(context).size.width)/5,
+              child: SvgPicture.asset(
+                'assets/icons/human.svg',
+                height: 40,
+                color: active == "profile" ? activeColor : currentColor,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

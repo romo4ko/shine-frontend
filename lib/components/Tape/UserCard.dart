@@ -1,8 +1,10 @@
 import 'dart:ffi';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class UserCard extends StatefulWidget {
 
@@ -24,41 +26,72 @@ class _UserCardState extends State<UserCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        image: DecorationImage(
-          image: AssetImage("assets/images/test/test-user.png"),
-          fit: BoxFit.fitWidth,
-          alignment: Alignment.topCenter
-        ),
-        color: Colors.black,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Stack(
+      height: MediaQuery.of(context).size.height-100,
+      child: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.only(top: 100),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 80),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 60.0,
-                        spreadRadius: 60,
-                        offset: Offset(
-                          0,
-                          30,
-                        ),
+              Stack(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height-300,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20)
                       ),
-                      BoxShadow(
-                        offset: Offset(0, 30),
-                      ),
-                    ],
+                      color: Colors.black,
+                    ),
+                    child: Builder(
+                      builder: (context) {
+                        return Container(
+                          child: CarouselSlider(
+                            options: CarouselOptions(
+                              height: MediaQuery.of(context).size.height-200,
+                              viewportFraction: 1.0,
+                              enlargeCenterPage: false,
+                              // autoPlay: false,
+                            ),
+                            items: widget.user['images']
+                                .map<Widget>((item) => Container(
+                              child: Center(
+                                  child: Image.network(
+                                    item,
+                                    fit: BoxFit.cover,
+                                    height: MediaQuery.of(context).size.height-300,
+                                  )),
+                            ))
+                                .toList(),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                  child: Column(
-                    children: [
-                      Row(
+                  Positioned(
+                    bottom: 0,
+                    child: Container(
+                      height: 80,
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 60.0,
+                            spreadRadius: 60,
+                            offset: Offset(
+                              0,
+                              0,
+                            ),
+                          ),
+                          BoxShadow(
+                            offset: Offset(0, 30),
+                          ),
+                        ],
+                      ),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -129,59 +162,59 @@ class _UserCardState extends State<UserCard> {
                           ),
                         ],
                       ),
-                      Container(
-                        color: Colors.black,
-                        padding: EdgeInsets.all(20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-
-                            Text(
-                              widget.user['text'],
-                              style: const TextStyle(
-                                  fontFamily: 'Inter',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  Container(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "${widget.user['name']}, ${widget.user['age']}",
+                          style: const TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 32,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white
+                          ),
+                        ),
+                        Text(
+                          widget.user['distance'],
+                          style: const TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               Container(
-                padding: EdgeInsets.only(left: 20, right: 20),
+                color: Colors.black,
+                padding: const EdgeInsets.all(20),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${widget.user['name']}, ${widget.user['age']}",
+                      widget.user['text'],
                       style: const TextStyle(
                           fontFamily: 'Inter',
-                          fontSize: 32,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white
-                      ),
-                    ),
-                    Text(
-                      widget.user['distance'],
-                      style: const TextStyle(
-                          fontFamily: 'Inter',
-                          fontSize: 15,
+                          fontSize: 16,
                           fontWeight: FontWeight.w500,
                           color: Colors.white
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
