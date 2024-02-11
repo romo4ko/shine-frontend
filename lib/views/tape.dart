@@ -133,7 +133,7 @@ class _TapeState extends State<Tape> {
   createCards() {
     for (var user in users) {
       cards.add(
-          UserCard(user: user, swipeController: swipeController)
+          UserCard(user: user, swipeController: swipeController, key: UniqueKey())
       );
     }
   }

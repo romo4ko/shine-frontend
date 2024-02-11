@@ -42,7 +42,6 @@ dependencies:
   image_picker: ^1.0.7
   flutter_xlider: ^3.5.0
   flutter_card_swiper: ^7.0.0
-  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
