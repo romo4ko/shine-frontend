@@ -83,6 +83,7 @@ flutter:
     - assets/icons/like.svg
     - assets/icons/message.svg
     - assets/icons/star.svg
+    - assets/icons/filter.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

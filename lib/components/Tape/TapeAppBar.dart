@@ -35,7 +35,7 @@ class TapeAppBar extends StatelessWidget implements PreferredSizeWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(width: 52),
+              Container(width: 60),
               Text(
                 title,
                 style: TextStyle(
@@ -46,16 +46,21 @@ class TapeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     color: Colors.white
                 ),
               ),
-              IconButton(
-                onPressed: () {
+              InkWell(
+                onTap: () {
                   Navigator.pushNamed(context, 'filters');
                 },
-                icon: const Icon(
-                    Icons.filter_list,
-                    size: 32,
-                    color: Colors.white,
-                )
-              )
+                child: Container(
+                  width: 50,
+                  margin: EdgeInsets.only(right: 10),
+                  padding: EdgeInsets.only(right: 10, bottom: 10, left: 10),
+                  child: SvgPicture.asset(
+                    'assets/icons/filter.svg',
+                    width: 30,
+                    height: 20,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

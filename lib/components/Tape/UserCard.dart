@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +29,10 @@ class _UserCardState extends State<UserCard> {
   }
 
   var currentImageIndex = 0;
+  var images = [];
 
   changeImage() {
-    if (currentImageIndex < widget.user['images'].length-1) {
+    if (currentImageIndex < images.length-1) {
       setState(() {
         currentImageIndex++;
       });
@@ -44,9 +44,26 @@ class _UserCardState extends State<UserCard> {
     }
   }
 
+  loadImages() {
+    for (var image in widget.user['images']) {
+      images.add(
+          NetworkImage(image)
+      );
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    loadImages();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    for (var image in images) {
+      precacheImage(image, context);
+    }
   }
 
   @override
@@ -90,10 +107,10 @@ class _UserCardState extends State<UserCard> {
                                   topLeft: Radius.circular(20),
                                   topRight: Radius.circular(20)
                               ),
-                              child: Image.network(
-                                widget.user['images'][currentImageIndex],
-                                fit: BoxFit.cover,
-                                alignment: Alignment.center,
+                              child: Image(
+                                  image: images[currentImageIndex],
+                                  fit: BoxFit.cover,
+                                  alignment: Alignment.center,
                               ),
                             ),
                           )
@@ -117,7 +134,14 @@ class _UserCardState extends State<UserCard> {
                                       fontFamily: 'Inter',
                                       fontSize: 32,
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.white
+                                      color: Colors.white,
+                                      shadows: <Shadow>[
+                                        Shadow(
+                                          offset: Offset(1, 1),
+                                          blurRadius: 5,
+                                          color: Color.fromRGBO(0, 0, 0, 0.25),
+                                        ),
+                                      ],
                                   ),
                                 ),
                                 Text(
@@ -126,7 +150,14 @@ class _UserCardState extends State<UserCard> {
                                       fontFamily: 'Inter',
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.white
+                                      color: Colors.white,
+                                      shadows: <Shadow>[
+                                        Shadow(
+                                          offset: Offset(2, 2),
+                                          blurRadius: 5,
+                                          color: Color.fromRGBO(0, 0, 0, 0.25),
+                                        ),
+                                      ],
                                   ),
                                 ),
                               ],
@@ -140,10 +171,10 @@ class _UserCardState extends State<UserCard> {
                             children: List.generate(widget.user['images'].length, (index) {
                               return Container(
                                 decoration: BoxDecoration(
-                                  color: index == currentImageIndex ? Colors.white : Colors.white.withOpacity(0.5),
+                                  color: index == currentImageIndex ? Colors.white.withOpacity(0.7) : Colors.white.withOpacity(0.3),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
+                                      color: Colors.black.withOpacity(0.1)
                                     ),
                                   ],
                                 ),
@@ -157,19 +188,51 @@ class _UserCardState extends State<UserCard> {
                       ],
                     ),
                     Container(
+                      padding: const EdgeInsets.only(bottom: 20),
                       color: Colors.black,
-                      padding: const EdgeInsets.all(20),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            widget.user['text'],
-                            style: const TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white
+                          Container(
+                            padding: const EdgeInsets.all(20),
+                            child: Text(
+                              widget.user['text'],
+                              style: const TextStyle(
+                                  fontFamily: 'Inter',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Wrap(
+                              children: List.generate(widget.user['tags'].length, (index) {
+                                return Container(
+                                  margin: const EdgeInsets.only(right: 10, bottom: 10),
+                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black.withOpacity(0.1)
+                                      ),
+                                    ],
+                                    color: const Color.fromRGBO(20, 20, 20, 1),
+                                  ),
+                                  child: Text(
+                                      widget.user['tags'][index],
+                                      style: const TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white
+                                      ),
+                                  ),
+                                );
+                              }),
                             ),
                           )
                         ],

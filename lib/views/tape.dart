@@ -1,6 +1,4 @@
 
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -45,11 +43,11 @@ class _TapeState extends State<Tape> {
         "https://bipbap.ru/wp-content/uploads/2015/02/547b9db42203b2d5c16d9dd0f5626207.jpg",
         "https://24warez.ru/uploads/posts/2019-05/270519/392210/f99e9c4d602b-800x1000.jpg",
         "https://interesnoewmire.ru/wp-content/uploads/fotografii-krasivyh-devushek-chast-12-43-foto-45a3348.jpg",
-        "https://i.yapx.cc/SGXLz.jpg"
+        "https://i.yapx.cc/SGXLz.jpg",
       ],
       'distance': '2 км',
       'tags': [
-        'Музыка', 'Спорт', 'Дизайн'
+        'IT', 'Сериалы', 'Фильмы', 'Спорт', 'Кафе', 'Рестораны'
       ],
       'sign': 'Телец'
     }
@@ -94,6 +92,7 @@ class _TapeState extends State<Tape> {
             child: CardSwiper(
               controller: swipeController,
               cardsCount: cards.length,
+              numberOfCardsDisplayed: 2,
               onSwipe: _onSwipe,
               onUndo: _onUndo,
               allowedSwipeDirection: const AllowedSwipeDirection.symmetric(horizontal: true),
