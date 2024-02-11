@@ -26,9 +26,9 @@ class _TapeState extends State<Tape> {
       'age': 22,
       'text': 'В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера',
       'images': [
-        "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000008881.jpg?alt=media&token=cca5f27d-62f1-43c9-93ac-08f786149ecc",
-        "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000011393.jpg?alt=media&token=45a29840-9348-4c88-8cf9-ad5560daba69",
-        "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000011391.jpg?alt=media&token=a93af62b-fb73-4144-9380-ebc7d5428b6b"
+        "https://bipbap.ru/wp-content/uploads/2015/02/dana-kareglazaya-portret-boke.jpg",
+        "https://wp-s.ru/wallpapers/4/2/452110934931644/osennij-portret-s-pronizyvayushhim-vzglyadom-devushki.jpg",
+        "https://wp-s.ru/wallpapers/3/16/389721010561919/krasivaya-devushka-na-fone-industrialnogo-pejzazha.jpg"
       ],
       'distance': '2 км',
       'tags': [
@@ -42,9 +42,10 @@ class _TapeState extends State<Tape> {
       'age': 23,
       'text': 'В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера. В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера. В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера',
       'images': [
-        "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000008881.jpg?alt=media&token=cca5f27d-62f1-43c9-93ac-08f786149ecc",
-        "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000011393.jpg?alt=media&token=45a29840-9348-4c88-8cf9-ad5560daba69",
-        "https://firebasestorage.googleapis.com/v0/b/candy-fa135.appspot.com/o/files%2F1000011391.jpg?alt=media&token=a93af62b-fb73-4144-9380-ebc7d5428b6b"
+        "https://bipbap.ru/wp-content/uploads/2015/02/547b9db42203b2d5c16d9dd0f5626207.jpg",
+        "https://24warez.ru/uploads/posts/2019-05/270519/392210/f99e9c4d602b-800x1000.jpg",
+        "https://interesnoewmire.ru/wp-content/uploads/fotografii-krasivyh-devushek-chast-12-43-foto-45a3348.jpg",
+        "https://i.yapx.cc/SGXLz.jpg"
       ],
       'distance': '2 км',
       'tags': [
@@ -95,6 +96,8 @@ class _TapeState extends State<Tape> {
               cardsCount: cards.length,
               onSwipe: _onSwipe,
               onUndo: _onUndo,
+              allowedSwipeDirection: const AllowedSwipeDirection.symmetric(horizontal: true),
+              backCardOffset: const Offset(0, 0),
               padding: const EdgeInsets.symmetric(horizontal: 10),
               cardBuilder: (context, index, percentThresholdX, percentThresholdY) => cards[index],
             ),

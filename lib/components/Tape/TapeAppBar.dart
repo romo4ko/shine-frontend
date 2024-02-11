@@ -54,7 +54,6 @@ class TapeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     Icons.filter_list,
                     size: 32,
                     color: Colors.white,
-                    weight: 10.0,
                 )
               )
             ],
