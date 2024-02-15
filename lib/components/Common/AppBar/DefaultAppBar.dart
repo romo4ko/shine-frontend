@@ -18,7 +18,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.only(top: 40),
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top+10),
           decoration: const BoxDecoration(
             // image: DecorationImage(
             //   image: AssetImage("assets/images/appbar-bg.png"),

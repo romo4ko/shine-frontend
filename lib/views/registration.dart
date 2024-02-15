@@ -24,7 +24,7 @@ class _RegistrationState extends State<Registration> {
       body: SingleChildScrollView(
         child: Container(
           constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
-          padding: const EdgeInsets.only(top: 140, left: 20, right: 20, bottom: 60),
+          padding: const EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 60),
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/backgrounds/register-bg.png"),

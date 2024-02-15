@@ -38,7 +38,7 @@ class _ChatsState extends State<Chats> {
           ),
           Container(
             alignment: Alignment.bottomCenter,
-            child: const BottomBar(active: "tape"),
+            child: const BottomBar(active: "chats"),
           )
         ],
       ),

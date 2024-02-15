@@ -38,7 +38,7 @@ class _ProfileState extends State<Profile> {
           ),
           Container(
             alignment: Alignment.bottomCenter,
-            child: const BottomBar(active: "tape"),
+            child: const BottomBar(active: "profile"),
           )
         ],
       ),

@@ -38,7 +38,7 @@ class _LikesState extends State<Likes> {
           ),
           Container(
             alignment: Alignment.bottomCenter,
-            child: const BottomBar(active: "tape"),
+            child: const BottomBar(active: "likes"),
           )
         ],
       ),
