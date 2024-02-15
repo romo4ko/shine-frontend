@@ -23,12 +23,13 @@ class _InformationState extends State<Information> {
       resizeToAvoidBottomInset: false,
       appBar: const DefaultAppBar(title: "ОСНОВНАЯ  ИНФОРМАЦИЯ"),
       body: SingleChildScrollView(
+        physics : const ClampingScrollPhysics(),
         child: Container(
           constraints: BoxConstraints(
               minHeight: MediaQuery.of(context).size.height,
               minWidth: MediaQuery.of(context).size.width
           ),
-          padding: const EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 40),
+          padding: const EdgeInsets.only(top: 140, left: 20, right: 20, bottom: 40),
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/backgrounds/info-bg.png"),

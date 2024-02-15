@@ -18,7 +18,7 @@ class TapeAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top+10),
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top+5),
           decoration: const BoxDecoration(
             boxShadow: [
               BoxShadow(
