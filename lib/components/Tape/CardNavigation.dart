@@ -22,7 +22,6 @@ class _CardNavigationState extends State<CardNavigation> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 2, right: 1),
       height: 80,
       decoration: const BoxDecoration(
         boxShadow: [
