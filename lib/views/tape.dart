@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
-import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
-import 'package:shine/components/Tape/TapeAppBar.dart';
-import 'package:shine/components/Tape/UserCard.dart';
+import 'package:shine/components/Tape/tape.dart';
 import '../components/Common/BottomBar.dart';
 
 class Tape extends StatefulWidget {

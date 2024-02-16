@@ -15,15 +15,16 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 100,
       decoration: const BoxDecoration(
         color: Colors.transparent,
         boxShadow: [
           BoxShadow(
-            blurRadius: 50.0,
-            spreadRadius: 50,
+            blurRadius: 40.0,
+            spreadRadius: 40,
             offset: Offset(
               0,
-              20,
+              30,
             ),
           ),
         ],
