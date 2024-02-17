@@ -5,6 +5,7 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
 import 'package:shine/components/Tape/tape.dart';
 import '../components/Common/BottomBar.dart';
+import '../models/User.dart';
 
 class Tape extends StatefulWidget {
   const Tape({super.key});
@@ -15,7 +16,7 @@ class Tape extends StatefulWidget {
 
 class _TapeState extends State<Tape> {
 
-  List users = [
+  var response = [
     {
       'id': 0,
       'name': 'Аня',
@@ -26,7 +27,7 @@ class _TapeState extends State<Tape> {
         "https://wp-s.ru/wallpapers/4/2/452110934931644/osennij-portret-s-pronizyvayushhim-vzglyadom-devushki.jpg",
         "https://wp-s.ru/wallpapers/3/16/389721010561919/krasivaya-devushka-na-fone-industrialnogo-pejzazha.jpg"
       ],
-      'distance': '2 км',
+      'distance': 2,
       'tags': [
         'Музыка', 'Спорт', 'Дизайн'
       ],
@@ -43,7 +44,7 @@ class _TapeState extends State<Tape> {
         "https://interesnoewmire.ru/wp-content/uploads/fotografii-krasivyh-devushek-chast-12-43-foto-45a3348.jpg",
         "https://i.yapx.cc/SGXLz.jpg",
       ],
-      'distance': '2 км',
+      'distance': 2,
       'tags': [
         'IT', 'Сериалы', 'Фильмы', 'Спорт', 'Кафе', 'Рестораны'
       ],
@@ -51,9 +52,10 @@ class _TapeState extends State<Tape> {
     }
   ];
 
-  final CardSwiperController swipeController = CardSwiperController();
-
+  List<User> users = [];
   var cards = [];
+
+  final CardSwiperController swipeController = CardSwiperController();
 
   @override
   void dispose() {
@@ -64,6 +66,7 @@ class _TapeState extends State<Tape> {
   @override
   void initState() {
     super.initState();
+    fetchUsers();
     createCards();
   }
 
@@ -134,6 +137,14 @@ class _TapeState extends State<Tape> {
     for (var user in users) {
       cards.add(
           UserCard(user: user, swipeController: swipeController, key: UniqueKey())
+      );
+    }
+  }
+
+  fetchUsers() {
+    for (var data in response) {
+      users.add(
+          User.fromJson(data)
       );
     }
   }

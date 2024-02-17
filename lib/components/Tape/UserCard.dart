@@ -5,9 +5,11 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shine/components/Tape/CardNavigation.dart';
 
+import '../../models/User.dart';
+
 class UserCard extends StatefulWidget {
 
-  final user;
+  final User user;
   final CardSwiperController swipeController;
 
   const UserCard({
@@ -45,7 +47,7 @@ class _UserCardState extends State<UserCard> {
   }
 
   loadImages() {
-    for (var image in widget.user['images']) {
+    for (var image in widget.user.images) {
       images.add(
           NetworkImage(image)
       );
@@ -129,7 +131,7 @@ class _UserCardState extends State<UserCard> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Text(
-                                  "${widget.user['name']}, ${widget.user['age']}",
+                                  "${widget.user.name}, ${widget.user.age.toString()}",
                                   style: const TextStyle(
                                       fontFamily: 'Inter',
                                       fontSize: 32,
@@ -145,7 +147,7 @@ class _UserCardState extends State<UserCard> {
                                   ),
                                 ),
                                 Text(
-                                  widget.user['distance'],
+                                  "${widget.user.distance} км",
                                   style: const TextStyle(
                                       fontFamily: 'Inter',
                                       fontSize: 15,
@@ -168,7 +170,7 @@ class _UserCardState extends State<UserCard> {
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: List.generate(widget.user['images'].length, (index) {
+                            children: List.generate(widget.user.images.length, (index) {
                               return Container(
                                 decoration: BoxDecoration(
                                   color: index == currentImageIndex ? Colors.white.withOpacity(0.7) : Colors.white.withOpacity(0.3),
@@ -180,7 +182,7 @@ class _UserCardState extends State<UserCard> {
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 5),
                                 height: 5,
-                                width: (MediaQuery.of(context).size.width-80)/widget.user['images'].length,
+                                width: (MediaQuery.of(context).size.width-80)/widget.user.images.length,
                               );
                             }),
                           ),
@@ -197,7 +199,7 @@ class _UserCardState extends State<UserCard> {
                           Container(
                             padding: const EdgeInsets.all(20),
                             child: Text(
-                              widget.user['text'],
+                              widget.user.text,
                               style: const TextStyle(
                                   fontFamily: 'Inter',
                                   fontSize: 16,
@@ -209,7 +211,7 @@ class _UserCardState extends State<UserCard> {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Wrap(
-                              children: List.generate(widget.user['tags'].length, (index) {
+                              children: List.generate(widget.user.tags.length, (index) {
                                 return Container(
                                   margin: const EdgeInsets.only(right: 10, bottom: 10),
                                   padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
@@ -223,7 +225,7 @@ class _UserCardState extends State<UserCard> {
                                     color: const Color.fromRGBO(20, 20, 20, 1),
                                   ),
                                   child: Text(
-                                      widget.user['tags'][index],
+                                      widget.user.tags[index],
                                       style: const TextStyle(
                                           fontFamily: 'Montserrat',
                                           fontSize: 16,

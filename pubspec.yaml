@@ -85,6 +85,12 @@ flutter:
     - assets/icons/star.svg
     - assets/icons/filter.svg
     - assets/icons/settings.svg
+    - assets/icons/invites/send-link.svg
+    - assets/icons/invites/invite-star-1.svg
+    - assets/icons/invites/invite-star-2.svg
+    - assets/icons/invites/invite-star-3.svg
+    - assets/icons/arrow-bottom.svg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

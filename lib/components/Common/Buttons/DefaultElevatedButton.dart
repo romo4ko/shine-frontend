@@ -12,8 +12,8 @@ class DefaultElevatedButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.action,
-    required this.width,
-    required this.height,
+    this.width = 270,
+    this.height = 40,
   });
 
   @override
