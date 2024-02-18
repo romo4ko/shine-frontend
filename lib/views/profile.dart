@@ -36,19 +36,19 @@ class _ProfileState extends State<Profile> {
       appBar: const ProfileAppBar(title: "С И Я Н И Е", titleSize: 32),
       body: Stack(
         children: [
-          Container(
-            constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height,
-                minWidth: MediaQuery.of(context).size.width
-            ),
-            padding: const EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 40),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/backgrounds/profile-bg.png"),
-                fit: BoxFit.cover,
-              ),
-            ),
+          SingleChildScrollView(
             child: Container(
+              constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height,
+                  minWidth: MediaQuery.of(context).size.width
+              ),
+              padding: const EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 100),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/backgrounds/profile-bg.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
               child: Column(
                 children: [
                   ProfileCard(user: user),

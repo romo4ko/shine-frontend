@@ -37,7 +37,7 @@ class BottomBar extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, 'bot');
             },
-            child: Container(
+            child: SizedBox(
               width: (MediaQuery.of(context).size.width)/5,
               child: SvgPicture.asset(
                 'assets/icons/star-bot.svg',
@@ -50,7 +50,7 @@ class BottomBar extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, 'likes');
             },
-            child: Container(
+            child: SizedBox(
               width: (MediaQuery.of(context).size.width)/5,
               child: SvgPicture.asset(
                 'assets/icons/heart.svg',
@@ -63,7 +63,7 @@ class BottomBar extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, 'tape');
             },
-            child: Container(
+            child: SizedBox(
               width: (MediaQuery.of(context).size.width)/5,
               child: SvgPicture.asset(
                 'assets/icons/cards.svg',
@@ -76,7 +76,7 @@ class BottomBar extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, 'chats');
             },
-            child: Container(
+            child: SizedBox(
               width: (MediaQuery.of(context).size.width)/5,
               child: SvgPicture.asset(
                 'assets/icons/chats.svg',
@@ -89,7 +89,7 @@ class BottomBar extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, 'profile');
             },
-            child: Container(
+            child: SizedBox(
               width: (MediaQuery.of(context).size.width)/5,
               child: SvgPicture.asset(
                 'assets/icons/human.svg',

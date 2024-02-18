@@ -90,6 +90,8 @@ flutter:
     - assets/icons/invites/invite-star-2.svg
     - assets/icons/invites/invite-star-3.svg
     - assets/icons/arrow-bottom.svg
+    - assets/icons/bot-settings-star.svg
+    - assets/icons/drawed-arrow.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
