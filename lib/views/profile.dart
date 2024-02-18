@@ -25,7 +25,7 @@ class _ProfileState extends State<Profile> {
     'is_premium': false,
     'bot_setting': 1,
     'profile_filled': 73,
-    'invites': 3
+    'invites': 1
   });
 
   @override

@@ -29,15 +29,13 @@ class ProfileCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                margin: const EdgeInsets.only(right: 10),
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(user.image),
-                      fit: BoxFit.cover
+                padding: const EdgeInsets.only(right: 10),
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  backgroundImage: NetworkImage(
+                      user.image
                   ),
+                  maxRadius: 40,
                 ),
               ),
               Column(

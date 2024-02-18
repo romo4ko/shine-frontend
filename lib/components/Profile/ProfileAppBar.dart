@@ -26,7 +26,7 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
                 spreadRadius: 50,
                 offset: Offset(
                   0,
-                  -20,
+                  -30,
                 ),
               ),
             ],

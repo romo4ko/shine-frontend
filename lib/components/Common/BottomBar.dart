@@ -16,13 +16,14 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 100,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Colors.transparent,
         boxShadow: [
           BoxShadow(
+            color: Colors.black.withOpacity(1),
             blurRadius: 40.0,
             spreadRadius: 40,
-            offset: Offset(
+            offset: const Offset(
               0,
               30,
             ),

@@ -19,29 +19,17 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       children: [
         Container(
           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top+5),
-          decoration: const BoxDecoration(
-            // image: DecorationImage(
-            //   image: AssetImage("assets/images/appbar-bg.png"),
-            //   fit: BoxFit.cover,
-            // ),
-            // color: Colors.black,
+          decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
+              color: Colors.black.withOpacity(1),
               blurRadius: 50.0,
               spreadRadius: 50,
                 offset: Offset(
                   0,
                   -20,
                 ),
-            ),],
-            // gradient: LinearGradient(
-            //   begin: Alignment.topCenter,
-            //   end: Alignment.bottomCenter,
-            //   colors: [
-            //     Colors.black,
-            //     Colors.black,
-            //     Colors.transparent
-            //   ]),
+            )],
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
