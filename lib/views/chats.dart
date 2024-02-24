@@ -2,9 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shine/components/Chats/ChatsAppBar.dart';
-import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
 import 'package:shine/models/Chat.dart';
-
+import 'package:shine/components/Chats/ChatItem.dart';
 import '../components/Common/BottomBar.dart';
 
 class Chats extends StatefulWidget {
@@ -86,88 +85,10 @@ class _ChatsState extends State<Chats> {
                 padding: const EdgeInsets.all(0),
                 itemCount: response.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    padding: EdgeInsets.symmetric(vertical: 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            backgroundImage: NetworkImage(
-                                chats[index].image
-                            ),
-                            maxRadius: 30,
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        chats[index].name,
-                                        style: const TextStyle(
-                                          fontFamily: 'Inter',
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      !chats[index].is_viewed ? Container() :
-                                      Container(
-                                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                                        height: 7,
-                                        width: 7,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                                            color: Colors.white.withOpacity(0.8)
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    chats[index].time,
-                                    style: TextStyle(
-                                      fontFamily: 'Inter',
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white.withOpacity(0.5),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Container(
-                                child: Text(
-                                  chats[index].last_message,
-                                  style: const TextStyle(
-                                    fontFamily: 'Inter',
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  );
+                  return ChatItem(chat: chats[index]);
                 },
                 separatorBuilder: (context, index) {
-                  return Divider();
+                  return const Divider();
                 },
               ),
             ),
@@ -188,5 +109,4 @@ class _ChatsState extends State<Chats> {
       );
     }
   }
-
 }
