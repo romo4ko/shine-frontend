@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shine/components/Chats/ChatsAppBar.dart';
-import 'package:shine/models/Chat.dart';
+import 'package:shine/models/ChatItemModel.dart';
 import 'package:shine/components/Chats/ChatItem.dart';
 import '../components/Common/BottomBar.dart';
 
@@ -50,7 +50,7 @@ class _ChatsState extends State<Chats> {
     },
   ];
 
-  List<Chat> chats = [];
+  List<ChatItemModel> chats = [];
 
   @override
   void initState() {
@@ -105,7 +105,7 @@ class _ChatsState extends State<Chats> {
   fetchChats() {
     for (var data in response) {
       chats.add(
-          Chat.fromJson(data)
+          ChatItemModel.fromJson(data)
       );
     }
   }

@@ -8,6 +8,7 @@ import 'package:shine/views/likes.dart';
 import 'package:shine/views/profile.dart';
 import 'package:shine/views/purpose.dart';
 import 'package:shine/views/tape.dart';
+import 'views/chat.dart';
 import 'views/welcome.dart';
 import 'views/registration.dart';
 import 'views/login.dart';
@@ -38,6 +39,7 @@ class App extends StatelessWidget {
         'tape': (context) => const Tape(),
         'profile': (context) => const Profile(),
         'chats': (context) => const Chats(),
+        'chat': (context) => const Chat(),
         'likes': (context) => const Likes(),
       },
       theme: ThemeData(

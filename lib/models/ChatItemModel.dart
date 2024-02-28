@@ -1,5 +1,5 @@
 
-class Chat {
+class ChatItemModel {
 
   final int id;
   final String name;
@@ -8,7 +8,7 @@ class Chat {
   final String time;
   final bool is_viewed;
 
-  Chat(
+  ChatItemModel(
     this.id,
     this.name,
     this.image,
@@ -17,7 +17,7 @@ class Chat {
     this.is_viewed,
   );
 
-  Chat.fromJson(Map<String, dynamic> json) :
+  ChatItemModel.fromJson(Map<String, dynamic> json) :
     id = json['id'],
     name = json['name'],
     image = json['image'],
