@@ -11,6 +11,7 @@ class ChatModel {
   final String user_name;
   final String image;
   final bool is_online;
+  final bool is_viewed_by_user;
   List<Message> messages;
 
   ChatModel(
@@ -20,6 +21,7 @@ class ChatModel {
       this.user_name,
       this.image,
       this.is_online,
+      this.is_viewed_by_user,
       this.messages,
       );
 
@@ -30,6 +32,7 @@ class ChatModel {
         user_name = json['user_name'],
         image = json['image'],
         is_online = json['is_online'],
+        is_viewed_by_user = json['is_viewed_by_user'],
         messages = List<Message>.from(json['messages'].map((message) => Message.fromJson(message)));
 
 }

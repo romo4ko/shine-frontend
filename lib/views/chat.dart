@@ -27,6 +27,7 @@ class _ChatState extends State<Chat> {
       'user_name': 'Ника',
       'image': 'https://uprostim.com/wp-content/uploads/2021/03/image070-58.jpg',
       'is_online': true,
+      'is_viewed_by_user': true,
       'messages': [
         {
           'sender_id': 0,
@@ -147,9 +148,10 @@ class _ChatState extends State<Chat> {
                                         color: Colors.black,
                                       ),
                                     ),
-                                    const TextSpan(
-                                      text: '-00:00',
-                                      style: TextStyle(
+                                    // TODO: remove this crutch (transparent text for padding time and is_viewed marks
+                                    TextSpan(
+                                      text: (!is_sender && chat.is_viewed_by_user) ? '000-00:00' : '-00:00',
+                                      style: const TextStyle(
                                         fontFamily: 'Inter',
                                         fontSize: 10,
                                         color: Colors.transparent,
@@ -157,14 +159,20 @@ class _ChatState extends State<Chat> {
                                     ),
                                   ])
                                 ),
-                                Text(
-                                  chat.messages[index].time,
-                                  style: TextStyle(
-                                    fontFamily: 'Inter',
-                                    fontSize: 10,
-                                    color: Colors.black.withOpacity(0.4),
+                                Container(
+                                  padding: EdgeInsets.only(right: !is_sender && chat.is_viewed_by_user ? 18 : 0),
+                                  child: Text(
+                                    chat.messages[index].time,
+                                    style: TextStyle(
+                                      fontFamily: 'Inter',
+                                      fontSize: 10,
+                                      color: Colors.black.withOpacity(0.4),
+                                    ),
                                   ),
                                 ),
+                                if (!is_sender && chat.is_viewed_by_user) Container(
+                                  child: SvgPicture.asset('assets/icons/seen.svg', width: 15),
+                                )
                               ],
                             )
                           )

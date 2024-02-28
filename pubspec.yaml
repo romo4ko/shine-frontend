@@ -92,6 +92,9 @@ flutter:
     - assets/icons/arrow-bottom.svg
     - assets/icons/bot-settings-star.svg
     - assets/icons/drawed-arrow.svg
+    - assets/icons/seen.svg
+    - assets/icons/send.svg
+    - assets/icons/clip.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
