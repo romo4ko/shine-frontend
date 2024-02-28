@@ -30,7 +30,7 @@ class _ChatState extends State<Chat> {
       'messages': [
         {
           'sender_id': 0,
-          'text': 'Добрый день, сегодня хотелось бы выпить чашечку кофе',
+          'text': 'Добрый день, как ты смотришь на то, чтобы сегодня вместе выпить кофе?',
           'time': '14:00'
         },
         {
@@ -98,25 +98,33 @@ class _ChatState extends State<Chat> {
                 padding: const EdgeInsets.all(0),
                 itemCount: chat.messages.length,
                 itemBuilder: (BuildContext context, int index) {
+                  bool is_sender = chat.messages[index].sender_id == chat.user_id;
+                  bool is_last;
+                  if (chat.messages.length == index+1) {
+                    is_last = true;
+                  } else if (chat.messages[index+1].sender_id != chat.messages[index].sender_id) {
+                    is_last = true;
+                  } else {
+                    is_last = false;
+                  }
                   return Align(
-                    alignment: chat.messages[index].sender_id == chat.user_id ? Alignment.topLeft : Alignment.topRight,
+                    alignment: is_sender ? Alignment.topLeft : Alignment.topRight,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: is_sender ? CrossAxisAlignment.start : CrossAxisAlignment.end,
                       children: [
                         Container(
-                          // margin: EdgeInsets.only(
-                          //   bottom: 10,
-                          //   left: chat.messages[index].sender_id == chat.user_id ? 0 : 80,
-                          //   right: chat.messages[index].sender_id == chat.user_id ? 80 : 0
-                          // ),
+                          margin: EdgeInsets.only(
+                            // bottom: 10,
+                            left: is_sender ? 0 : 50,
+                            right: is_sender ? 50 : 0
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(chat.messages[index].sender_id == chat.user_id ? 10 : 20),
-                              bottomLeft: Radius.circular(chat.messages[index].sender_id == chat.user_id ? 0 : 20),
-                              topRight: Radius.circular(chat.messages[index].sender_id == chat.user_id ? 20 : 10),
-                              bottomRight: Radius.circular(chat.messages[index].sender_id == chat.user_id ? 20 : 0),
+                              topLeft: Radius.circular(is_sender ? 10 : 20),
+                              bottomLeft: is_last ? Radius.circular(is_sender ? 0 : 20) : Radius.circular(is_sender ? 10 : 20),
+                              topRight: Radius.circular(is_sender ? 20 : 10),
+                              bottomRight: is_last ? Radius.circular(is_sender ? 20 : 0) : Radius.circular(is_sender ? 20 : 10),
                             )
                           ),
                           child: Padding(
@@ -126,23 +134,46 @@ class _ChatState extends State<Chat> {
                                 top: 8,
                                 bottom: 8,
                             ),
-                            child: Text(
-                                chat.messages[index].text,
-                            ),
+                            child: Stack(
+                              alignment: Alignment.bottomRight,
+                              children: [
+                                Text.rich(
+                                  TextSpan(children: [
+                                    TextSpan(
+                                      text: chat.messages[index].text,
+                                      style: const TextStyle(
+                                        fontFamily: 'Inter',
+                                        fontSize: 14,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    const TextSpan(
+                                      text: '-00:00',
+                                      style: TextStyle(
+                                        fontFamily: 'Inter',
+                                        fontSize: 10,
+                                        color: Colors.transparent,
+                                      ),
+                                    ),
+                                  ])
+                                ),
+                                Text(
+                                  chat.messages[index].time,
+                                  style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    fontSize: 10,
+                                    color: Colors.black.withOpacity(0.4),
+                                  ),
+                                ),
+                              ],
+                            )
                           )
                         ),
-                        Container(
-                          padding: EdgeInsets.only(top: 3, bottom: 5),
-                          child: Text(
-                            chat.messages[index].time,
-                            style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontSize: 10,
-                              color: Colors.black.withOpacity(0.4),
-                            ),
-                            textAlign: chat.messages[index].sender_id == chat.user_id ? TextAlign.end : TextAlign.start,
-                          ),
-                        )
+                        if (is_last) Container(
+                            alignment: is_sender ? Alignment.bottomLeft : Alignment.bottomRight,
+                            child: CustomPaint(painter: Triangle(is_sender))
+                        ),
+                        SizedBox(height: 10,)
                       ],
                     ),
                   );
@@ -157,5 +188,36 @@ class _ChatState extends State<Chat> {
         ],
       ),
     );
+  }
+}
+
+class Triangle extends CustomPainter {
+  final bool is_sender;
+  Triangle(this.is_sender);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint()..color = Colors.white;
+    double width = 12;
+    double height = 11;
+
+    var path = Path();
+    if (is_sender) {
+      path.lineTo(0, width);
+      path.lineTo(0, width);
+      path.lineTo(height, 0);
+    }
+    else {
+      path.lineTo(width, 0); // Side of top right rectangle
+      path.lineTo(- width, 0); // Side of top left rectangle
+      path.lineTo(0, height); // Side of bottom rectangle
+    }
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
