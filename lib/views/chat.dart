@@ -1,10 +1,11 @@
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shine/components/Chat/ChatAppBar.dart';
 import 'package:shine/models/ChatModel.dart';
-import '../components/Common/BottomBar.dart';
+import '../components/Chat/ChatBottomBar.dart';
 
 class Chat extends StatefulWidget {
 
@@ -54,6 +55,81 @@ class _ChatState extends State<Chat> {
           'text': 'Отлично! До встречи)',
           'time': '14:10'
         },
+        {
+          'sender_id': 1,
+          'text': 'Да, мне нравится эта идея',
+          'time': '14:01'
+        },
+        {
+          'sender_id': 1,
+          'text': 'Давай встретимся возле парка в 18:00?',
+          'time': '14:05'
+        },
+        {
+          'sender_id': 0,
+          'text': 'Отлично! До встречи)',
+          'time': '14:10'
+        },
+        {
+          'sender_id': 1,
+          'text': 'Да, мне нравится эта идея',
+          'time': '14:01'
+        },
+        {
+          'sender_id': 1,
+          'text': 'Давай встретимся возле парка в 18:00?',
+          'time': '14:05'
+        },
+        {
+          'sender_id': 0,
+          'text': 'Отлично! До встречи)',
+          'time': '14:10'
+        },
+        {
+          'sender_id': 1,
+          'text': 'Да, мне нравится эта идея',
+          'time': '14:01'
+        },
+        {
+          'sender_id': 1,
+          'text': 'Давай встретимся возле парка в 18:00?',
+          'time': '14:05'
+        },
+        {
+          'sender_id': 0,
+          'text': 'Отлично! До встречи)',
+          'time': '14:10'
+        },
+        {
+          'sender_id': 1,
+          'text': 'Давай встретимся возле парка в 18:00?',
+          'time': '14:05'
+        },
+        {
+          'sender_id': 0,
+          'text': 'Отлично! До встречи)',
+          'time': '14:10'
+        },
+        {
+          'sender_id': 1,
+          'text': 'Давай встретимся возле парка в 18:00?',
+          'time': '14:05'
+        },
+        {
+          'sender_id': 0,
+          'text': 'Отлично! До встречи)',
+          'time': '14:10'
+        },
+        {
+          'sender_id': 1,
+          'text': 'Давай встретимся возле парка в 18:00?',
+          'time': '14:05'
+        },
+        {
+          'sender_id': 0,
+          'text': 'Отлично! До встречи)',
+          'time': '14:10'
+        },
       ]
     });
 
@@ -64,6 +140,8 @@ class _ChatState extends State<Chat> {
 
   @override
   Widget build(BuildContext context) {
+
+    ScrollController _scrollController = new ScrollController();
 
     final args = ModalRoute.of(context)!.settings.arguments as Chat;
 
@@ -76,7 +154,6 @@ class _ChatState extends State<Chat> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      resizeToAvoidBottomInset: false,
       appBar: ChatAppBar(chat: chat),
       body: Stack(
         children: [
@@ -85,7 +162,7 @@ class _ChatState extends State<Chat> {
                 minHeight: MediaQuery.of(context).size.height,
                 minWidth: MediaQuery.of(context).size.width
             ),
-            padding: const EdgeInsets.only(top: 100, left: 20, right: 20, bottom: 100),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/images/backgrounds/info-bg.png"),
@@ -95,8 +172,9 @@ class _ChatState extends State<Chat> {
             child: Container(
               alignment: Alignment.topCenter,
               child: ListView.builder(
+                controller: _scrollController,
                 physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.all(0),
+                padding: const EdgeInsets.only(top: 100, bottom: 60),
                 itemCount: chat.messages.length,
                 itemBuilder: (BuildContext context, int index) {
                   bool is_sender = chat.messages[index].sender_id == chat.user_id;
@@ -191,7 +269,7 @@ class _ChatState extends State<Chat> {
           ),
           Container(
             alignment: Alignment.bottomCenter,
-            child: const BottomBar(active: "chats"),
+            child: const ChatBottomBar(active: "chats"),
           )
         ],
       ),
