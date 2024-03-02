@@ -83,7 +83,11 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.pop(context);
+                  ChatActionsDialog.showCustomDialog(context,
+                      title: "Gallary",
+                      okBtnText: "Save",
+                      cancelBtnText: "Cancel",
+                  );
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -99,4 +103,110 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(100);
+}
+
+
+class ChatActionsDialog {
+  static ChatActionsDialog _instance = new ChatActionsDialog.internal();
+
+  ChatActionsDialog.internal();
+
+  factory ChatActionsDialog() => _instance;
+
+  static void showCustomDialog(BuildContext context,
+      {
+        required String title,
+        String okBtnText = "Ok",
+        String cancelBtnText = "Cancel"
+      }
+    ) {
+    showDialog(
+      context: context,
+      builder: (_) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            height: 200,
+            padding: const EdgeInsets.all(20),
+            width:  MediaQuery.of(context).size.width,
+            constraints: BoxConstraints(minHeight: 200),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              color: Color.fromRGBO(20, 20, 20, 0.8),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Действия",
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 18,
+                    color: Colors.white
+                  ),
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 40,
+                      child: ElevatedButton(
+                        onPressed: () => {
+                          Navigator.pushNamed(context, "edit-profile")
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          backgroundColor: Colors.black.withOpacity(0.4),
+                          foregroundColor: Colors.black.withOpacity(0.5),
+                          disabledBackgroundColor: Colors.black.withOpacity(1),
+                        ),
+                        child: const Text(
+                          "Пожаловаться",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              height: 1,
+                              fontFamily: 'Montserrat',
+                              fontSize: 16,
+                              color: Colors.white
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 40,
+                      child: ElevatedButton(
+                        onPressed: () => {
+                          Navigator.pushNamed(context, "edit-profile")
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          backgroundColor: Colors.black.withOpacity(0.4),
+                          foregroundColor: Colors.black.withOpacity(0.5),
+                          disabledBackgroundColor: Colors.black.withOpacity(1),
+                        ),
+                        child: const Text(
+                          "Заблокировать",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              height: 1,
+                              fontFamily: 'Montserrat',
+                              fontSize: 16,
+                              color: Colors.white
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
+        );
+      }
+    );
+  }
 }

@@ -152,127 +152,128 @@ class _ChatState extends State<Chat> {
       return false;
     }
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: ChatAppBar(chat: chat),
-      body: Stack(
-        children: [
-          Container(
-            constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height,
-                minWidth: MediaQuery.of(context).size.width
-            ),
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/backgrounds/info-bg.png"),
-                fit: BoxFit.fill,
-              ),
-            ),
-            child: Container(
-              alignment: Alignment.topCenter,
-              child: ListView.builder(
-                controller: _scrollController,
-                physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.only(top: 100, bottom: 60),
-                itemCount: chat.messages.length,
-                itemBuilder: (BuildContext context, int index) {
-                  bool is_sender = chat.messages[index].sender_id == chat.user_id;
-                  bool is_last;
-                  if (chat.messages.length == index+1) {
-                    is_last = true;
-                  } else if (chat.messages[index+1].sender_id != chat.messages[index].sender_id) {
-                    is_last = true;
-                  } else {
-                    is_last = false;
-                  }
-                  return Align(
-                    alignment: is_sender ? Alignment.topLeft : Alignment.topRight,
-                    child: Column(
-                      crossAxisAlignment: is_sender ? CrossAxisAlignment.start : CrossAxisAlignment.end,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(
-                            // bottom: 10,
-                            left: is_sender ? 0 : 50,
-                            right: is_sender ? 50 : 0
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(is_sender ? 10 : 20),
-                              bottomLeft: is_last ? Radius.circular(is_sender ? 0 : 20) : Radius.circular(is_sender ? 10 : 20),
-                              topRight: Radius.circular(is_sender ? 20 : 10),
-                              bottomRight: is_last ? Radius.circular(is_sender ? 20 : 0) : Radius.circular(is_sender ? 20 : 10),
-                            )
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 12,
-                                right: 12,
-                                top: 8,
-                                bottom: 8,
-                            ),
-                            child: Stack(
-                              alignment: Alignment.bottomRight,
-                              children: [
-                                Text.rich(
-                                  TextSpan(children: [
-                                    TextSpan(
-                                      text: chat.messages[index].text,
-                                      style: const TextStyle(
-                                        fontFamily: 'Inter',
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    // TODO: remove this crutch (transparent text for padding time and is_viewed marks
-                                    TextSpan(
-                                      text: (!is_sender && chat.is_viewed_by_user) ? '000-00:00' : '-00:00',
-                                      style: const TextStyle(
-                                        fontFamily: 'Inter',
-                                        fontSize: 10,
-                                        color: Colors.transparent,
-                                      ),
-                                    ),
-                                  ])
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(right: !is_sender && chat.is_viewed_by_user ? 18 : 0),
-                                  child: Text(
-                                    chat.messages[index].time,
-                                    style: TextStyle(
-                                      fontFamily: 'Inter',
-                                      fontSize: 10,
-                                      color: Colors.black.withOpacity(0.4),
-                                    ),
-                                  ),
-                                ),
-                                if (!is_sender && chat.is_viewed_by_user) Container(
-                                  child: SvgPicture.asset('assets/icons/seen.svg', width: 15),
+    return Stack(
+      children: [
+        Image.asset(
+          "assets/images/backgrounds/info-bg.png",
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          extendBodyBehindAppBar: true,
+          appBar: ChatAppBar(chat: chat),
+          body: Stack(
+            children: [
+              Container(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: Container(
+                  alignment: Alignment.topCenter,
+                  child: ListView.builder(
+                    controller: _scrollController,
+                    physics: const BouncingScrollPhysics(),
+                    padding: const EdgeInsets.only(top: 100, bottom: 60),
+                    itemCount: chat.messages.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      bool is_sender = chat.messages[index].sender_id == chat.user_id;
+                      bool is_last;
+                      if (chat.messages.length == index+1) {
+                        is_last = true;
+                      } else if (chat.messages[index+1].sender_id != chat.messages[index].sender_id) {
+                        is_last = true;
+                      } else {
+                        is_last = false;
+                      }
+                      return Align(
+                        alignment: is_sender ? Alignment.topLeft : Alignment.topRight,
+                        child: Column(
+                          crossAxisAlignment: is_sender ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(
+                                // bottom: 10,
+                                left: is_sender ? 0 : 50,
+                                right: is_sender ? 50 : 0
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(is_sender ? 10 : 20),
+                                  bottomLeft: is_last ? Radius.circular(is_sender ? 0 : 20) : Radius.circular(is_sender ? 10 : 20),
+                                  topRight: Radius.circular(is_sender ? 20 : 10),
+                                  bottomRight: is_last ? Radius.circular(is_sender ? 20 : 0) : Radius.circular(is_sender ? 20 : 10),
                                 )
-                              ],
-                            )
-                          )
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 12,
+                                    right: 12,
+                                    top: 8,
+                                    bottom: 8,
+                                ),
+                                child: Stack(
+                                  alignment: Alignment.bottomRight,
+                                  children: [
+                                    Text.rich(
+                                      TextSpan(children: [
+                                        TextSpan(
+                                          text: chat.messages[index].text,
+                                          style: const TextStyle(
+                                            fontFamily: 'Inter',
+                                            fontSize: 14,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        // TODO: remove this crutch (transparent text for padding time and is_viewed marks
+                                        TextSpan(
+                                          text: (!is_sender && chat.is_viewed_by_user) ? '000-00:00' : '-00:00',
+                                          style: const TextStyle(
+                                            fontFamily: 'Inter',
+                                            fontSize: 10,
+                                            color: Colors.transparent,
+                                          ),
+                                        ),
+                                      ])
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(right: !is_sender && chat.is_viewed_by_user ? 18 : 0),
+                                      child: Text(
+                                        chat.messages[index].time,
+                                        style: TextStyle(
+                                          fontFamily: 'Inter',
+                                          fontSize: 10,
+                                          color: Colors.black.withOpacity(0.4),
+                                        ),
+                                      ),
+                                    ),
+                                    if (!is_sender && chat.is_viewed_by_user) Container(
+                                      child: SvgPicture.asset('assets/icons/seen.svg', width: 15),
+                                    )
+                                  ],
+                                )
+                              )
+                            ),
+                            // if (is_last) Container(
+                            //     alignment: is_sender ? Alignment.bottomLeft : Alignment.bottomRight,
+                            //     child: CustomPaint(painter: Triangle(is_sender))
+                            // ),
+                            SizedBox(height: 10,)
+                          ],
                         ),
-                        if (is_last) Container(
-                            alignment: is_sender ? Alignment.bottomLeft : Alignment.bottomRight,
-                            child: CustomPaint(painter: Triangle(is_sender))
-                        ),
-                        SizedBox(height: 10,)
-                      ],
-                    ),
-                  );
-                },
+                      );
+                    },
+                  ),
+                ),
               ),
-            ),
+              Container(
+                alignment: Alignment.bottomCenter,
+                child: const ChatBottomBar(active: "chats"),
+              )
+            ],
           ),
-          Container(
-            alignment: Alignment.bottomCenter,
-            child: const ChatBottomBar(active: "chats"),
-          )
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
