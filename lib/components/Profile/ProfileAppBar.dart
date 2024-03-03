@@ -48,7 +48,7 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               InkWell(
                 onTap: () {
-                  // Navigator.pushNamed(context, 'filters');
+                  Navigator.pushNamed(context, 'settings');
                 },
                 child: Container(
                   width: 50,

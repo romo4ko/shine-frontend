@@ -19,14 +19,15 @@ class _ChatBottomBarState extends State<ChatBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: 60,
+      padding: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        color: Colors.transparent,
+        color: Colors.black,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(1),
-            blurRadius: 10.0,
-            spreadRadius: 10,
+            blurRadius: 5,
+            spreadRadius: 5,
           ),
         ],
       ),
@@ -34,55 +35,65 @@ class _ChatBottomBarState extends State<ChatBottomBar> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, 'bot');
-            },
-            child: Center(
-              child: SizedBox(
-                width: 50,
-                child: SvgPicture.asset(
-                  'assets/icons/clip.svg',
-                  width: 25,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
           Container(
-            width: MediaQuery.of(context).size.width-100,
-            color: Colors.black,
-            child: TextFormField(
-              style: const TextStyle(color: Colors.black, fontSize: 16, fontFamily: 'Inter'),
-              cursorColor: Colors.black,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.only(left: 10.0),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(20.0),
+            padding: EdgeInsets.only(top: 10),
+            child: InkWell(
+              onTap: () {
+              },
+              child: Center(
+                child: SizedBox(
+                  width: 50,
+                  child: SvgPicture.asset(
+                    'assets/icons/clip.svg',
+                    width: 30,
+                    color: Colors.white,
+                  ),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(20.0),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              height: 55,
+              padding: EdgeInsets.only(top: 10),
+              color: Colors.black,
+              child: TextFormField(
+                maxLines: 100,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontFamily: 'Inter'
                 ),
-                labelStyle: TextStyle(color: Colors.black.withOpacity(0.6), fontSize: 16, fontFamily: 'Inter'),
-                fillColor: Colors.white,
-                filled: true,
-                focusColor: Colors.white,
-                labelText: "Введите сообщение",
-                floatingLabelBehavior: FloatingLabelBehavior.never,
+                cursorColor: Colors.black.withOpacity(0.5),
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  labelStyle: TextStyle(color: Colors.black.withOpacity(0.6), fontSize: 16, fontFamily: 'Inter'),
+                  fillColor: Colors.white,
+                  filled: true,
+                  focusColor: Colors.white,
+                  labelText: "Введите сообщение",
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                ),
               ),
             ),
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, 'profile');
             },
-            child: SizedBox(
-              width: 50,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: SvgPicture.asset(
                 'assets/icons/send.svg',
-                width: 50,
+                height: 45,
+                alignment: Alignment.center,
                 color: Colors.white,
               ),
             ),

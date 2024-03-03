@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shine/components/Chats/ChatsAppBar.dart';
+import 'package:shine/components/Common/AppBar/TransparentAppBar.dart';
 import 'package:shine/models/ChatItemModel.dart';
 import 'package:shine/components/Chats/ChatItem.dart';
 import '../components/Common/BottomBar.dart';
@@ -122,6 +122,14 @@ class _ChatsState extends State<Chats> {
     fetchChats();
   }
 
+  fetchChats() {
+    for (var data in response) {
+      chats.add(
+          ChatItemModel.fromJson(data)
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -136,7 +144,7 @@ class _ChatsState extends State<Chats> {
           backgroundColor: Colors.transparent,
           extendBodyBehindAppBar: true,
           resizeToAvoidBottomInset: false,
-          appBar: const ChatsAppBar(),
+          appBar: const TransparentAppBar(title: 'Ч А Т Ы'),
           body: Stack(
             children: [
               Container(
@@ -145,7 +153,7 @@ class _ChatsState extends State<Chats> {
                   alignment: Alignment.topCenter,
                   child: ShaderMask(
                     shaderCallback: (Rect rect) {
-                      return LinearGradient(
+                      return const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.center,
                         colors: [Colors.black, Colors.transparent],
@@ -176,13 +184,5 @@ class _ChatsState extends State<Chats> {
         ),
       ],
     );
-  }
-
-  fetchChats() {
-    for (var data in response) {
-      chats.add(
-          ChatItemModel.fromJson(data)
-      );
-    }
   }
 }

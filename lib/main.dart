@@ -7,6 +7,7 @@ import 'package:shine/views/information.dart';
 import 'package:shine/views/likes.dart';
 import 'package:shine/views/profile.dart';
 import 'package:shine/views/purpose.dart';
+import 'package:shine/views/settings.dart';
 import 'package:shine/views/tape.dart';
 import 'views/chat.dart';
 import 'views/welcome.dart';
@@ -41,6 +42,7 @@ class App extends StatelessWidget {
         'chats': (context) => const Chats(),
         'chat': (context) => const Chat(),
         'likes': (context) => const Likes(),
+        'settings': (context) => const Settings(),
       },
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.black,

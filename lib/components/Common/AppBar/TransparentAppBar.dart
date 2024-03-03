@@ -2,10 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class ChatsAppBar extends StatelessWidget implements PreferredSizeWidget {
+class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
 
-  const ChatsAppBar({
+  final String title;
+
+  const TransparentAppBar({
     super.key,
+    required this.title
   });
 
   @override
@@ -19,20 +22,20 @@ class ChatsAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: Colors.black.withOpacity(0.3),
             blurRadius: 30.0,
             spreadRadius: 30,
-            offset: Offset(
+            offset: const Offset(
               0,
               -30,
             ),
           ),
         ],
       ),
-      child: const Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Ч А Т Ы',
-            style: TextStyle(
+            this.title,
+            style: const TextStyle(
                 height: 1,
                 fontFamily: 'Dejavu',
                 fontSize: 32,

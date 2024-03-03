@@ -143,15 +143,6 @@ class _ChatState extends State<Chat> {
 
     ScrollController _scrollController = new ScrollController();
 
-    final args = ModalRoute.of(context)!.settings.arguments as Chat;
-
-    getMessageDirection(sender_id, user_id) {
-      if (sender_id == chat.user_id) {
-        return true;
-      }
-      return false;
-    }
-
     return Stack(
       children: [
         Image.asset(
@@ -163,6 +154,7 @@ class _ChatState extends State<Chat> {
         Scaffold(
           backgroundColor: Colors.transparent,
           extendBodyBehindAppBar: true,
+          resizeToAvoidBottomInset: true,
           appBar: ChatAppBar(chat: chat),
           body: Stack(
             children: [
@@ -200,9 +192,11 @@ class _ChatState extends State<Chat> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(is_sender ? 10 : 20),
-                                  bottomLeft: is_last ? Radius.circular(is_sender ? 0 : 20) : Radius.circular(is_sender ? 10 : 20),
+                                  // bottomLeft: is_last ? Radius.circular(is_sender ? 0 : 20) : Radius.circular(is_sender ? 10 : 20),
+                                  bottomLeft: is_last ? Radius.circular(is_sender ? 10 : 20) : Radius.circular(is_sender ? 10 : 20),
                                   topRight: Radius.circular(is_sender ? 20 : 10),
-                                  bottomRight: is_last ? Radius.circular(is_sender ? 20 : 0) : Radius.circular(is_sender ? 20 : 10),
+                                  // bottomRight: is_last ? Radius.circular(is_sender ? 20 : 0) : Radius.circular(is_sender ? 20 : 10),
+                                  bottomRight: is_last ? Radius.circular(is_sender ? 20 : 10) : Radius.circular(is_sender ? 20 : 10),
                                 )
                               ),
                               child: Padding(
@@ -258,7 +252,7 @@ class _ChatState extends State<Chat> {
                             //     alignment: is_sender ? Alignment.bottomLeft : Alignment.bottomRight,
                             //     child: CustomPaint(painter: Triangle(is_sender))
                             // ),
-                            SizedBox(height: 10,)
+                            const SizedBox(height: 10)
                           ],
                         ),
                       );
