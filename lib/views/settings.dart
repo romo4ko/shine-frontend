@@ -46,7 +46,7 @@ class _SettingsState extends State<Settings> {
               padding: const EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 100),
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/backgrounds/profile-bg.png"),
+                  image: AssetImage("assets/images/backgrounds/settings-bg.png"),
                   fit: BoxFit.cover,
                 ),
               ),

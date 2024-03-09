@@ -5,7 +5,8 @@ class Self {
   final String? text;
   final String city;
   final String purpose;
-  final String image;
+  final String? image;
+  final List images;
   final bool is_premium;
   final int bot_setting;
   final int profile_filled;
@@ -19,6 +20,7 @@ class Self {
       this.city,
       this.purpose,
       this.image,
+      this.images,
       this.is_premium,
       this.bot_setting,
       this.profile_filled,
@@ -32,6 +34,7 @@ class Self {
         city = json['city'],
         purpose = json['purpose'],
         image = json['image'],
+        images = json['images'] ?? [],
         is_premium = json['is_premium'],
         bot_setting = json['bot_setting'],
         profile_filled = json['profile_filled'],

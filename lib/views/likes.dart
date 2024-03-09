@@ -19,7 +19,7 @@ class Likes extends StatefulWidget {
 class _LikesState extends State<Likes> {
 
   var response = {
-      'is_premium': true,
+      'is_premium': false,
       'likes': [
         {
           'id': 0,
@@ -207,13 +207,13 @@ class _LikesState extends State<Likes> {
                                           children: [
                                             SvgPicture.asset(
                                               'assets/icons/dislike.svg',
-                                              height: 50,
-                                              width: 50,
+                                              height: 40,
+                                              width: 40,
                                             ),
                                             SvgPicture.asset(
                                               'assets/icons/like.svg',
-                                              height: 50,
-                                              width: 50,
+                                              height: 40,
+                                              width: 40,
                                             ),
                                           ],
                                         ),

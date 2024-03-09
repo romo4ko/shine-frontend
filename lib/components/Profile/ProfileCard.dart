@@ -33,7 +33,7 @@ class ProfileCard extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
                   backgroundImage: NetworkImage(
-                      user.image
+                      user.image ?? 'https://smart.mag-river.ru/uploads/goods/img/445-360/fit/no-image.png'
                   ),
                   maxRadius: 40,
                 ),
@@ -81,7 +81,7 @@ class ProfileCard extends StatelessWidget {
                 height: 30,
                 child: ElevatedButton(
                   onPressed: () => {
-                    Navigator.pushNamed(context, "edit-profile")
+                    Navigator.pushNamed(context, "profile-settings")
                   },
                   style: ElevatedButton.styleFrom(
                     shape: const RoundedRectangleBorder(
