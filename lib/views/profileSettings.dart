@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shine/components/Profile/profile.dart';
 import 'package:shine/components/ProfileSettings/ImagesGrid.dart';
+import 'package:shine/components/ProfileSettings/ProfileDescription.dart';
+import 'package:shine/components/ProfileSettings/ProfileInfo.dart';
 
 import '../components/Common/AppBar/DefaultAppBar.dart';
 import '../components/Common/BottomBar.dart';
@@ -26,6 +28,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
     'purpose': 'Свидания',
     'image': "https://avatars.dzeninfra.ru/get-zen_doc/29030/pub_5ae9c5fe3dceb76be76eebac_5ae9cad457906a18134a10ad/scale_1200",
     'images': [
+      "https://avatars.dzeninfra.ru/get-zen_doc/29030/pub_5ae9c5fe3dceb76be76eebac_5ae9cad457906a18134a10ad/scale_1200",
     ],
     'is_premium': false,
     'bot_setting': 1,
@@ -37,7 +40,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: const DefaultAppBar(title: "НАСТРОЙКИ ПРОФИЛЯ", titleSize: 24),
       body: SingleChildScrollView(
         child: Container(
@@ -45,7 +48,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               minHeight: MediaQuery.of(context).size.height,
               minWidth: MediaQuery.of(context).size.width
           ),
-          padding: const EdgeInsets.only(top: 100, left: 20, right: 20, bottom: 100),
+          padding: const EdgeInsets.only(top: 100, left: 20, right: 20, bottom: 300),
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/backgrounds/profile-settings-bg.png"),
@@ -55,7 +58,12 @@ class _ProfileSettingsState extends State<ProfileSettings> {
           child: Column(
             children: [
               ProfileSettingsFilled(percent: user.profile_filled),
-              ImagesGrid(images: user.images)
+              ImagesGrid(images: user.images),
+              SizedBox(height: 20),
+              ProfileInfo(),
+              SizedBox(height: 20),
+              ProfileDescription(),
+
             ],
           ),
         ),

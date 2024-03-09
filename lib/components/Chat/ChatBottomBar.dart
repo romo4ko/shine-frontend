@@ -54,10 +54,11 @@ class _ChatBottomBarState extends State<ChatBottomBar> {
           ),
           Expanded(
             child: Container(
-              height: 55,
               padding: EdgeInsets.only(top: 10),
               color: Colors.black,
               child: TextFormField(
+                keyboardType: TextInputType.multiline,
+                minLines: 1,
                 maxLines: 100,
                 style: const TextStyle(
                     color: Colors.black,
