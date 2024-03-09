@@ -26,7 +26,6 @@ class _ProfileSettingsState extends State<ProfileSettings> {
     'purpose': 'Свидания',
     'image': "https://avatars.dzeninfra.ru/get-zen_doc/29030/pub_5ae9c5fe3dceb76be76eebac_5ae9cad457906a18134a10ad/scale_1200",
     'images': [
-      "https://avatars.dzeninfra.ru/get-zen_doc/29030/pub_5ae9c5fe3dceb76be76eebac_5ae9cad457906a18134a10ad/scale_1200"
     ],
     'is_premium': false,
     'bot_setting': 1,
