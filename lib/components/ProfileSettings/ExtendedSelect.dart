@@ -5,14 +5,14 @@ import 'package:flutter_svg/svg.dart';
 class ExtendedSelect extends StatefulWidget {
 
   final List<String> values;
-  final String selected;
+  final String? selected;
   final String title;
   final String placeholder;
 
   const ExtendedSelect({
     super.key,
     required this.values,
-    this.selected = '',
+    this.selected = null,
     required this.title,
     this.placeholder = ''
   });
@@ -33,6 +33,7 @@ class _ExtendedSelectState extends State<ExtendedSelect> {
   @override
   void initState() {
     _selectedValue = widget.selected;
+    is_active = _selectedValue == null ? false : true;
     super.initState();
   }
 
@@ -56,7 +57,7 @@ class _ExtendedSelectState extends State<ExtendedSelect> {
             color: Colors.transparent,
             padding: EdgeInsets.symmetric(
                 horizontal: 20,
-                vertical: !is_active && controller.text.length == 0 ? 21 : 10
+                vertical: !is_active ? 21 : 10
             ),
             width: MediaQuery.of(context).size.width,
             child: Row(
@@ -70,13 +71,13 @@ class _ExtendedSelectState extends State<ExtendedSelect> {
                       widget.title,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                          color: is_active ? Colors.white.withOpacity(0.6) : Colors.white,
+                          color: Colors.white.withOpacity(0.6),
                           fontSize: is_active ? 12 : 20,
                           height: 1,
                           fontFamily: 'Inter'
                       ),
                     ),
-                    !is_active && controller.text.length > 0 ? Padding(
+                    !is_active ? Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Text(
                         controller.text,

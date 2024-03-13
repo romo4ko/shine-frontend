@@ -119,10 +119,62 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                           color: Color.fromRGBO(20, 20, 20, 0.8),
                           borderRadius: BorderRadius.circular(10)
                       ),
-                      child: const ExtendedSelect(
-                        values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
-                        title: 'Цель знакомства',
-                        selected: 'Свидания',
+                      child: Column(
+                        children: [
+                          ExtendedSelect(
+                            values: ['Ростов-на-Дону', 'Москва', 'Краснодар', 'Санкт-Петербург'],
+                            title: 'Город',
+                            selected: 'Ростов-на-Дону',
+                          ),
+                          Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                          ExtendedSelect(
+                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                            title: 'Семейное положение',
+                            selected: null,
+                          ),
+                          Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                          ExtendedSelect(
+                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                            title: 'Дети',
+                            selected: 'Свидания',
+                          ),
+                          Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                          ExtendedSelect(
+                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                            title: 'Рост',
+                            selected: 'Свидания',
+                          ),
+                          Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                          ExtendedSelect(
+                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                            title: 'Образование',
+                            selected: 'Свидания',
+                          ),
+                          Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                          ExtendedSelect(
+                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                            title: 'Хобби/Интересы',
+                            selected: 'Свидания',
+                          ),
+                          Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                          ExtendedSelect(
+                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                            title: 'Языки',
+                            selected: 'Свидания',
+                          ),
+                          Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                          ExtendedSelect(
+                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                            title: 'Отношение к алкоголю',
+                            selected: 'Свидания',
+                          ),
+                          Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                          ExtendedSelect(
+                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                            title: 'Отношение к курению',
+                            selected: 'Свидания',
+                          ),
+                        ],
                       )
                   )
                 ],

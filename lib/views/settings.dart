@@ -1,10 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shine/components/Profile/profile.dart';
-
+import 'package:flutter_svg/svg.dart';
+import 'package:shine/components/Common/Buttons/buttons.dart';
 import '../components/Common/AppBar/DefaultAppBar.dart';
-import '../components/Common/BottomBar.dart';
 import '../models/Self.dart';
 
 class Settings extends StatefulWidget {
@@ -35,41 +34,144 @@ class _SettingsState extends State<Settings> {
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
       appBar: const DefaultAppBar(title: "НАСТРОЙКИ", titleSize: 24),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Container(
-              constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height,
-                  minWidth: MediaQuery.of(context).size.width
-              ),
-              padding: const EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 100),
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/backgrounds/settings-bg.png"),
-                  fit: BoxFit.cover,
-                ),
+      body: Container(
+        padding: const EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 40),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/backgrounds/settings-bg.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(20, 20, 20, 0.8),
+                  borderRadius: BorderRadius.circular(10)
               ),
               child: Column(
                 children: [
-                  ProfileCard(user: user),
-                  SizedBox(height: 10),
-                  (user.profile_filled < 100) ?
-                  ProfileFilled(percent: user.profile_filled) :
-                  Container(),
-                  SizedBox(height: 10),
-                  PremiumInvites(invites: user.invites ?? 0),
-                  SizedBox(height: 10),
-                  BotSettings()
+                  SettingsButton(title: 'Уведомления', route: '/'),
+                  Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                  SettingsButton(title: 'Черный список', route: '/'),
+                  Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                  SettingsButton(title: 'FAQ', route: '/'),
+                  Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                  SettingsButton(title: 'Сообщить о проблеме', route: '/'),
+                  Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                  SettingsButton(title: 'Помощь разработчикам', route: '/'),
+                  Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                  SettingsButton(title: 'Политика конфиденциальности', route: '/'),
+                  Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                  SettingsButton(title: 'Пользовательское соглашение', route: '/'),
                 ],
+              )
+            ),
+            Column(
+              children: [
+                SizedBox(height: 30),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 40,
+                  child: ElevatedButton(
+                    onPressed: () => {
+                      Navigator.pushNamed(context, 'welcome')
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      backgroundColor: Colors.black.withOpacity(0.4),
+                      foregroundColor: Colors.black.withOpacity(0.5),
+                      disabledBackgroundColor: Colors.black.withOpacity(1),
+                    ),
+                    child: Text(
+                      'Выйти',
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                          height: 1,
+                          fontFamily: 'Inter',
+                          fontSize: 18,
+                          color: Colors.white
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 30),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 40,
+                  child: ElevatedButton(
+                    onPressed: () => {
+                      Navigator.pushNamed(context, 'welcome')
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      backgroundColor: Colors.black.withOpacity(0.4),
+                      foregroundColor: Colors.black.withOpacity(0.5),
+                      disabledBackgroundColor: Colors.black.withOpacity(1),
+                    ),
+                    child: Text(
+                      'Удалить аккаунт',
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                          height: 1,
+                          fontFamily: 'Inter',
+                          fontSize: 18,
+                          color: Colors.redAccent
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      )
+    );
+  }
+}
+
+class SettingsButton extends StatelessWidget {
+
+  final String title;
+  final String route;
+
+  const SettingsButton({super.key, required this.title, required this.route});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => {
+        Navigator.pushNamed(context, this.route)
+      },
+      child: Container(
+        color: Colors.transparent,
+        padding: EdgeInsets.symmetric(
+            horizontal: 20,
+        ),
+        height: 50,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              this.title,
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  height: 1,
+                  fontFamily: 'Inter'
               ),
             ),
-          ),
-          Container(
-            alignment: Alignment.bottomCenter,
-            child: const BottomBar(active: "profile"),
-          )
-        ],
+            SvgPicture.asset('assets/icons/arrow-right.svg', height: 14),
+          ],
+        ),
       ),
     );
   }
