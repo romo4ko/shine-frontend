@@ -1,15 +1,15 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-
 import 'package:shine/components/ProfileSettings/ExtendedInput.dart';
+import '../../models/Self.dart';
 
 class ProfileInfo extends StatefulWidget {
 
+  final Self user;
+
   const ProfileInfo({
     super.key,
+    required this.user
   });
 
   @override
@@ -47,11 +47,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
           ),
           child: Column(
             children: [
-              ExtendedInput(value: 'Иван', title: 'Имя', key: _k1),
+              ExtendedInput(value: widget.user.name, title: 'Имя', key: _k1),
               Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-              ExtendedInput(value: '11.11.1999', title: 'Дата рождения', key: _k2),
+              ExtendedInput(value: widget.user.birthdate, title: 'Дата рождения', key: _k2),
               Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-              ExtendedInput(value: null, title: 'Пол', key: _k3),
+              ExtendedInput(value: widget.user.sex, title: 'Пол', key: _k3),
             ],
           ),
         ),
