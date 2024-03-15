@@ -98,6 +98,7 @@ flutter:
     - assets/icons/clip.svg
     - assets/icons/likes-heart.svg
     - assets/icons/arrow-right.svg
+    - assets/icons/premium-main.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
