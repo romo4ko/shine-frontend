@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shine/components/Information/Inputs/TextInput.dart';
 import 'package:shine/components/Profile/profile.dart';
 import 'package:shine/components/ProfileSettings/ExtendedSelect.dart';
 import 'package:shine/components/ProfileSettings/ImagesGrid.dart';
@@ -178,6 +179,20 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       )
                   )
                 ],
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20),
+                  decoration: BoxDecoration(
+                      color: Color.fromRGBO(20, 20, 20, 0.8),
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Column(
+                    children: [
+                      TextInput(values: [], title: 'title'),
+                      Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                      TextInput(values: [], title: 'title')
+                    ],
+                  )
               )
             ],
           ),

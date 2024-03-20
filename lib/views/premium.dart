@@ -152,10 +152,10 @@ class _PremiumState extends State<Premium> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(top: 10),
                         child: Text(
                           "${getDays()} дней ${getHours()} часов ${getMinutes()} минут ${getSeconds()} секунд",
-                          style: TextStyle(
+                          style: const TextStyle(
                               height: 1,
                               fontFamily: 'Montserrat',
                               fontSize: 14,
