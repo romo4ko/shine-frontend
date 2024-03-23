@@ -24,7 +24,7 @@ class _LikesState extends State<Likes> {
         {
           'id': 0,
           'name': 'Ника',
-          'image': 'https://uprostim.com/wp-content/uploads/2021/03/image070-58.jpg',
+          'image': 'https://pikuco.ru/upload/test_stable/eee/eee3b0abbfdbcc0e320860a75e236c48.webp',
         },
         {
           'id': 1,
@@ -44,7 +44,7 @@ class _LikesState extends State<Likes> {
         {
           'id': 0,
           'name': 'Ника',
-          'image': 'https://uprostim.com/wp-content/uploads/2021/03/image070-58.jpg',
+          'image': 'https://pikuco.ru/upload/test_stable/eee/eee3b0abbfdbcc0e320860a75e236c48.webp',
         },
         {
           'id': 1,
@@ -64,7 +64,7 @@ class _LikesState extends State<Likes> {
         {
           'id': 0,
           'name': 'Ника',
-          'image': 'https://uprostim.com/wp-content/uploads/2021/03/image070-58.jpg',
+          'image': 'https://pikuco.ru/upload/test_stable/eee/eee3b0abbfdbcc0e320860a75e236c48.webp',
         },
         {
           'id': 1,
@@ -94,44 +94,86 @@ class _LikesState extends State<Likes> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.asset(
-          "assets/images/backgrounds/chats-bg.png",
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          fit: BoxFit.cover,
-        ),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          extendBodyBehindAppBar: true,
-          resizeToAvoidBottomInset: false,
-          appBar: const TransparentAppBar(title: 'Л А Й К И'),
-          body: Stack(
-            children: [
-              Container(
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                child: Container(
-                  alignment: Alignment.topCenter,
-                  child: ShaderMask(
-                    shaderCallback: (Rect rect) {
-                      return const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.center,
-                        colors: [Colors.black, Colors.transparent],
-                        stops: [0.0, 0.3],
-                      ).createShader(rect);
-                    },
-                    blendMode: BlendMode.dstOut,
-                    child: Container(
-                      child: GridView.count(
-                        padding: const EdgeInsets.only(top: 100, bottom: 100),
-                        crossAxisCount: 2,
-                        childAspectRatio: (3 / 4),
-                        mainAxisSpacing: 20,
-                        crossAxisSpacing: 20,
-                        children: List.generate(likes.likes.length, (index) {
-                            return !likes.is_premium ?
+    return Scaffold(
+      body: Stack(
+        children: [
+          Image.asset(
+            "assets/images/backgrounds/chats-bg.png",
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+          ),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            extendBodyBehindAppBar: true,
+            resizeToAvoidBottomInset: false,
+            appBar: const TransparentAppBar(title: 'Л А Й К И'),
+            body: Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    child: ShaderMask(
+                      shaderCallback: (Rect rect) {
+                        return const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.center,
+                          colors: [Colors.black, Colors.transparent],
+                          stops: [0.0, 0.3],
+                        ).createShader(rect);
+                      },
+                      blendMode: BlendMode.dstOut,
+                      child: Container(
+                        child: GridView.count(
+                          padding: const EdgeInsets.only(top: 100, bottom: 100),
+                          crossAxisCount: 2,
+                          childAspectRatio: (3 / 4),
+                          mainAxisSpacing: 20,
+                          crossAxisSpacing: 20,
+                          children: List.generate(likes.likes.length, (index) {
+                              return !likes.is_premium ?
+                                ClipRRect(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                                20.0),
+                                            color: Colors.grey.withOpacity(0.1),
+                                          ),
+                                          child: Image.network(
+                                            likes.likes[index].image,
+                                            height: MediaQuery
+                                                .of(context)
+                                                .size
+                                                .height,
+                                            width: MediaQuery
+                                                .of(context)
+                                                .size
+                                                .width,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        ClipRRect(
+                                          child: BackdropFilter(
+                                            filter: ImageFilter.blur(
+                                                sigmaX: 10, sigmaY: 10),
+                                            child: Container(
+                                              color: Colors.grey.withOpacity(0.1),
+                                              alignment: Alignment.center,
+                                              child: SvgPicture.asset(
+                                                  'assets/icons/likes-heart.svg',
+                                                  width: 65),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                ) :
                               ClipRRect(
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
                                   borderRadius: BorderRadius.circular(10.0),
@@ -158,84 +200,44 @@ class _LikesState extends State<Likes> {
                                         ),
                                       ),
                                       ClipRRect(
-                                        child: BackdropFilter(
-                                          filter: ImageFilter.blur(
-                                              sigmaX: 10, sigmaY: 10),
-                                          child: Container(
-                                            color: Colors.grey.withOpacity(0.1),
-                                            alignment: Alignment.center,
-                                            child: SvgPicture.asset(
-                                                'assets/icons/likes-heart.svg',
-                                                width: 65),
+                                        child: Container(
+                                          padding: EdgeInsets.all(10),
+                                          alignment: Alignment.bottomCenter,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              SvgPicture.asset(
+                                                'assets/icons/dislike.svg',
+                                                height: 40,
+                                                width: 40,
+                                              ),
+                                              SvgPicture.asset(
+                                                'assets/icons/like.svg',
+                                                height: 40,
+                                                width: 40,
+                                              ),
+                                            ],
                                           ),
-                                        ),
+                                        )
                                       ),
                                     ],
                                   )
-                              ) :
-                            ClipRRect(
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                borderRadius: BorderRadius.circular(10.0),
-                                child: Stack(
-                                  fit: StackFit.expand,
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            20.0),
-                                        color: Colors.grey.withOpacity(0.1),
-                                      ),
-                                      child: Image.network(
-                                        likes.likes[index].image,
-                                        height: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .height,
-                                        width: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    ClipRRect(
-                                      child: Container(
-                                        padding: EdgeInsets.all(10),
-                                        alignment: Alignment.bottomCenter,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            SvgPicture.asset(
-                                              'assets/icons/dislike.svg',
-                                              height: 40,
-                                              width: 40,
-                                            ),
-                                            SvgPicture.asset(
-                                              'assets/icons/like.svg',
-                                              height: 40,
-                                              width: 40,
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ),
-                                  ],
-                                )
-                            );
-                        }),
+                              );
+                          }),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                child: const BottomBar(active: "likes"),
-              )
-            ],
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  child: const BottomBar(active: "likes"),
+                )
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

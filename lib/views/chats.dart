@@ -19,7 +19,7 @@ class _ChatsState extends State<Chats> {
     {
       'id': 0,
       'name': 'Ника',
-      'image': 'https://uprostim.com/wp-content/uploads/2021/03/image070-58.jpg',
+      'image': 'https://pikuco.ru/upload/test_stable/eee/eee3b0abbfdbcc0e320860a75e236c48.webp',
       'last_message': 'Добрый день, сегодня хотелось бы выпить чашечку кофе',
       'time': '14:00',
       'is_viewed': true
@@ -51,7 +51,7 @@ class _ChatsState extends State<Chats> {
     {
       'id': 0,
       'name': 'Ника',
-      'image': 'https://uprostim.com/wp-content/uploads/2021/03/image070-58.jpg',
+      'image': 'https://pikuco.ru/upload/test_stable/eee/eee3b0abbfdbcc0e320860a75e236c48.webp',
       'last_message': 'Добрый день, сегодня хотелось бы выпить чашечку кофе',
       'time': '14:00',
       'is_viewed': true
@@ -83,7 +83,7 @@ class _ChatsState extends State<Chats> {
     {
       'id': 0,
       'name': 'Ника',
-      'image': 'https://uprostim.com/wp-content/uploads/2021/03/image070-58.jpg',
+      'image': 'https://pikuco.ru/upload/test_stable/eee/eee3b0abbfdbcc0e320860a75e236c48.webp',
       'last_message': 'Добрый день, сегодня хотелось бы выпить чашечку кофе',
       'time': '14:00',
       'is_viewed': true
@@ -132,57 +132,59 @@ class _ChatsState extends State<Chats> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.asset(
-          "assets/images/backgrounds/chats-bg.png",
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          fit: BoxFit.cover,
-        ),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          extendBodyBehindAppBar: true,
-          resizeToAvoidBottomInset: false,
-          appBar: const TransparentAppBar(title: 'Ч А Т Ы'),
-          body: Stack(
-            children: [
-              Container(
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                child: Container(
-                  alignment: Alignment.topCenter,
-                  child: ShaderMask(
-                    shaderCallback: (Rect rect) {
-                      return const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.center,
-                        colors: [Colors.black, Colors.transparent],
-                        stops: [0.0, 0.3],
-                      ).createShader(rect);
-                    },
-                    blendMode: BlendMode.dstOut,
-                    child: ListView.separated(
-                      physics: const BouncingScrollPhysics(),
-                      padding: const EdgeInsets.only(top: 100, bottom: 100),
-                      itemCount: response.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ChatItem(chat: chats[index]);
+    return Scaffold(
+      body: Stack(
+        children: [
+          Image.asset(
+            "assets/images/backgrounds/chats-bg.png",
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+          ),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            extendBodyBehindAppBar: true,
+            resizeToAvoidBottomInset: false,
+            appBar: const TransparentAppBar(title: 'Ч А Т Ы'),
+            body: Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    child: ShaderMask(
+                      shaderCallback: (Rect rect) {
+                        return const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.center,
+                          colors: [Colors.black, Colors.transparent],
+                          stops: [0.0, 0.3],
+                        ).createShader(rect);
                       },
-                      separatorBuilder: (context, index) {
-                        return const Divider();
-                      },
+                      blendMode: BlendMode.dstOut,
+                      child: ListView.separated(
+                        physics: const BouncingScrollPhysics(),
+                        padding: const EdgeInsets.only(top: 100, bottom: 100),
+                        itemCount: response.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ChatItem(chat: chats[index]);
+                        },
+                        separatorBuilder: (context, index) {
+                          return const Divider();
+                        },
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                child: const BottomBar(active: "chats"),
-              )
-            ],
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  child: const BottomBar(active: "chats"),
+                )
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
