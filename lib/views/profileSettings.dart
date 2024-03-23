@@ -1,16 +1,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shine/components/Information/Inputs/TextInput.dart';
-import 'package:shine/components/Profile/profile.dart';
-import 'package:shine/components/ProfileSettings/ExtendedSelect.dart';
+import 'package:shine/components/Common/Dropdowns/ExtendedDropdown.dart';
+import 'package:shine/components/Common/Inputs/TextInput.dart';
+import 'package:shine/components/ProfileSettings/HideProfile.dart';
 import 'package:shine/components/ProfileSettings/ImagesGrid.dart';
 import 'package:shine/components/ProfileSettings/ProfileDescription.dart';
 import 'package:shine/components/ProfileSettings/ProfileInfo.dart';
-import 'package:shine/components/ProfileSettings/PurposeSelect.dart';
-
+import 'package:shine/components/Common/Inputs/TextInput.dart';
 import '../components/Common/AppBar/DefaultAppBar.dart';
-import '../components/Common/BottomBar.dart';
 import '../models/Self.dart';
 import '../components/ProfileSettings/ProfileSettingsFilled.dart';
 
@@ -53,7 +51,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               minHeight: MediaQuery.of(context).size.height,
               minWidth: MediaQuery.of(context).size.width
           ),
-          padding: const EdgeInsets.only(top: 100, left: 20, right: 20, bottom: 300),
+          padding: const EdgeInsets.only(top: 100, left: 20, right: 20, bottom: 50),
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/backgrounds/profile-settings-bg.png"),
@@ -64,11 +62,11 @@ class _ProfileSettingsState extends State<ProfileSettings> {
             children: [
               ProfileSettingsFilled(percent: user.profile_filled),
               ImagesGrid(images: user.images),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ProfileInfo(user: user),
-              SizedBox(height: 20),
-              ProfileDescription(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
+              const ProfileDescription(),
+              const SizedBox(height: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -87,10 +85,10 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   ),
                   Container(
                       decoration: BoxDecoration(
-                          color: Color.fromRGBO(20, 20, 20, 0.8),
+                          color: const Color.fromRGBO(20, 20, 20, 0.8),
                           borderRadius: BorderRadius.circular(10)
                       ),
-                      child: const PurposeSelect(
+                      child: const ExtendedDropdown(
                           values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
                           title: 'Цель знакомства',
                           selected: 'Свидания',
@@ -98,7 +96,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   )
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -117,83 +115,70 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   ),
                   Container(
                       decoration: BoxDecoration(
-                          color: Color.fromRGBO(20, 20, 20, 0.8),
+                          color: const Color.fromRGBO(20, 20, 20, 0.8),
                           borderRadius: BorderRadius.circular(10)
                       ),
                       child: Column(
                         children: [
-                          ExtendedSelect(
+                          const ExtendedDropdown(
                             values: ['Ростов-на-Дону', 'Москва', 'Краснодар', 'Санкт-Петербург'],
                             title: 'Город',
                             selected: 'Ростов-на-Дону',
                           ),
                           Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          ExtendedSelect(
-                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                          const ExtendedDropdown(
+                            values: ['Женат/замужем', 'Свободен/свободна', 'В свободных отношениях'],
                             title: 'Семейное положение',
                             selected: null,
                           ),
                           Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          ExtendedSelect(
-                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                          const ExtendedDropdown(
+                            values: ['Есть', 'Нет, и не планирую', 'Нет, но хотелось бы'],
                             title: 'Дети',
-                            selected: 'Свидания',
+                            selected: null,
                           ),
                           Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          ExtendedSelect(
-                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                          TextInput(
                             title: 'Рост',
-                            selected: 'Свидания',
+                            value: '',
                           ),
                           Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          ExtendedSelect(
-                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                          const ExtendedDropdown(
+                            values: ['Нет', 'Среднее', 'Высшее', 'Неоконченное', 'Кандидат наук'],
                             title: 'Образование',
-                            selected: 'Свидания',
+                            selected: null,
                           ),
                           Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          ExtendedSelect(
+                          const ExtendedDropdown(
                             values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
                             title: 'Хобби/Интересы',
-                            selected: 'Свидания',
+                            selected: null,
                           ),
                           Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          ExtendedSelect(
-                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                          const ExtendedDropdown(
+                            values: ['Русский', 'Английский'],
                             title: 'Языки',
-                            selected: 'Свидания',
+                            selected: null,
                           ),
                           Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          ExtendedSelect(
-                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                          const ExtendedDropdown(
+                            values: ['Резко негативно', 'Нейтрально', 'Положительно'],
                             title: 'Отношение к алкоголю',
-                            selected: 'Свидания',
+                            selected: null,
                           ),
                           Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          ExtendedSelect(
-                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                          const ExtendedDropdown(
+                            values: ['Резко негативно', 'Нейтрально', 'Положительно'],
                             title: 'Отношение к курению',
-                            selected: 'Свидания',
+                            selected: null,
                           ),
                         ],
                       )
-                  )
+                  ),
+                  SizedBox(height: 50,),
+                  HideProfile(isHidden: user.is_premium)
                 ],
               ),
-              Container(
-                margin: EdgeInsets.only(top: 20),
-                  decoration: BoxDecoration(
-                      color: Color.fromRGBO(20, 20, 20, 0.8),
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: Column(
-                    children: [
-                      TextInput(values: [], title: 'title'),
-                      Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                      TextInput(values: [], title: 'title')
-                    ],
-                  )
-              )
             ],
           ),
         ),

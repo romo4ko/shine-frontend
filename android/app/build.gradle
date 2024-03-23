@@ -23,7 +23,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "online.ultrasource.shine.shine"
+    namespace "online.ultrasource.shine"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
