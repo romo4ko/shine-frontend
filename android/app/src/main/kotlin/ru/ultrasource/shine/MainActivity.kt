@@ -1,4 +1,4 @@
-package online.ultrasource.shine.shine
+package ru.ultrasource.shine
 
 import io.flutter.embedding.android.FlutterActivity
 

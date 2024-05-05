@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
+import 'package:shine/data/api/api_service.dart';
 import '../components/Common/Buttons/buttons.dart';
 import '../components/Common/Inputs/inputs.dart';
 
@@ -14,6 +16,16 @@ class Registration extends StatefulWidget {
 class _RegistrationState extends State<Registration> {
 
   final _formKey = GlobalKey<FormState>();
+
+  var api = ApiService();
+  var data;
+
+  register() {
+    setState(() {
+      api.getHttp();
+      data = api.register(email: 'email', password: 'password', birthdate: 'birthdate');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +51,6 @@ class _RegistrationState extends State<Registration> {
                 key: _formKey,
                 child: const Column(
                   children: [
-                    UnderlineTextField(text: 'Логин'),
-                    SizedBox(height: 20),
                     UnderlineTextField(text: 'Ваш Email'),
                     SizedBox(height: 20),
                     UnderlinePasswordField(text: 'Пароль'),
@@ -51,6 +61,9 @@ class _RegistrationState extends State<Registration> {
                   ],
                 ),
               ),
+              ElevatedButton(onPressed: () => {
+                register()
+              }, child: Text(data.toString() ?? '123')),
               const DefaultElevatedButton(text: 'Регистрация', action: 'purpose', width: 270, height: 40),
             ],
           ),

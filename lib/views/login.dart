@@ -35,7 +35,7 @@ class _LoginState extends State<Login> {
             children: [
               Column(
                 children: [
-                  UnderlineTextField(text: 'Логин'),
+                  UnderlineTextField(text: 'Ваш Email'),
                   SizedBox(height: 20),
                   UnderlinePasswordField(text: 'Пароль'),
                   SizedBox(height: 10),
