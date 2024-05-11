@@ -29,11 +29,11 @@ class _LoginState extends State<Login> {
               fit: BoxFit.cover,
             ),
           ),
-          child: const Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(
+              const Column(
                 children: [
                   UnderlineTextField(text: 'Ваш Email'),
                   SizedBox(height: 20),
@@ -47,7 +47,7 @@ class _LoginState extends State<Login> {
                   )
                 ],
               ),
-              DefaultElevatedButton(text: 'Войти', action: 'purpose', width: 270, height: 40),
+              DefaultElevatedButton(text: 'Войти', action: () => {Navigator.pushNamed(context, 'purpose')}, width: 270, height: 40),
             ],
           ),
         ),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class DefaultElevatedButton extends StatelessWidget {
 
   final String text;
-  final String action;
+  final Function action;
   final double width;
   final double height;
 
@@ -23,7 +23,7 @@ class DefaultElevatedButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         onPressed: () => {
-          Navigator.pushNamed(context, action)
+          action()
         },
         style: ElevatedButton.styleFrom(
           shape: const RoundedRectangleBorder(

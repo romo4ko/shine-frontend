@@ -17,14 +17,26 @@ class _RegistrationState extends State<Registration> {
 
   final _formKey = GlobalKey<FormState>();
 
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController firstPasswordController = TextEditingController();
+  final TextEditingController secondPasswordController = TextEditingController();
+  final TextEditingController birthdateController = TextEditingController();
+
   var api = ApiService();
   var data;
 
   register() {
-    setState(() {
-      api.getHttp();
-      data = api.register(email: 'email', password: 'password', birthdate: 'birthdate');
-    });
+    if (firstPasswordController.text == secondPasswordController.text) {
+      api.register(
+          email: emailController.text,
+          password: firstPasswordController.text,
+          birthdate: birthdateController.text
+      ).then((data) => {
+        if (data['id'] != null) {
+          Navigator.pushNamed(context, 'purpose')
+        }
+      });
+    }
   }
 
   @override
@@ -49,22 +61,25 @@ class _RegistrationState extends State<Registration> {
             children: [
               Form(
                 key: _formKey,
-                child: const Column(
+                child: Column(
                   children: [
-                    UnderlineTextField(text: 'Ваш Email'),
+                    UnderlineTextField(text: 'Ваш Email', controller: emailController),
                     SizedBox(height: 20),
-                    UnderlinePasswordField(text: 'Пароль'),
+                    UnderlinePasswordField(text: 'Пароль', controller: firstPasswordController),
                     SizedBox(height: 20),
-                    UnderlinePasswordField(text: 'Подтвердите пароль'),
+                    UnderlinePasswordField(text: 'Подтвердите пароль', controller: secondPasswordController),
                     SizedBox(height: 20),
-                    UnderlineBirthdateField(text: 'Дата рождения'),
+                    UnderlineBirthdateField(text: 'Дата рождения', controller: birthdateController),
                   ],
                 ),
               ),
-              ElevatedButton(onPressed: () => {
-                register()
-              }, child: Text(data.toString() ?? '123')),
-              const DefaultElevatedButton(text: 'Регистрация', action: 'purpose', width: 270, height: 40),
+              DefaultElevatedButton(
+                  text: 'Регистрация',
+                  action: () => {
+                    register()
+                  },
+                  width: 270, height: 40
+              ),
             ],
           ),
         ),

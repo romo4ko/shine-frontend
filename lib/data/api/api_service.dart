@@ -4,7 +4,7 @@ import '../../models/User.dart';
 
 class ApiService {
 
-  static const API_BASE_URL = 'http://79.174.82.139:8000/api';
+  static const API_BASE_URL = 'http://10.0.2.2:8000/api';
 
   final Dio _dio = Dio(
     BaseOptions(baseUrl: API_BASE_URL),
@@ -15,20 +15,20 @@ class ApiService {
     required String password,
     required String birthdate,
   }) async {
-    final query = {
-      'email': 'test@mail.com',
-      'password': '12345678',
-      'birthdate': '23.04.2002',
+    final data = {
+      'email': email,
+      'password': password,
+      'birthdate': birthdate,
     };
     final response = await _dio.post(
-      '/register',
-      queryParameters: query,
+      '/auth/register',
+      data: data,
     );
     return response.data;
   }
 
-  void getHttp() async {
-    final response = await _dio.get('/checkAuth');
-    print(response);
+  void checkAuth() async {
+    final response = await _dio.get('/auth/checkAuth');
+    return response.data;
   }
 }

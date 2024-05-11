@@ -110,7 +110,7 @@ class _InformationState extends State<Information> {
                   ),
                 ),
               ),
-              const DefaultElevatedButton(text: 'Сохранить', action: 'filters', width: 270, height: 40),
+              DefaultElevatedButton(text: 'Сохранить', action: () => {Navigator.pushNamed(context, 'filters')}, width: 270, height: 40),
             ],
           ),
         ),
