@@ -17,7 +17,7 @@ class _PurposeState extends State<Purpose> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
-      appBar: const DefaultAppBar(title: "ЦЕЛЬ ЗНАКОМСТВА"),
+      appBar: const DefaultAppBar(title: "ЦЕЛЬ ЗНАКОМСТВА", back: false),
       body: SingleChildScrollView(
         child: Container(
           constraints: BoxConstraints(

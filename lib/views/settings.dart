@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shine/components/Common/Buttons/buttons.dart';
 import '../components/Common/AppBar/DefaultAppBar.dart';
 import '../models/Self.dart';
+import 'package:shine/data/api/api_service.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -14,6 +14,8 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+
+  var api = ApiService();
 
   Self user = Self.fromJson({
     'id': 1,
@@ -77,6 +79,7 @@ class _SettingsState extends State<Settings> {
                   height: 40,
                   child: ElevatedButton(
                     onPressed: () => {
+                      api.logout(),
                       Navigator.pushNamed(context, 'welcome')
                     },
                     style: ElevatedButton.styleFrom(

@@ -5,6 +5,7 @@ import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
 import 'package:shine/data/api/api_service.dart';
 import '../components/Common/Buttons/buttons.dart';
 import '../components/Common/Inputs/inputs.dart';
+import '../components/Dialogs/DefaultDialog.dart';
 
 class Registration extends StatefulWidget {
   const Registration({super.key});
@@ -23,18 +24,25 @@ class _RegistrationState extends State<Registration> {
   final TextEditingController birthdateController = TextEditingController();
 
   var api = ApiService();
-  var data;
 
   register() {
     if (firstPasswordController.text == secondPasswordController.text) {
-      api.register(
-          email: emailController.text,
-          password: firstPasswordController.text,
-          birthdate: birthdateController.text
-      ).then((data) => {
+      api.register({
+        'email': emailController.text,
+        'password': firstPasswordController.text,
+        'birthdate': birthdateController.text
+      }).then((data) =>
+      {
         if (data['id'] != null) {
           Navigator.pushNamed(context, 'purpose')
         }
+        else
+          {
+            DefaultDialog.showCustomDialog(context, title: 'Ошибка регистрации')
+          }
+      }).catchError((error) =>
+      {
+        DefaultDialog.showCustomDialog(context, title: 'Ошибка регистрации')
       });
     }
   }

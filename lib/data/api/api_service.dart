@@ -10,16 +10,7 @@ class ApiService {
     BaseOptions(baseUrl: API_BASE_URL),
   );
 
-  Future register({
-    required String email,
-    required String password,
-    required String birthdate,
-  }) async {
-    final data = {
-      'email': email,
-      'password': password,
-      'birthdate': birthdate,
-    };
+  Future register(Map<String, String> data) async {
     final response = await _dio.post(
       '/auth/register',
       data: data,
@@ -27,8 +18,27 @@ class ApiService {
     return response.data;
   }
 
-  void checkAuth() async {
+  Future login(Map<String, String> data) async {
+    final response = await _dio.post(
+      '/auth/login',
+      data: data,
+    );
+    return response.data;
+  }
+
+  Future logout() async {
+    final response = await _dio.post(
+      '/auth/logout',
+    );
+    return response.data;
+  }
+
+  Future checkAuth() async {
     final response = await _dio.get('/auth/checkAuth');
     return response.data;
   }
+
+
+
+
 }

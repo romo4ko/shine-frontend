@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
 import '../components/Common/Buttons/buttons.dart';
 import '../components/Common/Inputs/inputs.dart';
+import 'package:shine/data/api/api_service.dart';
+import '../components/Dialogs/DefaultDialog.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -13,6 +15,28 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  var api = ApiService();
+
+  login() {
+      api.login({
+        'email': emailController.text,
+        'password': passwordController.text,
+      }).then((data) => {
+        if (data['id'] != null) {
+          Navigator.pushNamed(context, 'tape')
+        }
+        else {
+          DefaultDialog.showCustomDialog(context, title: 'Ошибка авторизации')
+        }
+      }).catchError((error) => {
+          DefaultDialog.showCustomDialog(context, title: 'Ошибка авторизации')
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,13 +57,13 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Column(
+              Column(
                 children: [
-                  UnderlineTextField(text: 'Ваш Email'),
-                  SizedBox(height: 20),
-                  UnderlinePasswordField(text: 'Пароль'),
-                  SizedBox(height: 10),
-                  Row(
+                  UnderlineTextField(text: 'Ваш Email', controller: emailController),
+                  const SizedBox(height: 20),
+                  UnderlinePasswordField(text: 'Пароль', controller: passwordController),
+                  const SizedBox(height: 10),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text("Забыли пароль?", style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'))
@@ -47,7 +71,14 @@ class _LoginState extends State<Login> {
                   )
                 ],
               ),
-              DefaultElevatedButton(text: 'Войти', action: () => {Navigator.pushNamed(context, 'purpose')}, width: 270, height: 40),
+              DefaultElevatedButton(
+                  text: 'Войти',
+                  action: () => {
+                    login()
+                  },
+                  width: 270,
+                  height: 40
+              ),
             ],
           ),
         ),
