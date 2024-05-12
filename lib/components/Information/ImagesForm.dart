@@ -1,8 +1,12 @@
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+
+import '../../data/api/api_service.dart';
 
 class ImagesForm extends StatefulWidget {
 
@@ -18,6 +22,14 @@ class ImagesForm extends StatefulWidget {
 }
 
 class _ImagesFormState extends State<ImagesForm> {
+
+  var api = ApiService();
+  var loading = false;
+
+  final ImagePicker picker = ImagePicker();
+  XFile? image;
+  List<String> multipleImages = [];
+  List<XFile> _images = [];
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +63,30 @@ class _ImagesFormState extends State<ImagesForm> {
           const SizedBox(width: 20),
           Column(children: [
             GestureDetector(
-              onTap: () {
+              onTap: () async {
                 print(1);
+                _images = await multiImagePicker();
+                if (_images.isNotEmpty) {
+                  if (_images.length > 10) {
+                    _images.clear();
+                    setState(() {});
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(const SnackBar(
+                      content: Text("Вы выбрали слишком много фото"),
+                      duration: Duration(milliseconds: 5000),
+                    ));
+                  } else {
+                    setState(() {});
+                    multipleImages = await multiImageUploader(_images);
+                  }
+                } else {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(const SnackBar(
+                    content: Text(
+                        "Пожалуйста, добавьте хотя бы одно ваше фото"),
+                    duration: Duration(milliseconds: 5000),
+                  ));
+                }
               },
               child: Container(
                 height: 115,
@@ -94,4 +128,41 @@ class _ImagesFormState extends State<ImagesForm> {
       ],
     );
   }
+
+
+  Future<List<String>> multiImageUploader(List<XFile> list) async {
+    setState(() {
+      loading = true;
+    });
+    List<String> _path = [];
+    for (XFile _image in list) {
+      _path.add(await uploadImage(_image));
+    }
+    setState(() {
+      loading = false;
+    });
+    return _path;
+  }
+}
+
+Future<List<XFile>> multiImagePicker() async {
+  List<XFile> _images = await ImagePicker().pickMultiImage(imageQuality: 50);
+  if (_images != null && _images.isNotEmpty) {
+    return _images;
+  }
+  return [];
+}
+
+Future<String> uploadImage(XFile image) async {
+  var api = ApiService();
+  var uploadedImage = await api.storeImage({
+    'sorting': 1,
+    'image': await MultipartFile.fromFile(image.path, filename: image.name),
+  });
+  print(uploadedImage['data']);
+  return uploadedImage['data']['path'];
+}
+
+String getImageName(XFile image) {
+  return image.path.split("/").last;
 }

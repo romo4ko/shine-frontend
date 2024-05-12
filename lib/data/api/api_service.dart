@@ -61,6 +61,7 @@ class ApiService {
       data: data,
       options: Options(headers: _setHeaders()),
     );
+    print(token);
     return response.data;
   }
 
@@ -74,5 +75,16 @@ class ApiService {
     return response.data;
   }
 
+  Future storeImage(dynamic data) async {
+    await _getToken();
+    final formData = FormData.fromMap(data);
+
+    final response = await _dio.post(
+      '/users/images/store',
+      data: formData,
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
 
 }
