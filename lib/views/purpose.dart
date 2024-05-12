@@ -23,9 +23,6 @@ class _PurposeState extends State<Purpose> {
       if (data['status'] == 'success') {
         Navigator.pushNamed(context, 'information')
       }
-      else {
-       print(data)
-      }
     });
   }
 

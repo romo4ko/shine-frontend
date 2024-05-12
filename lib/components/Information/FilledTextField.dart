@@ -6,8 +6,14 @@ class FilledTextField extends StatefulWidget {
 
   final String title;
   final String placeholder;
+  final TextEditingController? controller;
 
-  const FilledTextField({super.key, required this.title, required this.placeholder});
+  const FilledTextField({
+    super.key,
+    required this.title,
+    required this.placeholder,
+    this.controller
+  });
 
   @override
   State<FilledTextField> createState() => _FilledTextFieldState();
@@ -32,6 +38,7 @@ class _FilledTextFieldState extends State<FilledTextField> {
           ),
         ),
         TextFormField(
+          controller: widget.controller,
           style: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
           cursorColor: Colors.white,
           decoration: InputDecoration(

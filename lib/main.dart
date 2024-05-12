@@ -87,13 +87,11 @@ class _CheckAuthState extends State<CheckAuth> {
   Widget build(BuildContext context) {
     Widget child;
     if (isAuth) {
-      child = Profile();
+      child = Information();
     } else {
       child = Welcome();
     }
-    return Scaffold(
-      body: child,
-    );
+    return child;
   }
 }
 

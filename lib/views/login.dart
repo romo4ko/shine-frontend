@@ -19,16 +19,16 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   var api = ApiService();
 
   login() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
       api.login({
-        'email': emailController.text,
-        'password': passwordController.text,
+        'email': _email.text,
+        'password': _password.text,
       }).then((data) => {
         if (data['token'] != null) {
           localStorage.setString('token', json.encode(data['token'])),
@@ -65,9 +65,9 @@ class _LoginState extends State<Login> {
             children: [
               Column(
                 children: [
-                  UnderlineTextField(text: 'Ваш Email', controller: emailController),
+                  UnderlineTextField(text: 'Ваш Email', controller: _email),
                   const SizedBox(height: 20),
-                  UnderlinePasswordField(text: 'Пароль', controller: passwordController),
+                  UnderlinePasswordField(text: 'Пароль', controller: _password),
                   const SizedBox(height: 10),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.end,

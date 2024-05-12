@@ -4,15 +4,17 @@ import 'package:flutter_svg/svg.dart';
 
 class DefaultDropdown extends StatefulWidget {
 
-  final List<String> values;
+  final Map<String, String> items;
   final String title;
   final String placeholder;
+  final TextEditingController? controller;
 
   const DefaultDropdown({
     super.key,
-    required this.values,
+    required this.items,
     required this.title,
-    this.placeholder = "Выбрать вариант"
+    this.placeholder = "Выбрать вариант",
+    this.controller
   });
 
   @override
@@ -73,14 +75,22 @@ class _DefaultDropdownState extends State<DefaultDropdown> {
               onChanged: (String? value) {
                 setState(() {
                   _selectedValue = value!;
+                  if (widget.controller != null) {
+                    widget.controller?.text = widget.items.keys.firstWhere(
+                            (i) => widget.items[i] == _selectedValue
+                    );
+                  }
                 });
               },
-              items: widget.values.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value, textAlign: TextAlign.start),
-                );
-              }).toList(),
+              items: widget.items.map((code, value) {
+                return MapEntry(
+                    {code: value},
+                    DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value, textAlign: TextAlign.start),
+                    )
+                  );
+              }).values.toList(),
             ),
           ),
         ),

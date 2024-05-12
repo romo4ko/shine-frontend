@@ -64,5 +64,15 @@ class ApiService {
     return response.data;
   }
 
+  Future storeUserProperties(Map<String, String> data) async {
+    await _getToken();
+    final response = await _dio.post(
+      '/users/storeProperties',
+      data: data,
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
 
 }
