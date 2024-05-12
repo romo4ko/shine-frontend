@@ -1,6 +1,9 @@
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
 import '../components/Common/Buttons/buttons.dart';
 import '../components/Common/Inputs/inputs.dart';
@@ -21,13 +24,16 @@ class _LoginState extends State<Login> {
 
   var api = ApiService();
 
-  login() {
+  login() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
       api.login({
         'email': emailController.text,
         'password': passwordController.text,
       }).then((data) => {
-        if (data['id'] != null) {
-          Navigator.pushNamed(context, 'tape')
+        if (data['token'] != null) {
+          localStorage.setString('token', json.encode(data['token'])),
+          localStorage.setString('user', json.encode(data['user'])),
+          Navigator.pushNamed(context, 'profile')
         }
         else {
           DefaultDialog.showCustomDialog(context, title: 'Ошибка авторизации')

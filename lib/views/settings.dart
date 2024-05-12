@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../components/Common/AppBar/DefaultAppBar.dart';
 import '../models/Self.dart';
 import 'package:shine/data/api/api_service.dart';
@@ -29,6 +30,13 @@ class _SettingsState extends State<Settings> {
     'profile_filled': 73,
     'invites': 1
   });
+
+  logout() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    localStorage.remove('user');
+    localStorage.remove('token');
+    api.logout();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +87,7 @@ class _SettingsState extends State<Settings> {
                   height: 40,
                   child: ElevatedButton(
                     onPressed: () => {
-                      api.logout(),
+                      logout(),
                       Navigator.pushNamed(context, 'welcome')
                     },
                     style: ElevatedButton.styleFrom(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
 import '../components/Common/Buttons/buttons.dart';
+import 'package:shine/data/api/api_service.dart';
 
 class Purpose extends StatefulWidget {
   const Purpose({super.key});
@@ -12,6 +13,22 @@ class Purpose extends StatefulWidget {
 }
 
 class _PurposeState extends State<Purpose> {
+
+  var api = ApiService();
+
+  setPurpose(purpose) {
+    api.updateUserProperties({
+      'purpose': purpose,
+    }).then((data) => {
+      if (data['status'] == 'success') {
+        Navigator.pushNamed(context, 'information')
+      }
+      else {
+       print(data)
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,17 +54,17 @@ class _PurposeState extends State<Purpose> {
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: const Column(
+                child: Column(
                   children: [
-                    OptionElevatedButton(text: 'Свидания', action: 'information', width: 350, height: 40, aligment: Alignment.centerLeft),
+                    OptionElevatedButton(text: 'Свидания', action: () => {setPurpose('dates')}, width: 350, height: 40, aligment: Alignment.centerLeft),
                     SizedBox(height: 20),
-                    OptionElevatedButton(text: 'Флирт', action: 'information', width: 350, height: 40, aligment: Alignment.centerLeft),
+                    OptionElevatedButton(text: 'Флирт', action: () => {setPurpose('flirting')}, width: 350, height: 40, aligment: Alignment.centerLeft),
                     SizedBox(height: 20),
-                    OptionElevatedButton(text: 'Отношения', action: 'information', width: 350, height: 40, aligment: Alignment.centerLeft),
+                    OptionElevatedButton(text: 'Отношения', action: () => {setPurpose('relationship')}, width: 350, height: 40, aligment: Alignment.centerLeft),
                     SizedBox(height: 20),
-                    OptionElevatedButton(text: 'Дружба', action: 'information', width: 350, height: 40, aligment: Alignment.centerLeft),
+                    OptionElevatedButton(text: 'Дружба', action: () => {setPurpose('friendship')}, width: 350, height: 40, aligment: Alignment.centerLeft),
                     SizedBox(height: 20),
-                    OptionElevatedButton(text: 'Виртуальное общение', action: 'information', width: 350, height: 40, aligment: Alignment.centerLeft),
+                    OptionElevatedButton(text: 'Виртуальное общение', action: () => {setPurpose('virtual')}, width: 350, height: 40, aligment: Alignment.centerLeft),
                   ],
                 ),
               ),

@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
 import 'package:shine/data/api/api_service.dart';
 import '../components/Common/Buttons/buttons.dart';
@@ -25,7 +28,8 @@ class _RegistrationState extends State<Registration> {
 
   var api = ApiService();
 
-  register() {
+  register() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
     if (firstPasswordController.text == secondPasswordController.text) {
       api.register({
         'email': emailController.text,
@@ -33,7 +37,9 @@ class _RegistrationState extends State<Registration> {
         'birthdate': birthdateController.text
       }).then((data) =>
       {
-        if (data['id'] != null) {
+        if (data['token'] != null) {
+          localStorage.setString('token', json.encode(data['token'])),
+          localStorage.setString('user', json.encode(data['user'])),
           Navigator.pushNamed(context, 'purpose')
         }
         else

@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:shine/data/api/api_service.dart';
 import 'package:shine/components/Tape/tape.dart';
 import '../components/Common/BottomBar.dart';
 import '../models/User.dart';
@@ -15,6 +17,8 @@ class Tape extends StatefulWidget {
 }
 
 class _TapeState extends State<Tape> {
+
+  var api = ApiService();
 
   var response = [
     {
@@ -141,7 +145,7 @@ class _TapeState extends State<Tape> {
     }
   }
 
-  fetchUsers() {
+  fetchUsers() async {
     for (var data in response) {
       users.add(
           User.fromJson(data)

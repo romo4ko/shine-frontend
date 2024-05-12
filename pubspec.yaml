@@ -44,6 +44,7 @@ dependencies:
   flutter_card_swiper: ^7.0.0
   keyboard_attachable: ^2.2.0
   dio: ^5.4.2+1
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -54,7 +55,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
