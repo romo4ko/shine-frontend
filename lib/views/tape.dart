@@ -19,42 +19,43 @@ class Tape extends StatefulWidget {
 class _TapeState extends State<Tape> {
 
   var api = ApiService();
+  var loading = true;
 
-  var response = [
-    {
-      'id': 0,
-      'name': 'Аня',
-      'age': 22,
-      'text': 'В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера',
-      'images': [
-        "https://bipbap.ru/wp-content/uploads/2015/02/dana-kareglazaya-portret-boke.jpg",
-        "https://wp-s.ru/wallpapers/4/2/452110934931644/osennij-portret-s-pronizyvayushhim-vzglyadom-devushki.jpg",
-        "https://wp-s.ru/wallpapers/3/16/389721010561919/krasivaya-devushka-na-fone-industrialnogo-pejzazha.jpg"
-      ],
-      'distance': 2,
-      'tags': [
-        'Музыка', 'Спорт', 'Дизайн'
-      ],
-      'sign': 'Телец'
-    },
-    {
-      'id': 1,
-      'name': 'Лена',
-      'age': 23,
-      'text': 'В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера. В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера. В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера',
-      'images': [
-        "https://bipbap.ru/wp-content/uploads/2015/02/547b9db42203b2d5c16d9dd0f5626207.jpg",
-        "https://24warez.ru/uploads/posts/2019-05/270519/392210/f99e9c4d602b-800x1000.jpg",
-        "https://interesnoewmire.ru/wp-content/uploads/fotografii-krasivyh-devushek-chast-12-43-foto-45a3348.jpg",
-        "https://i.yapx.cc/SGXLz.jpg",
-      ],
-      'distance': 2,
-      'tags': [
-        'IT', 'Сериалы', 'Фильмы', 'Спорт', 'Кафе', 'Рестораны'
-      ],
-      'sign': 'Телец'
-    }
-  ];
+  // var response = [
+  //   {
+  //     'id': 0,
+  //     'name': 'Аня',
+  //     'age': 22,
+  //     'text': 'В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера',
+  //     'images': [
+  //       "https://bipbap.ru/wp-content/uploads/2015/02/dana-kareglazaya-portret-boke.jpg",
+  //       "https://wp-s.ru/wallpapers/4/2/452110934931644/osennij-portret-s-pronizyvayushhim-vzglyadom-devushki.jpg",
+  //       "https://wp-s.ru/wallpapers/3/16/389721010561919/krasivaya-devushka-na-fone-industrialnogo-pejzazha.jpg"
+  //     ],
+  //     'distance': 2,
+  //     'tags': [
+  //       'Музыка', 'Спорт', 'Дизайн'
+  //     ],
+  //     'sign': 'Телец'
+  //   },
+  //   {
+  //     'id': 1,
+  //     'name': 'Лена',
+  //     'age': 23,
+  //     'text': 'В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера. В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера. В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера',
+  //     'images': [
+  //       "https://bipbap.ru/wp-content/uploads/2015/02/547b9db42203b2d5c16d9dd0f5626207.jpg",
+  //       "https://24warez.ru/uploads/posts/2019-05/270519/392210/f99e9c4d602b-800x1000.jpg",
+  //       "https://interesnoewmire.ru/wp-content/uploads/fotografii-krasivyh-devushek-chast-12-43-foto-45a3348.jpg",
+  //       "https://i.yapx.cc/SGXLz.jpg",
+  //     ],
+  //     'distance': 2,
+  //     'tags': [
+  //       'IT', 'Сериалы', 'Фильмы', 'Спорт', 'Кафе', 'Рестораны'
+  //     ],
+  //     'sign': 'Телец'
+  //   }
+  // ];
 
   List<User> users = [];
   var cards = [];
@@ -71,7 +72,6 @@ class _TapeState extends State<Tape> {
   void initState() {
     super.initState();
     fetchUsers();
-    createCards();
   }
 
   @override
@@ -94,7 +94,11 @@ class _TapeState extends State<Tape> {
                 fit: BoxFit.cover,
               ),
             ),
-            child: CardSwiper(
+            child: loading ? Center(
+              child: CircularProgressIndicator(
+                  color: Colors.white.withOpacity(0.8)),
+            ) :
+            CardSwiper(
               controller: swipeController,
               cardsCount: cards.length,
               numberOfCardsDisplayed: 2,
@@ -120,6 +124,9 @@ class _TapeState extends State<Tape> {
       int? currentIndex,
       CardSwiperDirection direction,
       ) {
+    if (previousIndex == users.length-1) {
+      fetchUsers();
+    }
     debugPrint(
       'The card $previousIndex was swiped to the ${direction.name}. Now the card $currentIndex is on top',
     );
@@ -138,6 +145,7 @@ class _TapeState extends State<Tape> {
   }
 
   createCards() {
+    cards.clear();
     for (var user in users) {
       cards.add(
           UserCard(user: user, swipeController: swipeController, key: UniqueKey())
@@ -146,10 +154,21 @@ class _TapeState extends State<Tape> {
   }
 
   fetchUsers() async {
-    for (var data in response) {
-      users.add(
-          User.fromJson(data)
-      );
-    }
+    setState(() {
+      loading = true;
+      users.clear();
+    });
+    api.getUsers().then((data) {
+      for (var user in data['data']) {
+        print(user);
+        users.add(
+            User.fromJson(user)
+        );
+      }
+      setState(() {
+        createCards();
+        loading = false;
+      });
+    });
   }
 }

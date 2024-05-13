@@ -29,6 +29,8 @@ class ApiService {
     }
   }
 
+  // ##### AUTH #####
+
   Future register(Map<String, String> data) async {
     final response = await _dio.post(
       '/auth/register',
@@ -63,6 +65,8 @@ class ApiService {
     return response.data;
   }
 
+  // ##### USER #####
+
   Future updateUserProperties(Map<String, String> data) async {
     await _getToken();
     final response = await _dio.post(
@@ -91,6 +95,17 @@ class ApiService {
     final response = await _dio.post(
       '/users/images/store',
       data: formData,
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
+  // ##### USERS #####
+
+  Future getUsers() async {
+    await _getToken();
+    final response = await _dio.get(
+      '/users/list',
       options: Options(headers: _setHeaders()),
     );
     return response.data;
