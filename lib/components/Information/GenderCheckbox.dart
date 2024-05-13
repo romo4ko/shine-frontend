@@ -82,7 +82,10 @@ class _GenderCheckboxState extends State<GenderCheckbox> {
               height: 40,
               child: ElevatedButton(
                 onPressed: () => {
-                  setState(() => selected = 'male')
+                  setState(() {
+                    selected = 'male';
+                    widget.controller?.text = selected;
+                  })
                 },
                 style: ElevatedButton.styleFrom(
                   shape: const RoundedRectangleBorder(

@@ -12,6 +12,7 @@ import 'package:shine/views/profileSettings.dart';
 import 'package:shine/views/purpose.dart';
 import 'package:shine/views/settings.dart';
 import 'package:shine/views/tape.dart';
+import 'data/api/api_service.dart';
 import 'views/chat.dart';
 import 'views/welcome.dart';
 import 'views/registration.dart';
@@ -66,7 +67,10 @@ class CheckAuth extends StatefulWidget {
 }
 
 class _CheckAuthState extends State<CheckAuth> {
+
+  var api = ApiService();
   bool isAuth = false;
+
   @override
   void initState() {
     _checkIfLoggedIn();
@@ -77,8 +81,12 @@ class _CheckAuthState extends State<CheckAuth> {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var token = localStorage.getString('token');
     if(token != null){
-      setState(() {
-        isAuth = true;
+      api.checkAuth().then((data) => {
+        if (data['user'] != null) {
+          setState(() {
+            isAuth = true;
+          })
+        }
       });
     }
   }
@@ -87,7 +95,7 @@ class _CheckAuthState extends State<CheckAuth> {
   Widget build(BuildContext context) {
     Widget child;
     if (isAuth) {
-      child = Information();
+      child = Profile();
     } else {
       child = Welcome();
     }

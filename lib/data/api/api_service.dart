@@ -54,6 +54,15 @@ class ApiService {
     return response.data;
   }
 
+  Future checkAuth() async {
+    await _getToken();
+    final response = await _dio.get(
+      '/auth/check',
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
   Future updateUserProperties(Map<String, String> data) async {
     await _getToken();
     final response = await _dio.post(
