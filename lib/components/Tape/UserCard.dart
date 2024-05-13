@@ -49,7 +49,7 @@ class _UserCardState extends State<UserCard> {
   loadImages() {
     for (var image in widget.user.images) {
       images.add(
-          NetworkImage(image)
+          NetworkImage(image['path'])
       );
     }
   }
@@ -146,7 +146,7 @@ class _UserCardState extends State<UserCard> {
                                       ],
                                   ),
                                 ),
-                                Text(
+                                widget.user.distance != null ? Text(
                                   "${widget.user.distance} км",
                                   style: const TextStyle(
                                       fontFamily: 'Inter',
@@ -161,12 +161,12 @@ class _UserCardState extends State<UserCard> {
                                         ),
                                       ],
                                   ),
-                                ),
+                                ) : Container(),
                               ],
                             ),
                           ),
                         ),
-                        Padding(
+                        images.length > 1 ? Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -186,7 +186,7 @@ class _UserCardState extends State<UserCard> {
                               );
                             }),
                           ),
-                        )
+                        ) : Container()
                       ],
                     ),
                     Container(
@@ -208,7 +208,7 @@ class _UserCardState extends State<UserCard> {
                               ),
                             ),
                           ),
-                          Container(
+                          widget.user.tags.length > 0 ? Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Wrap(
                               children: List.generate(widget.user.tags.length, (index) {
@@ -236,7 +236,7 @@ class _UserCardState extends State<UserCard> {
                                 );
                               }),
                             ),
-                          )
+                          ) : Container()
                         ],
                       ),
                     ),

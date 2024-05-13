@@ -6,11 +6,13 @@ class TextArea extends StatefulWidget {
 
   final String title;
   final String placeholder;
+  final TextEditingController? controller;
 
   const TextArea({
     super.key,
     required this.title,
     required this.placeholder,
+    this.controller
   });
 
   @override
@@ -36,6 +38,7 @@ class _TextAreaState extends State<TextArea> {
           ),
         ),
         TextFormField(
+          controller: widget.controller,
           textAlign: TextAlign.start,
           textAlignVertical: TextAlignVertical.top,
           maxLines: 5,

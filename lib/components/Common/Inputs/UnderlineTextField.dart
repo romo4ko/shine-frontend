@@ -1,11 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class UnderlineTextField extends StatefulWidget {
 
   final String text;
+  final TextEditingController? controller;
 
-  const UnderlineTextField({super.key, required this.text});
+  const UnderlineTextField({
+    super.key,
+    required this.text,
+    this.controller
+  });
 
   @override
   State<UnderlineTextField> createState() => _UnderlineTextFieldState();
@@ -15,6 +21,7 @@ class _UnderlineTextFieldState extends State<UnderlineTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
       style: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
       cursorColor: Colors.white,
       decoration: InputDecoration(

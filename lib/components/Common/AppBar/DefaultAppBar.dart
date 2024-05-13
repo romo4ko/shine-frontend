@@ -6,11 +6,13 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final String title;
   final double titleSize;
+  final bool back;
 
   const DefaultAppBar({
     super.key,
     required this.title,
-    this.titleSize = 20.0
+    this.titleSize = 20.0,
+    this.back = true
   });
 
   @override
@@ -35,7 +37,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
+              back ? InkWell(
                 onTap: () {
                   Navigator.pop(context);
                 },
@@ -43,7 +45,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: SvgPicture.asset('assets/icons/arrow-back.svg', width: 12),
                 ),
-              ),
+              ) : SizedBox(),
               Text(
                 title,
                 style: TextStyle(
@@ -54,7 +56,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
                     color: Colors.white
                 ),
               ),
-              Container(width: 52)
+              Container(width: back ? 52 : 0)
             ],
           ),
         ),

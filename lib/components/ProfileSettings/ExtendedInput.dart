@@ -35,98 +35,95 @@ class _ExtendedInputState extends State<ExtendedInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              is_active = !is_active;
-              if (is_active) {
-                _focusNode.requestFocus();
-              }
-              else {
-                _focusNode.unfocus();
-              }
-            });
-          },
-          child: Container(
-            color: Colors.transparent,
-            padding: EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: !is_active && controller.text.length == 0 ? 21 : 10
-            ),
-            width: MediaQuery.of(context).size.width,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          is_active = !is_active;
+          if (is_active) {
+            _focusNode.requestFocus();
+          }
+          else {
+            _focusNode.unfocus();
+          }
+        });
+      },
+      child: Container(
+        height: 60,
+        color: Colors.transparent,
+        padding: EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: !is_active && controller.text.length == 0 ? 20 : 10
+        ),
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.title,
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                          color: is_active ? Colors.white.withOpacity(0.6) : Colors.white,
-                          fontSize: is_active ? 12 : 20,
-                          height: 1,
-                          fontFamily: 'Inter'
+                Text(
+                  widget.title,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      color: is_active ? Colors.white.withOpacity(0.6) : Colors.white,
+                      fontSize: is_active ? 10 : 20,
+                      height: 1,
+                      fontFamily: 'Inter'
+                  ),
+                ),
+                !is_active && controller.text.length > 0 ? Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: Text(
+                    controller.text,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        color: Colors.white.withOpacity(0.6),
+                        fontSize: 15,
+                        height: 1,
+                        fontFamily: 'Inter'
+                    ),
+                  ),
+                ) : Container(),
+                is_active ? SizedBox(
+                  width: 300,
+                  height: 30,
+                  child: Focus(
+                    onFocusChange: (hasFocus) {
+                      if(!hasFocus) {
+                        is_active = false;
+                      }
+                    },
+                    child: TextFormField(
+                      key: _key,
+                      controller: controller,
+                      focusNode: _focusNode,
+                      style: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
+                      cursorColor: Colors.white.withOpacity(0.5),
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(0),
+                        border: const OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                        labelStyle: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 18, fontFamily: 'Inter'),
+                        fillColor: Colors.transparent,
+                        filled: true,
+                        focusColor: Colors.transparent,
+                        labelText: widget.placeholder,
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
                       ),
                     ),
-                    !is_active && controller.text.length > 0 ? Padding(
-                      padding: const EdgeInsets.only(top: 5),
-                      child: Text(
-                        controller.text,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: Colors.white.withOpacity(0.6),
-                            fontSize: 16,
-                            height: 1,
-                            fontFamily: 'Inter'
-                        ),
-                      ),
-                    ) : Container(),
-                    is_active ? SizedBox(
-                      width: 300,
-                      height: 30,
-                      child: Focus(
-                        onFocusChange: (hasFocus) {
-                          if(!hasFocus) {
-                            is_active = false;
-                          }
-                        },
-                        child: TextFormField(
-                          key: _key,
-                          controller: controller,
-                          focusNode: _focusNode,
-                          style: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
-                          cursorColor: Colors.white.withOpacity(0.5),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(0),
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            labelStyle: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 18, fontFamily: 'Inter'),
-                            fillColor: Colors.transparent,
-                            filled: true,
-                            focusColor: Colors.transparent,
-                            labelText: widget.placeholder,
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
-                          ),
-                        ),
-                      ),
-                    ) : Container()
-                  ],
-                ),
-                SvgPicture.asset('assets/icons/arrow-right.svg', height: 14),
+                  ),
+                ) : Container()
               ],
             ),
-          ),
+            SvgPicture.asset('assets/icons/arrow-right.svg', height: 14),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

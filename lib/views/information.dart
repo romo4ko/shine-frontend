@@ -6,6 +6,7 @@ import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
 import '../components/Common/Buttons/buttons.dart';
 import '../components/Common/Dropdowns/dropdowns.dart';
 import 'package:shine/components/Information/information.dart';
+import 'package:shine/data/api/api_service.dart';
 
 
 class Information extends StatefulWidget {
@@ -16,6 +17,35 @@ class Information extends StatefulWidget {
 }
 
 class _InformationState extends State<Information> {
+
+  var api = ApiService();
+
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _gender = TextEditingController();
+  final TextEditingController _fs = TextEditingController();
+  final TextEditingController _city = TextEditingController();
+  final TextEditingController _description = TextEditingController();
+  final TextEditingController _children = TextEditingController();
+  final TextEditingController _alcohol = TextEditingController();
+  final TextEditingController _smoking = TextEditingController();
+
+  save() {
+    api.storeUserProperties({
+      'name': _name.text,
+      'gender': _gender.text,
+      'city': _city.text,
+      'fs': _fs.text,
+      'children': _children.text,
+      'smoking': _smoking.text,
+      'alcohol': _alcohol.text,
+      'text': _description.text,
+    }).then((data) => {
+      if (data['status'] != null) {
+        Navigator.pushNamed(context, 'filters')
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,65 +63,77 @@ class _InformationState extends State<Information> {
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/backgrounds/info-bg.png"),
-              fit: BoxFit.fitHeight,
+              fit: BoxFit.fill,
             ),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Column(
+              Column(
                 children: [
-                  FilledTextField(title: 'Как вас зовут?*', placeholder: 'Имя'),
-                  SizedBox(height: 20),
-                  GenderCheckbox(title: 'Пол*'),
-                  SizedBox(height: 20),
-                  CityTextField(title: 'Местоположение*', placeholder: 'Укажите город для поиска'),
-                  SizedBox(height: 20),
-                  DefaultDropdown(values: [
-                    'Женат/замужем',
-                    'Свободен/свободна',
-                    'В свободных отношениях'
-                  ],
+                  FilledTextField(
+                      title: 'Как вас зовут?*',
+                      placeholder: 'Имя',
+                      controller: _name
+                  ),
+                  const SizedBox(height: 20),
+                  GenderCheckbox(title: 'Пол*', controller: _gender),
+                  const SizedBox(height: 20),
+                  CityTextField(
+                      title: 'Местоположение*',
+                      placeholder: 'Укажите город для поиска',
+                      controller: _city
+                  ),
+                  const SizedBox(height: 20),
+                  DefaultDropdown(items: {
+                      'married': 'Женат/замужем',
+                      'single': 'Свободен/свободна',
+                      'open-rel': 'В свободных отношениях'
+                    },
                     title: 'Семейное положение',
-                    placeholder: 'Выбрать семейное положение '
+                    placeholder: 'Выбрать семейное положение',
+                    controller: _fs
                   ),
-                  SizedBox(height: 20),
-                  DefaultDropdown(values: [
-                    'Да',
-                    'Нет и не планирую',
-                    'Нет, но хотелось бы'
-                  ],
+                  const SizedBox(height: 20),
+                  DefaultDropdown(items: {
+                    'yes': 'Да',
+                    'no': 'Нет и не планирую',
+                    'would': 'Нет, но хотелось бы'},
                     title: 'У вас есть дети?',
+                    controller: _children,
                   ),
                   SizedBox(height: 20),
-                  DefaultDropdown(values: [
-                    'Резко негативно',
-                    'Нейтрально',
-                    'Положительно',
-                  ],
+                  DefaultDropdown(items: {
+                      'smoking_negative': 'Резко негативно',
+                      'smoking_neutral': 'Нейтрально',
+                      'smoking_positive': 'Положительно',
+                    },
                     title: 'Как вы относитесь к курению?',
+                    controller: _smoking,
                   ),
                   SizedBox(height: 20),
-                  DefaultDropdown(values: [
-                    'Резко негативно',
-                    'Нейтрально',
-                    'Положительно'
-                  ],
+                  DefaultDropdown(items: {
+                      'alcohol_negative': 'Резко негативно',
+                      'alcohol_neutral': 'Нейтрально',
+                      'alcohol_positive': 'Положительно'
+                    },
                     title: 'Как вы относитесь к алкоголю?',
+                    controller: _alcohol,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   TextArea(
                     title: 'Описание профиля',
                     placeholder: 'Напишите о себе и о своих желаниях',
+                    controller: _description
                   ),
-                  SizedBox(height: 20),
-                  TagsArea(
+                  const SizedBox(height: 20),
+                  const TagsArea(
                     title: 'Хобби/Интересы',
                     placeholder: '#музыка #спорт #рисование #растения #IT #татуировки #искусство #машины #дизайн #еда #кино #театры #фильмы #сериалы',
                   ),
-                  SizedBox(height: 20),
-                  ImagesForm(
+                  const SizedBox(height: 20),
+                  const ImagesForm(
                     title: 'Ваши фото*',
                   ),
                 ],
@@ -110,7 +152,7 @@ class _InformationState extends State<Information> {
                   ),
                 ),
               ),
-              const DefaultElevatedButton(text: 'Сохранить', action: 'filters', width: 270, height: 40),
+              DefaultElevatedButton(text: 'Сохранить', action: () => {save()}, width: 270, height: 40),
             ],
           ),
         ),

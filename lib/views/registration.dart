@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
+import 'package:shine/data/api/api_service.dart';
 import '../components/Common/Buttons/buttons.dart';
 import '../components/Common/Inputs/inputs.dart';
+import '../components/Dialogs/DefaultDialog.dart';
 
 class Registration extends StatefulWidget {
   const Registration({super.key});
@@ -14,6 +20,38 @@ class Registration extends StatefulWidget {
 class _RegistrationState extends State<Registration> {
 
   final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController firstPasswordController = TextEditingController();
+  final TextEditingController secondPasswordController = TextEditingController();
+  final TextEditingController birthdateController = TextEditingController();
+
+  var api = ApiService();
+
+  register() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    if (firstPasswordController.text == secondPasswordController.text) {
+      api.register({
+        'email': emailController.text,
+        'password': firstPasswordController.text,
+        'birthdate': birthdateController.text
+      }).then((data) =>
+      {
+        if (data['token'] != null) {
+          localStorage.setString('token', json.encode(data['token'])),
+          localStorage.setString('user', json.encode(data['user'])),
+          Navigator.pushNamed(context, 'purpose')
+        }
+        else
+          {
+            DefaultDialog.showCustomDialog(context, title: 'Ошибка регистрации')
+          }
+      }).catchError((error) =>
+      {
+        DefaultDialog.showCustomDialog(context, title: 'Ошибка регистрации')
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,21 +75,25 @@ class _RegistrationState extends State<Registration> {
             children: [
               Form(
                 key: _formKey,
-                child: const Column(
+                child: Column(
                   children: [
-                    UnderlineTextField(text: 'Логин'),
+                    UnderlineTextField(text: 'Ваш Email', controller: emailController),
                     SizedBox(height: 20),
-                    UnderlineTextField(text: 'Ваш Email'),
+                    UnderlinePasswordField(text: 'Пароль', controller: firstPasswordController),
                     SizedBox(height: 20),
-                    UnderlinePasswordField(text: 'Пароль'),
+                    UnderlinePasswordField(text: 'Подтвердите пароль', controller: secondPasswordController),
                     SizedBox(height: 20),
-                    UnderlinePasswordField(text: 'Подтвердите пароль'),
-                    SizedBox(height: 20),
-                    UnderlineBirthdateField(text: 'Дата рождения'),
+                    UnderlineBirthdateField(text: 'Дата рождения', controller: birthdateController),
                   ],
                 ),
               ),
-              const DefaultElevatedButton(text: 'Регистрация', action: 'purpose', width: 270, height: 40),
+              DefaultElevatedButton(
+                  text: 'Регистрация',
+                  action: () => {
+                    register()
+                  },
+                  width: 270, height: 40
+              ),
             ],
           ),
         ),

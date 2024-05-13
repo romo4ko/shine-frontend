@@ -26,7 +26,7 @@ class _ChatState extends State<Chat> {
       'user_id': 0,
       'self_id': 1,
       'user_name': 'Ника',
-      'image': 'https://uprostim.com/wp-content/uploads/2021/03/image070-58.jpg',
+      'image': 'https://pikuco.ru/upload/test_stable/eee/eee3b0abbfdbcc0e320860a75e236c48.webp',
       'is_online': true,
       'is_viewed_by_user': true,
       'messages': [

@@ -4,9 +4,9 @@ class User {
   final int age;
   final String text;
   final List images;
-  final int distance;
+  final int? distance;
   final List tags;
-  final String sign;
+  final String? sign;
 
   User(this.id, this.name, this.age, this.text, this.images, this.distance,
       this.tags, this.sign);
@@ -18,6 +18,6 @@ class User {
         text = json['text'],
         images = json['images'],
         distance = json['distance'],
-        tags = json['tags'],
+        tags = json['tags'] ?? [],
         sign = json['sign'];
 }

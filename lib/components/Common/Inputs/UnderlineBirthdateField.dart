@@ -6,8 +6,13 @@ import 'package:masked_text/masked_text.dart';
 class UnderlineBirthdateField extends StatefulWidget {
 
   final String text;
+  final TextEditingController? controller;
 
-  const UnderlineBirthdateField({super.key, required this.text});
+  const UnderlineBirthdateField({
+    super.key,
+    required this.text,
+    required this.controller
+  });
 
   @override
   State<UnderlineBirthdateField> createState() => _UnderlineBirthdateFieldState();
@@ -17,6 +22,7 @@ class _UnderlineBirthdateFieldState extends State<UnderlineBirthdateField> {
   @override
   Widget build(BuildContext context) {
     return MaskedTextField(
+      controller: widget.controller,
       mask: "##.##.####",
       style: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
       cursorColor: Colors.white,

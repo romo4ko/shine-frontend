@@ -2,11 +2,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+typedef void StringCallback(String val);
+
 class GenderCheckbox extends StatefulWidget {
 
   final String title;
+  final TextEditingController? controller;
 
-  const GenderCheckbox({super.key, required this.title});
+  const GenderCheckbox({
+    super.key,
+    required this.title,
+    this.controller
+  });
 
   @override
   State<GenderCheckbox> createState() => _GenderCheckboxState();
@@ -42,7 +49,10 @@ class _GenderCheckboxState extends State<GenderCheckbox> {
               height: 40,
               child: ElevatedButton(
                 onPressed: () => {
-                  setState(() => selected = 'female')
+                  setState(() {
+                    selected = 'female';
+                    widget.controller?.text = selected;
+                  })
                 },
                 style: ElevatedButton.styleFrom(
                   shape: const RoundedRectangleBorder(
@@ -72,7 +82,10 @@ class _GenderCheckboxState extends State<GenderCheckbox> {
               height: 40,
               child: ElevatedButton(
                 onPressed: () => {
-                  setState(() => selected = 'male')
+                  setState(() {
+                    selected = 'male';
+                    widget.controller?.text = selected;
+                  })
                 },
                 style: ElevatedButton.styleFrom(
                   shape: const RoundedRectangleBorder(

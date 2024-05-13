@@ -6,8 +6,14 @@ class CityTextField extends StatefulWidget {
 
   final String title;
   final String placeholder;
+  final TextEditingController? controller;
 
-  const CityTextField({super.key, required this.title, required this.placeholder});
+  const CityTextField({
+    super.key,
+    required this.title,
+    required this.placeholder,
+    this.controller
+  });
 
   @override
   State<CityTextField> createState() => _CityTextFieldState();
@@ -32,6 +38,7 @@ class _CityTextFieldState extends State<CityTextField> {
           ),
         ),
         TextFormField(
+          controller: widget.controller,
           style: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
           cursorColor: Colors.white.withOpacity(0.6),
           decoration: InputDecoration(

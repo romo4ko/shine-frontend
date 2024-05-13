@@ -4,17 +4,13 @@ import 'package:flutter_svg/svg.dart';
 
 class TextInput extends StatefulWidget {
 
-  final List<String> values;
-  final String? selected;
+  final String? value;
   final String title;
-  final String placeholder;
 
   const TextInput({
     super.key,
-    required this.values,
-    this.selected = null,
+    this.value = null,
     required this.title,
-    this.placeholder = 'test'
   });
 
   @override
@@ -32,7 +28,7 @@ class _TextInputState extends State<TextInput> {
 
   @override
   void initState() {
-    _selectedValue = widget.selected;
+    _selectedValue = widget.value;
     is_active = _selectedValue == null ? false : true;
     super.initState();
   }
@@ -74,16 +70,20 @@ class _TextInputState extends State<TextInput> {
                   errorBorder: InputBorder.none,
                   disabledBorder: InputBorder.none,
                   focusedErrorBorder: InputBorder.none,
+                  floatingLabelStyle: TextStyle(
+                      color: Colors.white.withOpacity(0.6),
+                      fontSize: 14,
+                      fontFamily: 'Inter'
+                  ),
                   labelStyle: TextStyle(
                       color: Colors.white.withOpacity(0.6),
                       fontSize: 18,
-                      height: 1,
                       fontFamily: 'Inter'
                   ),
                   fillColor: Colors.transparent,
                   filled: true,
                   focusColor: Colors.transparent,
-                  labelText: widget.placeholder,
+                  labelText: widget.title,
                 ),
               ),
             ),

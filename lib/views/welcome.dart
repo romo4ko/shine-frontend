@@ -50,13 +50,13 @@ class Welcome extends StatelessWidget {
                     )
                   ],
                 ),
-                const Column(
+                Column(
                   children: [
-                    DefaultElevatedButton(text: 'Вход', action: 'login', width: 270, height: 40),
+                    DefaultElevatedButton(text: 'Вход', action: () => {Navigator.pushNamed(context, 'login')}, width: 270, height: 40),
                     SizedBox(
                       height: 40,
                     ),
-                    DefaultElevatedButton(text: 'Регистрация', action: 'registration', width: 270, height: 40),
+                    DefaultElevatedButton(text: 'Регистрация', action: () => {Navigator.pushNamed(context, 'registration')}, width: 270, height: 40),
                   ],
                 ),
                 const Padding(

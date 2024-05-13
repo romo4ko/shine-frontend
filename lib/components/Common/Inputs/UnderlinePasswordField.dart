@@ -1,12 +1,18 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 
 class UnderlinePasswordField extends StatefulWidget {
 
   final String text;
+  final TextEditingController? controller;
 
-  const UnderlinePasswordField({super.key, required this.text});
+  const UnderlinePasswordField({
+    super.key,
+    required this.text,
+    this.controller
+  });
 
   @override
   _UnderlinePasswordFieldState createState() => _UnderlinePasswordFieldState();
@@ -29,6 +35,7 @@ class _UnderlinePasswordFieldState extends State<UnderlinePasswordField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
       obscureText: isPasswordHidden,
       style: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
       cursorColor: Colors.white,
