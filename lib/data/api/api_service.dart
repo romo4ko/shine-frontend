@@ -91,7 +91,6 @@ class ApiService {
   Future storeImage(dynamic data) async {
     await _getToken();
     final formData = FormData.fromMap(data);
-
     final response = await _dio.post(
       '/users/images/store',
       data: formData,
@@ -106,6 +105,16 @@ class ApiService {
     await _getToken();
     final response = await _dio.get(
       '/users/list',
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
+  Future like(Map<String, int> data) async {
+    await _getToken();
+    final response = await _dio.post(
+      '/users/like',
+      data: data,
       options: Options(headers: _setHeaders()),
     );
     return response.data;

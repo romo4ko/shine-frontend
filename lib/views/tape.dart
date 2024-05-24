@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shine/components/Dialogs/DefaultDialog.dart';
 
 import 'package:shine/data/api/api_service.dart';
 import 'package:shine/components/Tape/tape.dart';
@@ -124,12 +125,17 @@ class _TapeState extends State<Tape> {
       int? currentIndex,
       CardSwiperDirection direction,
       ) {
-    if (previousIndex == users.length-1) {
-      fetchUsers();
-    }
     debugPrint(
       'The card $previousIndex was swiped to the ${direction.name}. Now the card $currentIndex is on top',
     );
+
+    if (direction.name == 'right') {
+      like(users[previousIndex]);
+    }
+
+    if (previousIndex == users.length-1) {
+      fetchUsers();
+    }
     return true;
   }
 
@@ -160,7 +166,6 @@ class _TapeState extends State<Tape> {
     });
     api.getUsers().then((data) {
       for (var user in data['data']) {
-        print(user);
         users.add(
             User.fromJson(user)
         );
@@ -169,6 +174,14 @@ class _TapeState extends State<Tape> {
         createCards();
         loading = false;
       });
+    });
+  }
+
+  like(User user) {
+    api.like({'whom': user.id}).then((data) {
+      if (data['status'] == 'match') {
+        DefaultDialog.showCustomDialog(context, title: 'Звёзды сошлись!');
+      }
     });
   }
 }
