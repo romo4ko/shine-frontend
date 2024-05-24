@@ -113,11 +113,19 @@ class ApiService {
   Future like(Map<String, int> data) async {
     await _getToken();
     final response = await _dio.post(
-      '/users/like',
+      '/likes/set',
       data: data,
       options: Options(headers: _setHeaders()),
     );
     return response.data;
   }
 
+  Future chats() async {
+    await _getToken();
+    final response = await _dio.get(
+      '/chats/list',
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
 }

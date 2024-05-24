@@ -66,7 +66,7 @@ class _ChatItemState extends State<ChatItem> {
                               color: Colors.white,
                             ),
                           ),
-                          !widget.chat.is_viewed ? Container() :
+                          widget.chat.is_viewed ? Container() :
                           Container(
                             margin: const EdgeInsets.symmetric(horizontal: 5),
                             height: 7,
