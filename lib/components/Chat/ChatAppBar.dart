@@ -5,7 +5,7 @@ import 'package:shine/models/ChatModel.dart';
 
 class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
 
-  final ChatModel chat;
+  final ChatModel? chat;
 
   const ChatAppBar({
     super.key,
@@ -49,18 +49,18 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                     padding: const EdgeInsets.only(right: 10),
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
-                      backgroundImage: NetworkImage(
-                          chat.image
-                      ),
+                      backgroundImage: chat != null ? NetworkImage(
+                          chat!.image
+                      ) : null,
                       maxRadius: 25,
                     ),
                   ),
-                  Column(
+                  chat != null ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        chat.user_name,
+                        chat!.user_name,
                         style: const TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 16,
@@ -70,7 +70,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                       ),
                       Text(
-                        chat.is_online ? 'в сети' : '',
+                        chat!.is_online ? 'в сети' : '',
                         style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 12,
@@ -79,7 +79,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                       ),
                     ],
-                  )
+                  ) : Container()
                 ],
               ),
               InkWell(

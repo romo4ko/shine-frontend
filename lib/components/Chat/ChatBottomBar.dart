@@ -1,13 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ChatBottomBar extends StatefulWidget {
 
   final String active;
+  final TextEditingController? controller;
 
   const ChatBottomBar({
     super.key,
-    required this.active
+    required this.active,
+    this.controller
   });
 
   @override

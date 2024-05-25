@@ -2,12 +2,13 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import '../../models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
 
-  static const API_BASE_URL = 'http://10.0.2.2:8000/api';
+  static const API_BASE_URL = kDebugMode ? 'http://10.0.2.2:8000/api' : '';
 
   var token;
 
@@ -120,6 +121,8 @@ class ApiService {
     return response.data;
   }
 
+  // ##### CHAT #####
+
   Future chats() async {
     await _getToken();
     final response = await _dio.get(
@@ -133,6 +136,16 @@ class ApiService {
     await _getToken();
     final response = await _dio.get(
       '/chats/chat',
+      data: data,
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
+  Future sendMessage(Map<String, dynamic> data) async {
+    await _getToken();
+    final response = await _dio.get(
+      '/message/send',
       data: data,
       options: Options(headers: _setHeaders()),
     );

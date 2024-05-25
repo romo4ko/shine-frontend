@@ -32,11 +32,10 @@ class _ChatState extends State<Chat> {
       loading = true;
     });
     var data = {
-      'chat_id': 1
+      'chat_id': widget.chat_id ?? 0
     };
     api.chat(data).then((response) {
       if (response['data'] != null) {
-        print(response['data']);
         chat = ChatModel.fromJson(response['data']);
       }
       setState(() {
@@ -55,6 +54,22 @@ class _ChatState extends State<Chat> {
   Widget build(BuildContext context) {
 
     ScrollController _scrollController = new ScrollController();
+    TextEditingController text = TextEditingController();
+
+    sendMessage() {
+      var data = {
+        'text': text.text,
+      };
+
+      api.sendMessage(data).then((response) {
+        if (response != null) {
+          print(response);
+        }
+        setState(() {
+          loading = false;
+        });
+      });
+    }
 
     return Stack(
       children: [
@@ -178,7 +193,7 @@ class _ChatState extends State<Chat> {
               ),
               Container(
                 alignment: Alignment.bottomCenter,
-                child: const ChatBottomBar(active: "chats"),
+                child: ChatBottomBar(active: "chats", controller: text),
               )
             ],
           ),
