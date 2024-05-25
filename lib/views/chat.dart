@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shine/components/Chat/ChatAppBar.dart';
+import 'package:shine/data/api/api_service.dart';
 import 'package:shine/models/ChatModel.dart';
 import '../components/Chat/ChatBottomBar.dart';
 
@@ -21,120 +22,32 @@ class Chat extends StatefulWidget {
 
 class _ChatState extends State<Chat> {
 
-  ChatModel chat = ChatModel.fromJson({
-      'chat_id': 0,
-      'user_id': 0,
-      'self_id': 1,
-      'user_name': 'Ника',
-      'image': 'https://pikuco.ru/upload/test_stable/eee/eee3b0abbfdbcc0e320860a75e236c48.webp',
-      'is_online': true,
-      'is_viewed_by_user': true,
-      'messages': [
-        {
-          'sender_id': 0,
-          'text': 'Добрый день, как ты смотришь на то, чтобы сегодня вместе выпить кофе?',
-          'time': '14:00'
-        },
-        {
-          'sender_id': 1,
-          'text': 'Привет',
-          'time': '14:01'
-        },
-        {
-          'sender_id': 1,
-          'text': 'Да, мне нравится эта идея',
-          'time': '14:01'
-        },
-        {
-          'sender_id': 1,
-          'text': 'Давай встретимся возле парка в 18:00?',
-          'time': '14:05'
-        },
-        {
-          'sender_id': 0,
-          'text': 'Отлично! До встречи)',
-          'time': '14:10'
-        },
-        {
-          'sender_id': 1,
-          'text': 'Да, мне нравится эта идея',
-          'time': '14:01'
-        },
-        {
-          'sender_id': 1,
-          'text': 'Давай встретимся возле парка в 18:00?',
-          'time': '14:05'
-        },
-        {
-          'sender_id': 0,
-          'text': 'Отлично! До встречи)',
-          'time': '14:10'
-        },
-        {
-          'sender_id': 1,
-          'text': 'Да, мне нравится эта идея',
-          'time': '14:01'
-        },
-        {
-          'sender_id': 1,
-          'text': 'Давай встретимся возле парка в 18:00?',
-          'time': '14:05'
-        },
-        {
-          'sender_id': 0,
-          'text': 'Отлично! До встречи)',
-          'time': '14:10'
-        },
-        {
-          'sender_id': 1,
-          'text': 'Да, мне нравится эта идея',
-          'time': '14:01'
-        },
-        {
-          'sender_id': 1,
-          'text': 'Давай встретимся возле парка в 18:00?',
-          'time': '14:05'
-        },
-        {
-          'sender_id': 0,
-          'text': 'Отлично! До встречи)',
-          'time': '14:10'
-        },
-        {
-          'sender_id': 1,
-          'text': 'Давай встретимся возле парка в 18:00?',
-          'time': '14:05'
-        },
-        {
-          'sender_id': 0,
-          'text': 'Отлично! До встречи)',
-          'time': '14:10'
-        },
-        {
-          'sender_id': 1,
-          'text': 'Давай встретимся возле парка в 18:00?',
-          'time': '14:05'
-        },
-        {
-          'sender_id': 0,
-          'text': 'Отлично! До встречи)',
-          'time': '14:10'
-        },
-        {
-          'sender_id': 1,
-          'text': 'Давай встретимся возле парка в 18:00?',
-          'time': '14:05'
-        },
-        {
-          'sender_id': 0,
-          'text': 'Отлично! До встречи)',
-          'time': '14:10'
-        },
-      ]
+  var api = ApiService();
+  var loading = true;
+
+  var chat;
+
+  fetchChat() {
+    setState(() {
+      loading = true;
     });
+    var data = {
+      'chat_id': 1
+    };
+    api.chat(data).then((response) {
+      if (response['data'] != null) {
+        print(response['data']);
+        chat = ChatModel.fromJson(response['data']);
+      }
+      setState(() {
+        loading = false;
+      });
+    });
+  }
 
   @override
   void initState() {
+    fetchChat();
     super.initState();
   }
 
@@ -162,7 +75,10 @@ class _ChatState extends State<Chat> {
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Container(
                   alignment: Alignment.topCenter,
-                  child: ListView.builder(
+                  child: loading ? Center(
+                    child: CircularProgressIndicator(
+                        color: Colors.white.withOpacity(0.8)),
+                    ) : ListView.builder(
                     controller: _scrollController,
                     physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.only(top: 100, bottom: 60),

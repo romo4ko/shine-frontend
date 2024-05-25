@@ -75,7 +75,10 @@ class _ChatsState extends State<Chats> {
                         ).createShader(rect);
                       },
                       blendMode: BlendMode.dstOut,
-                      child: ListView.separated(
+                      child: loading ? Center(
+                        child: CircularProgressIndicator(
+                            color: Colors.white.withOpacity(0.8)),
+                      ) : chats.isNotEmpty ? ListView.separated(
                         physics: const BouncingScrollPhysics(),
                         padding: const EdgeInsets.only(top: 100, bottom: 100),
                         itemCount: chats.length,
@@ -85,6 +88,15 @@ class _ChatsState extends State<Chats> {
                         separatorBuilder: (context, index) {
                           return const Divider();
                         },
+                      ) : const Center(
+                          child: Text(
+                              "Список пуст",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontFamily: 'Inter'
+                              ),
+                          )
                       ),
                     ),
                   ),

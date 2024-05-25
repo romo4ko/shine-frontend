@@ -128,4 +128,14 @@ class ApiService {
     );
     return response.data;
   }
+
+  Future chat(Map<String, int> data) async {
+    await _getToken();
+    final response = await _dio.get(
+      '/chats/chat',
+      data: data,
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
 }
