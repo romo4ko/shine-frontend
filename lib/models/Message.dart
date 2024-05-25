@@ -1,6 +1,6 @@
 class Message {
   final int sender_id;
-  final String text;
+  final String? text;
   final String time;
   final Map<String, dynamic>? content;
 

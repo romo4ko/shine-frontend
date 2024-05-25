@@ -5,11 +5,13 @@ import 'package:flutter_svg/svg.dart';
 class ChatBottomBar extends StatefulWidget {
 
   final String active;
+  final Function callback;
   final TextEditingController? controller;
 
   const ChatBottomBar({
     super.key,
     required this.active,
+    required this.callback,
     this.controller
   });
 
@@ -60,6 +62,7 @@ class _ChatBottomBarState extends State<ChatBottomBar> {
               padding: EdgeInsets.only(top: 10),
               color: Colors.black,
               child: TextFormField(
+                controller: widget.controller,
                 keyboardType: TextInputType.multiline,
                 minLines: 1,
                 maxLines: 100,
@@ -91,6 +94,7 @@ class _ChatBottomBarState extends State<ChatBottomBar> {
           ),
           InkWell(
             onTap: () {
+              widget.callback();
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),

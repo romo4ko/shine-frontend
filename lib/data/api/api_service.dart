@@ -144,7 +144,7 @@ class ApiService {
 
   Future sendMessage(Map<String, dynamic> data) async {
     await _getToken();
-    final response = await _dio.get(
+    final response = await _dio.post(
       '/message/send',
       data: data,
       options: Options(headers: _setHeaders()),
