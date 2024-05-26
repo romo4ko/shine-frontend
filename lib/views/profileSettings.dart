@@ -8,6 +8,7 @@ import 'package:shine/components/ProfileSettings/ImagesGrid.dart';
 import 'package:shine/components/ProfileSettings/ProfileDescription.dart';
 import 'package:shine/components/ProfileSettings/ProfileInfo.dart';
 import 'package:shine/components/Common/Inputs/TextInput.dart';
+import 'package:shine/data/api/api_service.dart';
 import '../components/Common/AppBar/DefaultAppBar.dart';
 import '../models/Self.dart';
 import '../components/ProfileSettings/ProfileSettingsFilled.dart';
@@ -21,23 +22,29 @@ class ProfileSettings extends StatefulWidget {
 
 class _ProfileSettingsState extends State<ProfileSettings> {
 
-  Self user = Self.fromJson({
-    'id': 1,
-    'name': 'Александр',
-    'age': 25,
-    'sex': 'мужской',
-    'birthdate': '11.11.1999',
-    'city': 'Ростов-на-Дону',
-    'purpose': 'Свидания',
-    'image': "https://avatars.dzeninfra.ru/get-zen_doc/29030/pub_5ae9c5fe3dceb76be76eebac_5ae9cad457906a18134a10ad/scale_1200",
-    'images': [
-      "https://avatars.dzeninfra.ru/get-zen_doc/29030/pub_5ae9c5fe3dceb76be76eebac_5ae9cad457906a18134a10ad/scale_1200",
-    ],
-    'is_premium': false,
-    'bot_setting': 1,
-    'profile_filled': 73,
-    'invites': 1
-  });
+  var user;
+
+  var api = ApiService();
+  var loading = true;
+
+  fetchChats() {
+    setState(() {
+      loading = true;
+    });
+    api.getCurrentUser().then((data) {
+      print(data);
+      user = Self.fromJson(data);
+      setState(() {
+        loading = false;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchChats();
+  }
 
   @override
   Widget build(BuildContext context) {

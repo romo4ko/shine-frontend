@@ -50,7 +50,7 @@ class _ImagesGridState extends State<ImagesGrid> {
                   image: widget.images.length >= 1 ?
                   DecorationImage(
                     image: NetworkImage(
-                      widget.images[0],
+                      widget.images[0]['path'],
                     ),
                     fit: BoxFit.cover
                   ) : null
@@ -75,7 +75,7 @@ class _ImagesGridState extends State<ImagesGrid> {
                       image: widget.images.length >= 2 ?
                       DecorationImage(
                           image: NetworkImage(
-                            widget.images[1],
+                            widget.images[1]['path'],
                           ),
                           fit: BoxFit.cover
                       ) : null
@@ -106,7 +106,7 @@ class _ImagesGridState extends State<ImagesGrid> {
                       image: widget.images.length >= 3 ?
                       DecorationImage(
                           image: NetworkImage(
-                            widget.images[2],
+                            widget.images[2]['path'],
                           ),
                           fit: BoxFit.cover
                       ) : null
@@ -131,7 +131,7 @@ class _ImagesGridState extends State<ImagesGrid> {
                     image: widget.images.length >= 4 ?
                     DecorationImage(
                         image: NetworkImage(
-                          widget.images[3],
+                          widget.images[3]['path'],
                         ),
                         fit: BoxFit.cover
                     ) : null
@@ -150,7 +150,7 @@ class _ImagesGridState extends State<ImagesGrid> {
                     image: widget.images.length >= 5 ?
                     DecorationImage(
                         image: NetworkImage(
-                          widget.images[4],
+                          widget.images[4]['path'],
                         ),
                         fit: BoxFit.cover
                     ) : null
@@ -169,7 +169,7 @@ class _ImagesGridState extends State<ImagesGrid> {
                     image: widget.images.length >= 6 ?
                     DecorationImage(
                         image: NetworkImage(
-                          widget.images[5],
+                          widget.images[5]['path'],
                         ),
                         fit: BoxFit.cover
                     ) : null
