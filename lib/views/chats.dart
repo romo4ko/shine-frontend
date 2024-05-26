@@ -5,6 +5,7 @@ import 'package:shine/components/Common/AppBar/TransparentAppBar.dart';
 import 'package:shine/data/api/api_service.dart';
 import 'package:shine/models/ChatItemModel.dart';
 import 'package:shine/components/Chats/ChatItem.dart';
+import 'package:shine/components/Common/CustomProgressIndicator.dart';
 import '../components/Common/BottomBar.dart';
 
 class Chats extends StatefulWidget {
@@ -75,10 +76,8 @@ class _ChatsState extends State<Chats> {
                         ).createShader(rect);
                       },
                       blendMode: BlendMode.dstOut,
-                      child: loading ? Center(
-                        child: CircularProgressIndicator(
-                            color: Colors.white.withOpacity(0.8)),
-                      ) : chats.isNotEmpty ? ListView.separated(
+                      child: loading ? CustomProgressIndicator() :
+                        chats.isNotEmpty ? ListView.separated(
                         physics: const BouncingScrollPhysics(),
                         padding: const EdgeInsets.only(top: 100, bottom: 100),
                         itemCount: chats.length,
@@ -89,13 +88,16 @@ class _ChatsState extends State<Chats> {
                           return const Divider();
                         },
                       ) : const Center(
-                          child: Text(
-                              "Список пуст",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontFamily: 'Inter'
-                              ),
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 50),
+                            child: Text(
+                                "Список пуст",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontFamily: 'Montserrat',
+                                ),
+                            ),
                           )
                       ),
                     ),

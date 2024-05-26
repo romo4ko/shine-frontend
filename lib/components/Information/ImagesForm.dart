@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:shine/components/Common/CustomProgressIndicator.dart';
 
 import '../../data/api/api_service.dart';
 
@@ -74,8 +75,7 @@ class _ImagesFormState extends State<ImagesForm> {
                   ),
                   _uploadedImages.length < 1 ? Center(
                     child: loading
-                        ? CircularProgressIndicator(
-                        color: Colors.white.withOpacity(0.8))
+                        ? CustomProgressIndicator()
                         : SvgPicture.asset('assets/icons/add-image.svg', width: 50),
                   ) : Container(),
                 ],
@@ -109,8 +109,7 @@ class _ImagesFormState extends State<ImagesForm> {
                       ),
                       _uploadedImages.length < 2 ? Center(
                         child: loading
-                            ? CircularProgressIndicator(
-                            color: Colors.white.withOpacity(0.8))
+                            ? CustomProgressIndicator()
                             : SvgPicture.asset('assets/icons/add-image.svg',
                                 width: 50),
                       ) : Container(),
@@ -143,8 +142,7 @@ class _ImagesFormState extends State<ImagesForm> {
                       ),
                       _uploadedImages.length < 3 ? Center(
                         child: loading
-                            ? CircularProgressIndicator(
-                            color: Colors.white.withOpacity(0.8))
+                            ? CustomProgressIndicator()
                             : SvgPicture.asset('assets/icons/add-image.svg',
                                 width: 50),
                       ) : Container(),
@@ -185,8 +183,7 @@ class _ImagesFormState extends State<ImagesForm> {
                       ),
                       _uploadedImages.length < 4 ? Center(
                         child: loading
-                            ? CircularProgressIndicator(
-                            color: Colors.white.withOpacity(0.8))
+                            ? CustomProgressIndicator()
                             : SvgPicture.asset('assets/icons/add-image.svg',
                             width: 50),
                       ) : Container(),
@@ -219,8 +216,7 @@ class _ImagesFormState extends State<ImagesForm> {
                       ),
                       _uploadedImages.length < 5 ? Center(
                         child: loading
-                            ? CircularProgressIndicator(
-                            color: Colors.white.withOpacity(0.8))
+                            ? CustomProgressIndicator()
                             : SvgPicture.asset('assets/icons/add-image.svg',
                             width: 50),
                       ) : Container(),
@@ -255,8 +251,7 @@ class _ImagesFormState extends State<ImagesForm> {
                   ),
                   _uploadedImages.length < 6 ? Center(
                     child: loading
-                        ? CircularProgressIndicator(
-                        color: Colors.white.withOpacity(0.8))
+                        ? CustomProgressIndicator()
                         : SvgPicture.asset('assets/icons/add-image.svg', width: 50),
                   ) : Container(),
                 ],
@@ -294,8 +289,7 @@ class _ImagesFormState extends State<ImagesForm> {
                       ),
                       _uploadedImages.length < 6 ? Center(
                         child: loading
-                            ? CircularProgressIndicator(
-                            color: Colors.white.withOpacity(0.8))
+                            ? CustomProgressIndicator()
                             : SvgPicture.asset('assets/icons/add-image.svg',
                             width: 50),
                       ) : Container(),
@@ -328,8 +322,7 @@ class _ImagesFormState extends State<ImagesForm> {
                       ),
                       _uploadedImages.length < 7 ? Center(
                         child: loading
-                            ? CircularProgressIndicator(
-                            color: Colors.white.withOpacity(0.8))
+                            ? CustomProgressIndicator()
                             : SvgPicture.asset('assets/icons/add-image.svg',
                             width: 50),
                       ) : Container(),
@@ -364,8 +357,7 @@ class _ImagesFormState extends State<ImagesForm> {
                   ),
                   _uploadedImages.length < 8 ? Center(
                     child: loading
-                        ? CircularProgressIndicator(
-                        color: Colors.white.withOpacity(0.8))
+                        ? CustomProgressIndicator()
                         : SvgPicture.asset('assets/icons/add-image.svg', width: 50),
                   ) : Container(),
                 ],

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shine/components/Common/CustomProgressIndicator.dart';
 import 'package:shine/components/Dialogs/DefaultDialog.dart';
 
 import 'package:shine/data/api/api_service.dart';
@@ -21,42 +21,6 @@ class _TapeState extends State<Tape> {
 
   var api = ApiService();
   var loading = true;
-
-  // var response = [
-  //   {
-  //     'id': 0,
-  //     'name': 'Аня',
-  //     'age': 22,
-  //     'text': 'В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера',
-  //     'images': [
-  //       "https://bipbap.ru/wp-content/uploads/2015/02/dana-kareglazaya-portret-boke.jpg",
-  //       "https://wp-s.ru/wallpapers/4/2/452110934931644/osennij-portret-s-pronizyvayushhim-vzglyadom-devushki.jpg",
-  //       "https://wp-s.ru/wallpapers/3/16/389721010561919/krasivaya-devushka-na-fone-industrialnogo-pejzazha.jpg"
-  //     ],
-  //     'distance': 2,
-  //     'tags': [
-  //       'Музыка', 'Спорт', 'Дизайн'
-  //     ],
-  //     'sign': 'Телец'
-  //   },
-  //   {
-  //     'id': 1,
-  //     'name': 'Лена',
-  //     'age': 23,
-  //     'text': 'В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера. В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера. В поисках человека схожего с моими взглядами, интересами и увлечениями. Люблю творчество и уютные вечера',
-  //     'images': [
-  //       "https://bipbap.ru/wp-content/uploads/2015/02/547b9db42203b2d5c16d9dd0f5626207.jpg",
-  //       "https://24warez.ru/uploads/posts/2019-05/270519/392210/f99e9c4d602b-800x1000.jpg",
-  //       "https://interesnoewmire.ru/wp-content/uploads/fotografii-krasivyh-devushek-chast-12-43-foto-45a3348.jpg",
-  //       "https://i.yapx.cc/SGXLz.jpg",
-  //     ],
-  //     'distance': 2,
-  //     'tags': [
-  //       'IT', 'Сериалы', 'Фильмы', 'Спорт', 'Кафе', 'Рестораны'
-  //     ],
-  //     'sign': 'Телец'
-  //   }
-  // ];
 
   List<User> users = [];
   var cards = [];
@@ -95,10 +59,7 @@ class _TapeState extends State<Tape> {
                 fit: BoxFit.cover,
               ),
             ),
-            child: loading ? Center(
-              child: CircularProgressIndicator(
-                  color: Colors.white.withOpacity(0.8)),
-            ) :
+            child: loading ? CustomProgressIndicator() :
             CardSwiper(
               controller: swipeController,
               cardsCount: cards.length,

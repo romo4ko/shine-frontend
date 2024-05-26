@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
+import 'package:shine/components/Dialogs/DefaultDialog.dart';
 
 import '../components/Common/Buttons/buttons.dart';
 import '../components/Common/Dropdowns/dropdowns.dart';
@@ -30,7 +31,12 @@ class _InformationState extends State<Information> {
   final TextEditingController _smoking = TextEditingController();
 
   save() {
-    api.storeUserProperties({
+    // TODO: Add images and city check
+    if (_name.text.isEmpty || _gender.text.isEmpty) {
+      DefaultDialog.showCustomDialog(context, title: 'Пожалуйста, заполните необходимые поля!');
+      return 1;
+    }
+    api.updateUserProperties({
       'name': _name.text,
       'gender': _gender.text,
       'city': _city.text,
@@ -43,6 +49,8 @@ class _InformationState extends State<Information> {
       if (data['status'] != null) {
         Navigator.pushNamed(context, 'filters')
       }
+    }).catchError((error) => {
+      DefaultDialog.showCustomDialog(context, title: 'Ошибка сети')
     });
   }
 
@@ -128,11 +136,12 @@ class _InformationState extends State<Information> {
                     controller: _description
                   ),
                   const SizedBox(height: 20),
-                  const TagsArea(
-                    title: 'Хобби/Интересы',
-                    placeholder: '#музыка #спорт #рисование #растения #IT #татуировки #искусство #машины #дизайн #еда #кино #театры #фильмы #сериалы',
-                  ),
-                  const SizedBox(height: 20),
+                  // TODO: make tags
+                  // const TagsArea(
+                  //   title: 'Хобби/Интересы',
+                  //   placeholder: '#музыка #спорт #рисование #растения #IT #татуировки #искусство #машины #дизайн #еда #кино #театры #фильмы #сериалы',
+                  // ),
+                  // const SizedBox(height: 20),
                   const ImagesForm(
                     title: 'Ваши фото*',
                   ),

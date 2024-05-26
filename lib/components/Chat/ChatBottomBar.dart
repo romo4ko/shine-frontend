@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shine/components/Dialogs/DefaultDialog.dart';
 
 class ChatBottomBar extends StatefulWidget {
 
@@ -44,6 +45,7 @@ class _ChatBottomBarState extends State<ChatBottomBar> {
             padding: EdgeInsets.only(top: 10),
             child: InkWell(
               onTap: () {
+                DefaultDialog.showCustomDialog(context, title: 'Скоро эта функция обязательно появится!');
               },
               child: Center(
                 child: SizedBox(

@@ -33,13 +33,18 @@ class _LoginState extends State<Login> {
         if (data['token'] != null) {
           localStorage.setString('token', json.encode(data['token'])),
           localStorage.setString('user', json.encode(data['user'])),
-          Navigator.pushNamed(context, 'profile')
+          print(data),
+          if (data['filled']) {
+            Navigator.pushNamed(context, 'profile')
+          } else {
+              Navigator.pushNamed(context, 'information')
+          }
         }
         else {
-          DefaultDialog.showCustomDialog(context, title: 'Ошибка авторизации')
+          DefaultDialog.showCustomDialog(context, title: data['error'])
         }
       }).catchError((error) => {
-          DefaultDialog.showCustomDialog(context, title: 'Ошибка авторизации')
+          DefaultDialog.showCustomDialog(context, title: 'Ошибка сети')
       });
   }
 

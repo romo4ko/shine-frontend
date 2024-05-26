@@ -44,11 +44,10 @@ class _RegistrationState extends State<Registration> {
         }
         else
           {
-            DefaultDialog.showCustomDialog(context, title: 'Ошибка регистрации')
+            DefaultDialog.showCustomDialog(context, title: data['error'])
           }
-      }).catchError((error) =>
-      {
-        DefaultDialog.showCustomDialog(context, title: 'Ошибка регистрации')
+      }).catchError((error) => {
+        DefaultDialog.showCustomDialog(context, title: 'Ошибка сети')
       });
     }
   }
