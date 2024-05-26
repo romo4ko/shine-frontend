@@ -4,11 +4,11 @@ import 'package:flutter_svg/svg.dart';
 
 class BotSettings extends StatefulWidget {
 
-  final int invites;
+  final String? selected;
 
   const BotSettings({
     super.key,
-    this.invites = 0,
+    this.selected,
   });
 
   @override
@@ -18,6 +18,12 @@ class BotSettings extends StatefulWidget {
 class _BotSettingsState extends State<BotSettings> {
 
   var selected;
+
+  @override
+  void initState() {
+    selected = widget.selected ?? 'mixed';
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +66,7 @@ class _BotSettingsState extends State<BotSettings> {
                         height: 30,
                         child: ElevatedButton(
                           onPressed: () => {
-                            setState(() => selected = 1)
+                            setState(() => selected = 'funny')
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -83,7 +89,7 @@ class _BotSettingsState extends State<BotSettings> {
                                       color: Colors.white.withOpacity(0.6),
                                       width: 1,
                                     ),
-                                    color: selected == 1 ? Colors.white : Colors.transparent
+                                    color: selected == 'funny' ? Colors.white : Colors.transparent
                                 ),
                               ),
                               const Align(
@@ -109,7 +115,7 @@ class _BotSettingsState extends State<BotSettings> {
                         height: 30,
                         child: ElevatedButton(
                           onPressed: () => {
-                            setState(() => selected = 2)
+                            setState(() => selected = 'needful')
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -132,7 +138,7 @@ class _BotSettingsState extends State<BotSettings> {
                                       color: Colors.white.withOpacity(0.6),
                                       width: 1,
                                     ),
-                                    color: selected == 2 ? Colors.white : Colors.transparent
+                                    color: selected == 'needful' ? Colors.white : Colors.transparent
                                 ),
                               ),
                               const Align(
@@ -159,7 +165,7 @@ class _BotSettingsState extends State<BotSettings> {
                         height: 30,
                         child: ElevatedButton(
                           onPressed: () => {
-                            setState(() => selected = 3)
+                            setState(() => selected = 'mixed')
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -182,7 +188,7 @@ class _BotSettingsState extends State<BotSettings> {
                                       color: Colors.white.withOpacity(0.6),
                                       width: 1,
                                     ),
-                                    color: selected == 3 ? Colors.white : Colors.transparent
+                                    color: selected == 'mixed' ? Colors.white : Colors.transparent
                                 ),
                               ),
                               const Align(

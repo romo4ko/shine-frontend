@@ -60,7 +60,7 @@ class ProfileCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    user.purpose,
+                    user.purpose ?? '',
                     style: const TextStyle(
                       fontFamily: 'Inter',
                       fontSize: 14,

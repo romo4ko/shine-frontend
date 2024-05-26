@@ -60,7 +60,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
           ),
           child: Column(
             children: [
-              ProfileSettingsFilled(percent: user.profile_filled),
+              ProfileSettingsFilled(percent: user.profile_filled ?? 0),
               ImagesGrid(images: user.images),
               const SizedBox(height: 20),
               ProfileInfo(user: user),

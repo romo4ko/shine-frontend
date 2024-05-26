@@ -5,13 +5,13 @@ class Self {
   final String? birthdate;
   final String? sex;
   final String? text;
-  final String city;
-  final String purpose;
+  final String? city;
+  final String? purpose;
   final String? image;
   final List images;
   final bool is_premium;
-  final int bot_setting;
-  final int profile_filled;
+  final String? bot_settings;
+  final int? profile_filled;
   final int? invites;
 
   Self(
@@ -26,7 +26,7 @@ class Self {
       this.image,
       this.images,
       this.is_premium,
-      this.bot_setting,
+      this.bot_settings,
       this.profile_filled,
       this.invites);
 
@@ -42,7 +42,7 @@ class Self {
         image = json['image'],
         images = json['images'] ?? [],
         is_premium = json['is_premium'],
-        bot_setting = json['bot_setting'],
+        bot_settings = json['bot_settings'],
         profile_filled = json['profile_filled'],
         invites = json['invites'];
 }

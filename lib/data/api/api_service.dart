@@ -68,6 +68,15 @@ class ApiService {
 
   // ##### USER #####
 
+  Future getCurrentUser() async {
+    await _getToken();
+    final response = await _dio.get(
+      '/users/me',
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
   Future updateUserProperties(Map<String, dynamic> data) async {
     await _getToken();
     final response = await _dio.post(

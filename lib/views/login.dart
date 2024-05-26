@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,8 +34,7 @@ class _LoginState extends State<Login> {
         if (data['token'] != null) {
           localStorage.setString('token', json.encode(data['token'])),
           localStorage.setString('user', json.encode(data['user'])),
-          print(data),
-          if (data['filled']) {
+          if (data['filled'] == null) {
             Navigator.pushNamed(context, 'profile')
           } else {
               Navigator.pushNamed(context, 'information')
