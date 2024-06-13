@@ -27,19 +27,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Padding(
-        //   padding: const EdgeInsets.only(top: 10, bottom: 8),
-        //   child: Text(
-        //     'Основные',
-        //     textAlign: TextAlign.start,
-        //     style: TextStyle(
-        //         color: Colors.black.withOpacity(0.6),
-        //         fontSize: 24,
-        //         fontWeight: FontWeight.bold,
-        //         fontFamily: 'Inter'
-        //     ),
-        //   ),
-        // ),
         Container(
           decoration: BoxDecoration(
               color: Color.fromRGBO(20, 20, 20, 0.8),
@@ -47,11 +34,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
           ),
           child: Column(
             children: [
-              ExtendedInput(value: widget.user.name, title: 'Имя', key: _k1),
+              ExtendedInput(value: widget.user.name, title: 'Имя', key: _k1, disabled: true),
               Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-              ExtendedInput(value: widget.user.birthdate, title: 'Дата рождения', key: _k2),
+              ExtendedInput(value: widget.user.birthdate, title: 'Дата рождения', key: _k2, disabled: true),
               Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-              ExtendedInput(value: widget.user.sex, title: 'Пол', key: _k3),
+              ExtendedInput(value: widget.user.sex, title: 'Пол', key: _k3, disabled: true),
             ],
           ),
         ),

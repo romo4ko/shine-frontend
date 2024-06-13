@@ -7,12 +7,14 @@ class ExtendedInput extends StatefulWidget {
   final String? value;
   final String title;
   final String placeholder;
+  final bool disabled;
 
   const ExtendedInput({
     super.key,
     this.value,
     required this.title,
-    this.placeholder = ''
+    this.placeholder = '',
+    this.disabled = false
   });
 
   @override
@@ -38,12 +40,14 @@ class _ExtendedInputState extends State<ExtendedInput> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          is_active = !is_active;
-          if (is_active) {
-            _focusNode.requestFocus();
-          }
-          else {
-            _focusNode.unfocus();
+          if (! widget.disabled) {
+            is_active = !is_active;
+            if (is_active) {
+              _focusNode.requestFocus();
+            }
+            else {
+              _focusNode.unfocus();
+            }
           }
         });
       },

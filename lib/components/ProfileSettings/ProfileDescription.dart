@@ -1,10 +1,14 @@
 
 import 'package:flutter/material.dart';
+import 'package:shine/data/api/api_service.dart';
 
 class ProfileDescription extends StatefulWidget {
 
+  final String? text;
+
   const ProfileDescription({
     super.key,
+    this.text
   });
 
   @override
@@ -12,6 +16,39 @@ class ProfileDescription extends StatefulWidget {
 }
 
 class _ProfileDescriptionState extends State<ProfileDescription> {
+
+  TextEditingController _text = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+  var api = ApiService();
+
+  save() {
+    api.updateUserProperties({
+      'text': _text.text,
+    }).then((data) => {
+      print(data['status'])
+    });
+  }
+
+  @override
+  void initState() {
+    if (widget.text != null) {
+      _text.text = widget.text!;
+    }
+    super.initState();
+    _focusNode.addListener(() {
+      if (!_focusNode.hasFocus) {
+        print(1);
+        save();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,6 +68,8 @@ class _ProfileDescriptionState extends State<ProfileDescription> {
             ),
         ),
         TextFormField(
+          focusNode: _focusNode,
+          controller: _text,
           textAlign: TextAlign.start,
           textAlignVertical: TextAlignVertical.top,
           maxLines: 5,

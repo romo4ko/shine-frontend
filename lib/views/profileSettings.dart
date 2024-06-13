@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shine/components/Common/CustomProgressIndicator.dart';
 import 'package:shine/components/Common/Dropdowns/ExtendedDropdown.dart';
 import 'package:shine/components/Common/Inputs/TextInput.dart';
 import 'package:shine/components/ProfileSettings/HideProfile.dart';
@@ -27,7 +28,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   var api = ApiService();
   var loading = true;
 
-  fetchChats() {
+  fetchUser() {
     setState(() {
       loading = true;
     });
@@ -43,7 +44,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   @override
   void initState() {
     super.initState();
-    fetchChats();
+    fetchUser();
   }
 
   @override
@@ -65,14 +66,14 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               fit: BoxFit.cover,
             ),
           ),
-          child: Column(
+          child: loading ? CustomProgressIndicator() : Column(
             children: [
               ProfileSettingsFilled(percent: user.profile_filled ?? 0),
               ImagesGrid(images: user.images),
               const SizedBox(height: 20),
               ProfileInfo(user: user),
               const SizedBox(height: 20),
-              const ProfileDescription(),
+              ProfileDescription(text: user.text),
               const SizedBox(height: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

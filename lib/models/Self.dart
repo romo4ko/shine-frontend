@@ -35,7 +35,7 @@ class Self {
         name = json['name'],
         age = json['age'],
         birthdate = json['birthdate'],
-        sex = json['sex'],
+        sex = json['gender'],
         text = json['text'],
         city = json['city'],
         purpose = json['purpose'],
