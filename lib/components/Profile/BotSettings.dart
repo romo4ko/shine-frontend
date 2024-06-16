@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shine/data/api/api_service.dart';
 
 class BotSettings extends StatefulWidget {
 
@@ -18,6 +19,11 @@ class BotSettings extends StatefulWidget {
 class _BotSettingsState extends State<BotSettings> {
 
   var selected;
+  var api = ApiService();
+
+  save() {
+    api.updateUserSettings({'bot_settings': selected});
+  }
 
   @override
   void initState() {
@@ -66,7 +72,8 @@ class _BotSettingsState extends State<BotSettings> {
                         height: 30,
                         child: ElevatedButton(
                           onPressed: () => {
-                            setState(() => selected = 'funny')
+                            setState(() => selected = 'funny'),
+                            save()
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -115,7 +122,8 @@ class _BotSettingsState extends State<BotSettings> {
                         height: 30,
                         child: ElevatedButton(
                           onPressed: () => {
-                            setState(() => selected = 'needful')
+                            setState(() => selected = 'needful'),
+                            save()
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -165,7 +173,8 @@ class _BotSettingsState extends State<BotSettings> {
                         height: 30,
                         child: ElevatedButton(
                           onPressed: () => {
-                            setState(() => selected = 'mixed')
+                            setState(() => selected = 'mixed'),
+                            save()
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
