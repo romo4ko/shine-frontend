@@ -334,7 +334,6 @@ class _ImagesFormState extends State<ImagesForm> {
             const SizedBox(width: 20),
             GestureDetector(
               onTap: () async {
-                print(2);
                 pickImages();
               },
               child: Stack(
@@ -415,7 +414,6 @@ class _ImagesFormState extends State<ImagesForm> {
   }
 
   Future<String> uploadImage(XFile image, int sorting) async {
-    var api = ApiService();
     var uploadedImage = await api.storeImage({
       'sorting': sorting,
       'image': await MultipartFile.fromFile(image.path, filename: image.name),
