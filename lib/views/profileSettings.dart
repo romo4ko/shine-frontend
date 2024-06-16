@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:shine/components/Common/CustomProgressIndicator.dart';
 import 'package:shine/components/Common/Dropdowns/ExtendedDropdown.dart';
 import 'package:shine/components/Common/Inputs/TextInput.dart';
+import 'package:shine/components/Dialogs/DefaultDialog.dart';
 import 'package:shine/components/ProfileSettings/HideProfile.dart';
 import 'package:shine/components/ProfileSettings/ImagesGrid.dart';
 import 'package:shine/components/ProfileSettings/ProfileDescription.dart';
@@ -25,6 +26,16 @@ class _ProfileSettingsState extends State<ProfileSettings> {
 
   var user;
 
+  final TextEditingController _purpose = TextEditingController();
+  final TextEditingController _fs = TextEditingController();
+  final TextEditingController _city = TextEditingController();
+  final TextEditingController _text = TextEditingController();
+  final TextEditingController _children = TextEditingController();
+  final TextEditingController _alcohol = TextEditingController();
+  final TextEditingController _smoking = TextEditingController();
+  final TextEditingController _education = TextEditingController();
+  final TextEditingController _height = TextEditingController();
+
   var api = ApiService();
   var loading = true;
 
@@ -38,6 +49,20 @@ class _ProfileSettingsState extends State<ProfileSettings> {
       setState(() {
         loading = false;
       });
+    });
+  }
+
+  save(dynamic data) {
+    api.updateUserProperties(data).then((data) => {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Center(child: Text("Сохранено")),
+        duration: Duration(milliseconds: 500),
+      ))
+    }).catchError((error) => {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Center(child: Text("Ошибка")),
+        duration: Duration(milliseconds: 500),
+      ))
     });
   }
 
@@ -73,7 +98,11 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               const SizedBox(height: 20),
               ProfileInfo(user: user),
               const SizedBox(height: 20),
-              ProfileDescription(text: user.text),
+              ProfileDescription(
+                  text: user.text,
+                  controller: _text,
+                  callback: () => { save({'text': _text.text}) }
+              ),
               const SizedBox(height: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,10 +125,18 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                           color: const Color.fromRGBO(20, 20, 20, 0.8),
                           borderRadius: BorderRadius.circular(10)
                       ),
-                      child: const ExtendedDropdown(
-                          values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
+                      child: ExtendedDropdown(
+                          items: const {
+                            'dates': 'Свидания',
+                            'flirting': 'Флирт',
+                            'relationship': 'Отношения',
+                            'friendship': 'Дружба',
+                            'virtual': 'Виртуальное общение',
+                          },
                           title: 'Цель знакомства',
-                          selected: 'Свидания',
+                          selected: user.purpose,
+                          controller: _purpose,
+                          callback: () => { save({'purpose': _purpose.text}) }
                       )
                   )
                 ],
@@ -128,63 +165,85 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       ),
                       child: Column(
                         children: [
-                          const ExtendedDropdown(
-                            values: ['Ростов-на-Дону', 'Москва', 'Краснодар', 'Санкт-Петербург'],
-                            title: 'Город',
-                            selected: 'Ростов-на-Дону',
+                          // const ExtendedDropdown(
+                          //   values: ['Ростов-на-Дону', 'Москва', 'Краснодар', 'Санкт-Петербург'],
+                          //   title: 'Город',
+                          //   selected: 'Ростов-на-Дону',
+                          // ),
+                          // Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                          ExtendedDropdown(
+                              items: const {
+                                'married': 'Женат/замужем',
+                                'single': 'Свободен/свободна',
+                                'open-rel': 'В свободных отношениях'
+                              },
+                              title: 'Семейное положение',
+                              selected: user.fs,
+                              controller: _fs,
+                              callback: () => { save({'fs': _fs.text}) },
                           ),
                           Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          const ExtendedDropdown(
-                            values: ['Женат/замужем', 'Свободен/свободна', 'В свободных отношениях'],
-                            title: 'Семейное положение',
-                            selected: null,
-                          ),
-                          Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          const ExtendedDropdown(
-                            values: ['Есть', 'Нет, и не планирую', 'Нет, но хотелось бы'],
+                          ExtendedDropdown(
+                            items: const {
+                              'yes': 'Да',
+                              'no': 'Нет и не планирую',
+                              'would': 'Нет, но хотелось бы'
+                            },
                             title: 'Дети',
-                            selected: null,
+                            selected: user.children,
+                            controller: _children,
+                            callback: () => { save({'children': _children.text}) },
                           ),
                           Divider(height: 1, color: Colors.white.withOpacity(0.6)),
                           TextInput(
                             title: 'Рост',
-                            value: '',
+                            controller: _height,
+                            value: user.height.toString(),
+                            callback: () => { save({'height': _height.text}) },
                           ),
                           Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          const ExtendedDropdown(
-                            values: ['Нет', 'Среднее', 'Высшее', 'Неоконченное', 'Кандидат наук'],
+                          ExtendedDropdown(
+                            items: const {
+                              'without': 'Нет',
+                              'secondary': 'Среднее',
+                              'higher': 'Высшее',
+                              'phd': 'Кандидат наук'
+                            },
                             title: 'Образование',
-                            selected: null,
+                            selected: user.education,
+                            controller: _education,
+                            callback: () => { save({'education': _education.text}) },
                           ),
                           Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          const ExtendedDropdown(
-                            values: ['Свидания', 'Флирт', 'Отношения', 'Дружба', 'Виртуальное общение'],
-                            title: 'Хобби/Интересы',
-                            selected: null,
-                          ),
-                          Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          const ExtendedDropdown(
-                            values: ['Русский', 'Английский'],
-                            title: 'Языки',
-                            selected: null,
-                          ),
-                          Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          const ExtendedDropdown(
-                            values: ['Резко негативно', 'Нейтрально', 'Положительно'],
-                            title: 'Отношение к алкоголю',
-                            selected: null,
-                          ),
-                          Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                          const ExtendedDropdown(
-                            values: ['Резко негативно', 'Нейтрально', 'Положительно'],
+                          // TODO: Tags
+                          ExtendedDropdown(
+                            items: const {
+                              'smoking_negative': 'Резко негативно',
+                              'smoking_neutral': 'Нейтрально',
+                              'smoking_positive': 'Положительно',
+                            },
                             title: 'Отношение к курению',
-                            selected: null,
+                            selected: user.smoking,
+                            controller: _smoking,
+                            callback: () => { save({'smoking': _smoking.text}) },
+                          ),
+                          Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                          ExtendedDropdown(
+                            items: const {
+                              'alcohol_negative': 'Резко негативно',
+                              'alcohol_neutral': 'Нейтрально',
+                              'alcohol_positive': 'Положительно'
+                            },
+                            title: 'Отношение к алкоголю',
+                            selected: user.alcohol,
+                            controller: _alcohol,
+                            callback: () => { save({'alcohol': _alcohol.text}) },
                           ),
                         ],
                       )
                   ),
                   SizedBox(height: 50,),
-                  HideProfile(isHidden: user.is_premium)
+                  HideProfile(isHidden: !user.active)
                 ],
               ),
             ],

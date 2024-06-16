@@ -6,11 +6,15 @@ class TextInput extends StatefulWidget {
 
   final String? value;
   final String title;
+  final TextEditingController? controller;
+  final Function callback;
 
   const TextInput({
     super.key,
-    this.value = null,
+    this.value,
     required this.title,
+    this.controller,
+    required this.callback
   });
 
   @override
@@ -20,17 +24,23 @@ class TextInput extends StatefulWidget {
 class _TextInputState extends State<TextInput> {
 
   bool is_active = false;
-  String? _selectedValue;
 
   Key _key = new GlobalKey();
   final FocusNode _focusNode = FocusNode();
-  TextEditingController controller = TextEditingController();
 
   @override
   void initState() {
-    _selectedValue = widget.value;
-    is_active = _selectedValue == null ? false : true;
+    is_active = false;
+    if (widget.value != null) {
+      widget.controller!.text = widget.value!;
+      is_active = true;
+    }
     super.initState();
+    _focusNode.addListener(() {
+      if (!_focusNode.hasFocus) {
+        widget.callback();
+      }
+    });
   }
 
   @override
@@ -38,7 +48,6 @@ class _TextInputState extends State<TextInput> {
     return GestureDetector(
       onTap: () {
         _focusNode.requestFocus();
-        print(1);
       },
       child: Container(
         height: 60,
@@ -51,8 +60,9 @@ class _TextInputState extends State<TextInput> {
               width: 300,
               padding: EdgeInsets.symmetric(vertical: 5),
               child: TextFormField(
+                keyboardType: TextInputType.number,
                 key: _key,
-                controller: controller,
+                controller: widget.controller,
                 focusNode: _focusNode,
                 textCapitalization: TextCapitalization.words,
                 style: const TextStyle(

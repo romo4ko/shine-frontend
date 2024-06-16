@@ -5,10 +5,14 @@ import 'package:shine/data/api/api_service.dart';
 class ProfileDescription extends StatefulWidget {
 
   final String? text;
+  final TextEditingController? controller;
+  final Function callback;
 
   const ProfileDescription({
     super.key,
-    this.text
+    this.text,
+    this.controller,
+    required this.callback
   });
 
   @override
@@ -17,28 +21,19 @@ class ProfileDescription extends StatefulWidget {
 
 class _ProfileDescriptionState extends State<ProfileDescription> {
 
-  TextEditingController _text = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
+  late FocusNode _focusNode;
   var api = ApiService();
-
-  save() {
-    api.updateUserProperties({
-      'text': _text.text,
-    }).then((data) => {
-      print(data['status'])
-    });
-  }
 
   @override
   void initState() {
+    _focusNode = FocusNode();
     if (widget.text != null) {
-      _text.text = widget.text!;
+      widget.controller!.text = widget.text!;
     }
     super.initState();
     _focusNode.addListener(() {
       if (!_focusNode.hasFocus) {
-        print(1);
-        save();
+        widget.callback();
       }
     });
   }
@@ -69,7 +64,7 @@ class _ProfileDescriptionState extends State<ProfileDescription> {
         ),
         TextFormField(
           focusNode: _focusNode,
-          controller: _text,
+          controller: widget.controller,
           textAlign: TextAlign.start,
           textAlignVertical: TextAlignVertical.top,
           maxLines: 5,

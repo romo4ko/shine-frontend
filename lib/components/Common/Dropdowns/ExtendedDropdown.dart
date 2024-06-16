@@ -5,17 +5,19 @@ import 'package:flutter_svg/svg.dart';
 
 class ExtendedDropdown extends StatefulWidget {
 
-  final List<String> values;
-  final String? selected;
+  final Map<String, String> items;
   final String title;
-  final String placeholder;
+  final String? selected;
+  final TextEditingController? controller;
+  final Function callback;
 
   const ExtendedDropdown({
     super.key,
-    required this.values,
-    this.selected = null,
+    required this.items,
     required this.title,
-    this.placeholder = ''
+    this.controller,
+    this.selected,
+    required this.callback
   });
 
   @override
@@ -28,14 +30,20 @@ class _ExtendedDropdownState extends State<ExtendedDropdown> {
   String? _selectedValue;
 
   Key _key = new GlobalKey();
-  final FocusNode _focusNode = FocusNode();
-  TextEditingController controller = TextEditingController();
+  late  FocusNode _focusNode;
 
   @override
   void initState() {
+    _focusNode = FocusNode();
     _selectedValue = widget.selected;
     is_active = _selectedValue == null ? false : true;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -92,14 +100,23 @@ class _ExtendedDropdownState extends State<ExtendedDropdown> {
                   onChanged: (String? value) {
                     setState(() {
                       _selectedValue = value!;
+                      if (widget.controller != null) {
+                        widget.controller?.text = widget.items.keys.firstWhere(
+                                (i) => widget.items[i] == _selectedValue
+                        );
+                        widget.callback();
+                      }
                     });
                   },
-                  items: widget.values.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value, textAlign: TextAlign.start),
-                    );
-                  }).toList(),
+                items: widget.items.map((code, value) {
+                  return MapEntry(
+                      {code: value},
+                      DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value, textAlign: TextAlign.start),
+                      )
+                  );
+                }).values.toList(),
                 ),
               ),
             Container(

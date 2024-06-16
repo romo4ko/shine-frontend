@@ -86,7 +86,16 @@ class ApiService {
       data: data,
       options: Options(headers: _setHeaders()),
     );
-    print(token);
+    return response.data;
+  }
+
+  Future updateUserSettings(Map<String, dynamic> data) async {
+    await _getToken();
+    final response = await _dio.post(
+      '/users/updateSettings',
+      data: data,
+      options: Options(headers: _setHeaders()),
+    );
     return response.data;
   }
 

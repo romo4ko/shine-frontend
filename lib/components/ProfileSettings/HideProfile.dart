@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shine/components/ProfileSettings/ExtendedInput.dart';
+import 'package:shine/data/api/api_service.dart';
 import '../../models/Self.dart';
 
 class HideProfile extends StatefulWidget {
@@ -21,11 +22,26 @@ class HideProfile extends StatefulWidget {
 class _HideProfileState extends State<HideProfile> {
 
   var isEnable;
+  var api = ApiService();
 
   @override
   void initState() {
     isEnable = widget.isHidden ?? false;
     super.initState();
+  }
+
+  save() {
+    api.updateUserSettings({'active': !isEnable}).then((data) => {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Center(child: Text("Сохранено")),
+        duration: Duration(milliseconds: 500),
+      ))
+    }).catchError((error) => {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Center(child: Text("Ошибка")),
+        duration: Duration(milliseconds: 500),
+      ))
+    });
   }
 
   @override
@@ -75,6 +91,7 @@ class _HideProfileState extends State<HideProfile> {
                       onChanged: (bool value) {
                       setState(() {
                         isEnable = !isEnable;
+                        save();
                       });
                     }
                   ),
