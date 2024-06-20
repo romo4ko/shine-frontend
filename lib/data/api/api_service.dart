@@ -131,6 +131,15 @@ class ApiService {
     return response.data;
   }
 
+  Future deleteUser() async {
+    await _getToken();
+    final response = await _dio.post(
+      '/users/delete',
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
   // ##### CHAT #####
 
   Future chats() async {

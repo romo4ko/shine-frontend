@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shine/components/Dialogs/DefaultDialog.dart';
 import '../components/Common/AppBar/DefaultAppBar.dart';
 import '../models/Self.dart';
 import 'package:shine/data/api/api_service.dart';
@@ -36,6 +37,15 @@ class _SettingsState extends State<Settings> {
     localStorage.remove('user');
     localStorage.remove('token');
     api.logout();
+    Navigator.pushNamed(context, 'welcome');
+  }
+
+  delete() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    localStorage.remove('user');
+    localStorage.remove('token');
+    api.deleteUser();
+    Navigator.pushNamed(context, 'welcome');
   }
 
   @override
@@ -88,7 +98,6 @@ class _SettingsState extends State<Settings> {
                   child: ElevatedButton(
                     onPressed: () => {
                       logout(),
-                      Navigator.pushNamed(context, 'welcome')
                     },
                     style: ElevatedButton.styleFrom(
                       shape: const RoundedRectangleBorder(
@@ -116,7 +125,10 @@ class _SettingsState extends State<Settings> {
                   height: 40,
                   child: ElevatedButton(
                     onPressed: () => {
-                      Navigator.pushNamed(context, 'welcome')
+                      DefaultDialog.showConfirmDialog(
+                          context,
+                          title: 'Вы уверены, что хотите удалить свой аккаунт? Отменить это действие будет невозможно',
+                          action: () => {delete()})
                     },
                     style: ElevatedButton.styleFrom(
                       shape: const RoundedRectangleBorder(

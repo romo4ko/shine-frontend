@@ -7,32 +7,69 @@ class DefaultDialog {
 
   factory DefaultDialog() => _instance;
 
-  static void showCustomDialog(BuildContext context,
-      {required String title,
-        String okBtnText = "Ok",
-        String cancelBtnText = "Cancel"}
-      ) {
-      showDialog(
+  static void showCustomDialog(BuildContext context, {required String title}) {
+    showDialog(
         context: context,
         builder: (_) {
           return Dialog(
             child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                color: Colors.black,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(
+                    Radius.circular(10)
+                ),
+                color: Colors.black87,
               ),
-              padding: EdgeInsets.all(20),
-              width: MediaQuery.of(context).size.width-100,
+              padding: const EdgeInsets.all(20),
+              width: MediaQuery.of(context).size.width - 100,
               child: Text(
                 title,
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white
-                ),
+                style: const TextStyle(fontSize: 20, color: Colors.white),
                 textAlign: TextAlign.center,
               ),
             ),
           );
         });
-      }
   }
+
+  static void showConfirmDialog(BuildContext context,
+      {
+        required String title,
+        required Function action,
+      }) {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            backgroundColor: Colors.black,
+            content: Container(
+              width: MediaQuery.of(context).size.width - 100,
+              child: Text(
+                title,
+                style: const TextStyle(fontSize: 20, color: Colors.white),
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text(
+                    'Отменить',
+                    style: TextStyle(fontSize: 15, color: Colors.white)
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text(
+                    'Удалить',
+                    style: TextStyle(fontSize: 15, color: Colors.white),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  action();
+                },
+              ),
+            ],
+          );
+        });
+  }
+}
