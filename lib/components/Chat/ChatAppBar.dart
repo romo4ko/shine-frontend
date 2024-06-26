@@ -38,7 +38,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.pushNamed(context, 'chats');
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

@@ -121,6 +121,17 @@ class ApiService {
     return response.data;
   }
 
+  Future deleteUser() async {
+    await _getToken();
+    final response = await _dio.post(
+      '/users/delete',
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
+  // ##### LIKES #####
+
   Future like(Map<String, int> data) async {
     await _getToken();
     final response = await _dio.post(
@@ -131,10 +142,30 @@ class ApiService {
     return response.data;
   }
 
-  Future deleteUser() async {
+  Future revokeLike(Map<String, int> data) async {
     await _getToken();
     final response = await _dio.post(
-      '/users/delete',
+      '/likes/revoke',
+      data: data,
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
+  Future confirmLike(Map<String, int> data) async {
+    await _getToken();
+    final response = await _dio.post(
+      '/likes/confirm',
+      data: data,
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
+  Future likes() async {
+    await _getToken();
+    final response = await _dio.get(
+      '/likes/list',
       options: Options(headers: _setHeaders()),
     );
     return response.data;

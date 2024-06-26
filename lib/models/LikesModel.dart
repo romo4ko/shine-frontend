@@ -1,17 +1,17 @@
 
 class LikesModel {
   final bool is_premium;
-  List<Like> likes;
+  List<Like> data;
 
   LikesModel(
       this.is_premium,
-      this.likes,
+      this.data,
       );
 
   LikesModel.fromJson(Map<String, dynamic> json)
       : is_premium = json['is_premium'],
-        likes = List<Like>.from(
-            json['likes'].map((like) => Like.fromJson(like)));
+        data = List<Like>.from(
+            json['data'].map((like) => Like.fromJson(like)));
 }
 
 class Like {

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shine/views/bot.dart';
 import 'package:shine/views/chats.dart';
+import 'package:shine/views/faq.dart';
 import 'package:shine/views/filters.dart';
 import 'package:shine/views/information.dart';
 import 'package:shine/views/likes.dart';
@@ -50,6 +51,7 @@ class App extends StatelessWidget {
         'settings': (context) => const Settings(),
         'profile-settings': (context) => const ProfileSettings(),
         'premium': (context) => const Premium(),
+        'faq': (context) => const Faq(),
       },
       home: CheckAuth(),
       theme: ThemeData(

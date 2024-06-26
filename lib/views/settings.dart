@@ -19,19 +19,6 @@ class _SettingsState extends State<Settings> {
 
   var api = ApiService();
 
-  Self user = Self.fromJson({
-    'id': 1,
-    'name': 'Александр',
-    'age': 25,
-    'city': 'Ростов-на-Дону',
-    'purpose': 'Свидания',
-    'image': "https://avatars.dzeninfra.ru/get-zen_doc/29030/pub_5ae9c5fe3dceb76be76eebac_5ae9cad457906a18134a10ad/scale_1200",
-    'is_premium': false,
-    'bot_setting': 1,
-    'profile_filled': 73,
-    'invites': 1
-  });
-
   logout() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     localStorage.remove('user');
@@ -73,11 +60,11 @@ class _SettingsState extends State<Settings> {
               ),
               child: Column(
                 children: [
-                  SettingsButton(title: 'Уведомления', route: '/'),
-                  Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                  SettingsButton(title: 'Черный список', route: '/'),
-                  Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                  SettingsButton(title: 'FAQ', route: '/'),
+                  // SettingsButton(title: 'Уведомления', route: '/'),
+                  // Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                  // SettingsButton(title: 'Черный список', route: '/'),
+                  // Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                  SettingsButton(title: 'FAQ', route: 'faq'),
                   Divider(height: 1, color: Colors.white.withOpacity(0.6)),
                   SettingsButton(title: 'Сообщить о проблеме', route: '/'),
                   Divider(height: 1, color: Colors.white.withOpacity(0.6)),
