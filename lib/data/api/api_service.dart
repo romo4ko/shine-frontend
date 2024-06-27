@@ -201,5 +201,18 @@ class ApiService {
     );
     return response.data;
   }
+
+  // ##### CITIES #####
+
+  Future cities(Map<String, String> input) async {
+    await _getToken();
+    final response = await _dio.get(
+      '/cities',
+      data: input,
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
 }
 

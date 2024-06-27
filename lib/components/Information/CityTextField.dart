@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shine/data/api/api_service.dart';
 
 class CityTextField extends StatefulWidget {
 
@@ -37,6 +38,7 @@ class _CityTextFieldState extends State<CityTextField> {
             ),
           ),
         ),
+        // const _AsyncAutocomplete(),
         TextFormField(
           controller: widget.controller,
           style: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
@@ -60,6 +62,45 @@ class _CityTextFieldState extends State<CityTextField> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _AsyncAutocomplete extends StatefulWidget {
+  const _AsyncAutocomplete();
+
+  @override
+  State<_AsyncAutocomplete> createState() => _AsyncAutocompleteState();
+}
+
+class _AsyncAutocompleteState extends State<_AsyncAutocomplete> {
+  String? _searchingWithQuery;
+  var api = ApiService();
+
+  late Iterable<String> _lastOptions = <String>[];
+
+  @override
+  Widget build(BuildContext context) {
+    return Autocomplete<String>(
+      optionsBuilder: (TextEditingValue textEditingValue) async {
+        _searchingWithQuery = textEditingValue.text;
+
+        var data = await api.cities({'text': _searchingWithQuery!});
+        print(data);
+        var inverted = data.map((map) => map['name']).toList();
+        print(inverted);
+        final Iterable<String> options = inverted.cast<String>();
+
+        if (_searchingWithQuery != textEditingValue.text) {
+          return _lastOptions;
+        }
+
+        _lastOptions = options;
+        return options;
+      },
+      onSelected: (String selection) {
+        debugPrint(selection);
+      },
     );
   }
 }

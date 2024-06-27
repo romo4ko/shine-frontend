@@ -71,6 +71,7 @@ class _CheckAuthState extends State<CheckAuth> {
 
   var api = ApiService();
   bool isAuth = false;
+  String? filled;
 
   @override
   void initState() {
@@ -86,6 +87,7 @@ class _CheckAuthState extends State<CheckAuth> {
         if (data['user'] != null) {
           setState(() {
             isAuth = true;
+            filled = data['filled'];
           })
         }
       });
@@ -96,7 +98,15 @@ class _CheckAuthState extends State<CheckAuth> {
   Widget build(BuildContext context) {
     Widget child;
     if (isAuth) {
-      child = Profile();
+      if (filled == 'info') {
+        child = Information();
+      }
+      else if (filled == 'purpose') {
+        child = Purpose();
+      }
+      else {
+        child = Profile();
+      }
     } else {
       child = Welcome();
     }
