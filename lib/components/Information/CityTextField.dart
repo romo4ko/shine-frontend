@@ -21,6 +21,12 @@ class CityTextField extends StatefulWidget {
 }
 
 class _CityTextFieldState extends State<CityTextField> {
+
+  String? _searchingWithQuery;
+  var api = ApiService();
+
+  late Iterable<String> _lastOptions = <String>[];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -38,69 +44,80 @@ class _CityTextFieldState extends State<CityTextField> {
             ),
           ),
         ),
-        // const _AsyncAutocomplete(),
-        TextFormField(
-          controller: widget.controller,
-          style: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Inter'),
-          cursorColor: Colors.white.withOpacity(0.6),
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.only(left: 10.0),
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            labelStyle: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 18, fontFamily: 'Inter'),
-            fillColor: const Color.fromRGBO(20, 20, 20, 0.8),
-            filled: true,
-            focusColor: Colors.white,
-            labelText: widget.placeholder,
-            floatingLabelBehavior: FloatingLabelBehavior.never,
-          ),
+        Autocomplete<String>(
+          optionsBuilder: (TextEditingValue textEditingValue) async {
+            _searchingWithQuery = textEditingValue.text;
+
+            var data = await api.cities({'text': _searchingWithQuery!});
+            print(data);
+            var inverted = data.map((map) => map['name']).toList();
+            print(inverted);
+            final Iterable<String> options = inverted.cast<String>();
+
+            if (_searchingWithQuery != textEditingValue.text) {
+              return _lastOptions;
+            }
+
+            _lastOptions = options;
+            return options;
+          },
+          optionsViewBuilder: (BuildContext context, AutocompleteOnSelected<String> onSelected, Iterable<String> options) {
+            return Container(
+              padding: EdgeInsets.only(right: 40, bottom: MediaQuery.of(context).size.height-300),
+              child: Material(
+                borderRadius: BorderRadius.circular(10.0),
+                color: Colors.black.withOpacity(0.8),
+                elevation: 4.0,
+                child: ListView(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  children: options.map((String option) {
+                    return ListTile(
+                      title: Text(option, style: TextStyle(color: Colors.white)),
+                      onTap: () {
+                        onSelected(option);
+                      },
+                    );
+                  }).toList(),
+                ),
+              ),
+            );
+          },
+          fieldViewBuilder: (BuildContext context,
+            TextEditingController fieldTextEditingController,
+            FocusNode fieldFocusNode,
+            VoidCallback onFieldSubmitted) {
+            return TextFormField(
+              style: const TextStyle(color: Colors.white),
+              cursorColor: Colors.white,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                labelStyle: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 18, fontFamily: 'Inter'),
+                fillColor: const Color.fromRGBO(20, 20, 20, 0.8),
+                filled: true,
+                focusColor: Colors.white,
+                labelText: "Укажите город для поиска",
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+              ),
+              controller: fieldTextEditingController,
+              focusNode: fieldFocusNode,
+            );
+          },
+          onSelected: (String selection) {
+            debugPrint(selection);
+            widget.controller!.text = selection;
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
         ),
       ],
-    );
-  }
-}
-
-class _AsyncAutocomplete extends StatefulWidget {
-  const _AsyncAutocomplete();
-
-  @override
-  State<_AsyncAutocomplete> createState() => _AsyncAutocompleteState();
-}
-
-class _AsyncAutocompleteState extends State<_AsyncAutocomplete> {
-  String? _searchingWithQuery;
-  var api = ApiService();
-
-  late Iterable<String> _lastOptions = <String>[];
-
-  @override
-  Widget build(BuildContext context) {
-    return Autocomplete<String>(
-      optionsBuilder: (TextEditingValue textEditingValue) async {
-        _searchingWithQuery = textEditingValue.text;
-
-        var data = await api.cities({'text': _searchingWithQuery!});
-        print(data);
-        var inverted = data.map((map) => map['name']).toList();
-        print(inverted);
-        final Iterable<String> options = inverted.cast<String>();
-
-        if (_searchingWithQuery != textEditingValue.text) {
-          return _lastOptions;
-        }
-
-        _lastOptions = options;
-        return options;
-      },
-      onSelected: (String selection) {
-        debugPrint(selection);
-      },
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:shine/components/Common/CustomProgressIndicator.dart';
 import 'package:shine/components/Common/Dropdowns/ExtendedDropdown.dart';
 import 'package:shine/components/Common/Inputs/TextInput.dart';
 import 'package:shine/components/Dialogs/DefaultDialog.dart';
+import 'package:shine/components/Information/CityTextField.dart';
 import 'package:shine/components/ProfileSettings/HideProfile.dart';
 import 'package:shine/components/ProfileSettings/ImagesGrid.dart';
 import 'package:shine/components/ProfileSettings/ProfileDescription.dart';
@@ -12,6 +13,7 @@ import 'package:shine/components/ProfileSettings/ProfileInfo.dart';
 import 'package:shine/components/Common/Inputs/TextInput.dart';
 import 'package:shine/data/api/api_service.dart';
 import '../components/Common/AppBar/DefaultAppBar.dart';
+import '../components/ProfileSettings/CityAutocomplete.dart';
 import '../models/Self.dart';
 import '../components/ProfileSettings/ProfileSettingsFilled.dart';
 
@@ -165,12 +167,13 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       ),
                       child: Column(
                         children: [
-                          // const ExtendedDropdown(
-                          //   values: ['Ростов-на-Дону', 'Москва', 'Краснодар', 'Санкт-Петербург'],
-                          //   title: 'Город',
-                          //   selected: 'Ростов-на-Дону',
-                          // ),
-                          // Divider(height: 1, color: Colors.white.withOpacity(0.6)),
+                          CityAutocomplete(
+                            title: 'Город',
+                            controller: _city,
+                            value: user.city.toString(),
+                            callback: () => { save({'city': _city.text}) },
+                          ),
+                          Divider(height: 1, color: Colors.white.withOpacity(0.6)),
                           ExtendedDropdown(
                               items: const {
                                 'married': 'Женат/замужем',
@@ -198,7 +201,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                           TextInput(
                             title: 'Рост',
                             controller: _height,
-                            value: user.height.toString(),
+                            value: user.height != null ? user.height.toString() : '',
                             callback: () => { save({'height': _height.text}) },
                           ),
                           Divider(height: 1, color: Colors.white.withOpacity(0.6)),
