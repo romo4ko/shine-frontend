@@ -19,30 +19,24 @@ class _BotState extends State<Bot> {
   var api = ApiService();
   String? prediction;
 
-  var predictions = [
-
-  "Не дай свайпам управлять тобой, управляй ими сам!",
-
-  "Свайпай с умом, чтобы не пожалеть потом!",
-
-  "Каждый свайп - это новая возможность найти то, что ищешь!",
-
-  "Свайпай, чтобы расширить свой кругозор и узнать что-то новое!",
-
-  "Свайпай с уверенностью и верой в свои возможности!",
-
-  ];
-
   getPrediction() {
     setState(() {
       loading = true;
     });
     api.prediction().then((data) => {
-      setState(() {
-        prediction = data['text'];
-        loading = false;
-        isShow = !isShow;
-      })
+      if (data['error'] == null) {
+        setState(() {
+          prediction = data['text'];
+          loading = false;
+          isShow = !isShow;
+        })
+      } else {
+        setState(() {
+          prediction = 'Оформи премиум, чтобы получать больше предсказаний в день!';
+          loading = false;
+          isShow = !isShow;
+        })
+      }
     });
   }
 
