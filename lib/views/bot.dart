@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shine/components/Common/AppBar/DefaultAppBar.dart';
+import 'package:shine/data/api/api_service.dart';
 
 class Bot extends StatefulWidget {
   const Bot({super.key});
@@ -14,6 +15,9 @@ class Bot extends StatefulWidget {
 class _BotState extends State<Bot> {
 
   var isShow = false;
+  bool loading = false;
+  var api = ApiService();
+  String? prediction;
 
   var predictions = [
 
@@ -30,9 +34,16 @@ class _BotState extends State<Bot> {
   ];
 
   getPrediction() {
-    return predictions[
-      Random().nextInt(predictions.length)
-    ];
+    setState(() {
+      loading = true;
+    });
+    api.prediction().then((data) => {
+      setState(() {
+        prediction = data['text'];
+        loading = false;
+        isShow = !isShow;
+      })
+    });
   }
 
   @override
@@ -43,8 +54,7 @@ class _BotState extends State<Bot> {
       appBar: const DefaultAppBar(title: "С И Я Н И Е", titleSize: 32),
       body: GestureDetector(
         onTap: (() => {
-          setState(() => isShow = !isShow
-          )
+          getPrediction(),
         }),
         child: Container(
           constraints: BoxConstraints(
@@ -62,7 +72,7 @@ class _BotState extends State<Bot> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 60),
               child: Text(
-                !isShow ? "тык на экран\nи узнай свою\nсудьбу на\nдень" : getPrediction(),
+                !isShow || loading ? "тык на экран\nи узнай свою\nсудьбу на\nдень" : prediction!,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   height: 1,

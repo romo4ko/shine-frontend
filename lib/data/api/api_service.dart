@@ -214,5 +214,16 @@ class ApiService {
     return response.data;
   }
 
+  // ##### PREDICTIONS #####
+
+  Future prediction() async {
+    await _getToken();
+    final response = await _dio.get(
+      '/prediction/get',
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
 }
 
