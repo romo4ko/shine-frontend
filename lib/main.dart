@@ -12,6 +12,7 @@ import 'package:shine/views/profile.dart';
 import 'package:shine/views/profileSettings.dart';
 import 'package:shine/views/purpose.dart';
 import 'package:shine/views/settings.dart';
+import 'package:shine/views/support.dart';
 import 'package:shine/views/tape.dart';
 import 'data/api/api_service.dart';
 import 'views/chat.dart';
@@ -52,6 +53,7 @@ class App extends StatelessWidget {
         'profile-settings': (context) => const ProfileSettings(),
         'premium': (context) => const Premium(),
         'faq': (context) => const Faq(),
+        'support': (context) => const Support(),
       },
       home: CheckAuth(),
       theme: ThemeData(

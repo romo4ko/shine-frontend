@@ -66,7 +66,7 @@ class _SettingsState extends State<Settings> {
                   // Divider(height: 1, color: Colors.white.withOpacity(0.6)),
                   SettingsButton(title: 'FAQ', route: 'faq'),
                   Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                  SettingsButton(title: 'Сообщить о проблеме', route: '/'),
+                  SettingsButton(title: 'Сообщить о проблеме', route: 'support'),
                   Divider(height: 1, color: Colors.white.withOpacity(0.6)),
                   SettingsButton(title: 'Помощь разработчикам', route: '/'),
                   Divider(height: 1, color: Colors.white.withOpacity(0.6)),

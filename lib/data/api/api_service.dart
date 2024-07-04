@@ -225,5 +225,15 @@ class ApiService {
     return response.data;
   }
 
+  Future support(Map<String, dynamic> data) async {
+    await _getToken();
+    final response = await _dio.post(
+      '/support/create',
+      data: data,
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
 }
 
