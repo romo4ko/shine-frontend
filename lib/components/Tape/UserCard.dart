@@ -54,10 +54,13 @@ class _UserCardState extends State<UserCard> {
     }
   }
 
+  var additional = [];
+
   @override
   void initState() {
     super.initState();
     loadImages();
+    additional = collectAdditional();
   }
 
   @override
@@ -236,6 +239,14 @@ class _UserCardState extends State<UserCard> {
                                 );
                               }),
                             ),
+                          ) : Container(),
+                          additional.length > 0 ? Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Wrap(
+                              children: List.generate(additional.length, (index) {
+                                return additional[index];
+                              }),
+                            ),
                           ) : Container()
                         ],
                       ),
@@ -246,6 +257,77 @@ class _UserCardState extends State<UserCard> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  collectAdditional() {
+    var additional = [];
+    additional.add(getAdditional('purpose', widget.user.purpose));
+    additional.add(getAdditional('city', widget.user.city));
+
+    if (widget.user.height != null) {
+      additional.add(getAdditional('height', widget.user.height));
+    }
+    if (widget.user.sign != null) {
+      additional.add(getAdditional('sign', widget.user.sign));
+    }
+    if (widget.user.fs != null) {
+      additional.add(getAdditional('fs', widget.user.fs));
+    }
+    if (widget.user.children != null) {
+      additional.add(getAdditional('children', widget.user.children));
+    }
+    if (widget.user.smoking != null) {
+      additional.add(getAdditional('smoking', widget.user.smoking));
+    }
+    if (widget.user.alcohol != null) {
+      additional.add(getAdditional('alcohol', widget.user.alcohol));
+    }
+    if (widget.user.education != null) {
+      additional.add(getAdditional('education', widget.user.education));
+    }
+    return additional;
+  }
+
+  getAdditional(code, value) {
+    var icons = ['smoking', 'alcohol', 'children', 'height', 'education', 'city', 'purpose', 'fs', 'sign'];
+
+    return Container(
+      margin: const EdgeInsets.only(right: 10, bottom: 10),
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.1)
+          ),
+        ],
+        color: const Color.fromRGBO(20, 20, 20, 1),
+      ),
+      child: Stack(
+        alignment: Alignment.centerLeft,
+        children: [
+          if (icons.contains(code))
+            SvgPicture.asset(
+              'assets/icons/additional/${code}.svg',
+              width: 20,
+              height: 20,
+              color: Colors.white,
+            ),
+          Padding(
+            padding: EdgeInsets.only(left: icons.contains(code) ? 25 : 0),
+            child: Text(
+              value.toString(),
+              style: const TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

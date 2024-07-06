@@ -101,6 +101,15 @@ flutter:
     - assets/icons/likes-heart.svg
     - assets/icons/arrow-right.svg
     - assets/icons/premium-main.svg
+    - assets/icons/additional/smoking.svg
+    - assets/icons/additional/alcohol.svg
+    - assets/icons/additional/children.svg
+    - assets/icons/additional/height.svg
+    - assets/icons/additional/education.svg
+    - assets/icons/additional/city.svg
+    - assets/icons/additional/purpose.svg
+    - assets/icons/additional/fs.svg
+    - assets/icons/additional/sign.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
