@@ -4,7 +4,12 @@ import 'package:flutter_xlider/flutter_xlider.dart';
 
 class RangeAgeSlider extends StatefulWidget {
 
-  const RangeAgeSlider({super.key});
+  final TextEditingController controller;
+
+  const RangeAgeSlider({
+    super.key,
+    required this.controller,
+  });
 
   @override
   State<RangeAgeSlider> createState() => _RangeAgeSliderState();
@@ -14,6 +19,17 @@ class _RangeAgeSliderState extends State<RangeAgeSlider> {
 
   double _lowerValue = 18;
   double _upperValue = 80;
+
+  @override
+  void initState() {
+    if (widget.controller.text.isEmpty) {
+      widget.controller.text = '${_lowerValue.round()}:${_upperValue.round()}';
+    } else {
+      _lowerValue = double.parse(widget.controller.text.split(':')[0]);
+      _upperValue = double.parse(widget.controller.text.split(':')[1]);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +108,7 @@ class _RangeAgeSliderState extends State<RangeAgeSlider> {
             setState(() {
               _lowerValue = lowerValue;
               _upperValue = upperValue;
+              widget.controller.text = '${lowerValue.round()}:${upperValue.round()}';
             });
           },
         ),

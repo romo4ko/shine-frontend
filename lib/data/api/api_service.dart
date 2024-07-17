@@ -110,6 +110,25 @@ class ApiService {
     return response.data;
   }
 
+  Future getFilter() async {
+    await _getToken();
+    final response = await _dio.get(
+      '/users/filter/get',
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
+  Future setFilter(dynamic data) async {
+    await _getToken();
+    final response = await _dio.post(
+      '/users/filter/set',
+      data: data,
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
   // ##### USERS #####
 
   Future getUsers() async {

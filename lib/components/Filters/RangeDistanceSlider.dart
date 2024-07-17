@@ -4,7 +4,12 @@ import 'package:flutter_xlider/flutter_xlider.dart';
 
 class RangeDistanceSlider extends StatefulWidget {
 
-  const RangeDistanceSlider({super.key});
+  final TextEditingController controller;
+
+  const RangeDistanceSlider({
+    super.key,
+    required this.controller,
+  });
 
   @override
   State<RangeDistanceSlider> createState() => _RangeDistanceSliderState();
@@ -14,6 +19,17 @@ class _RangeDistanceSliderState extends State<RangeDistanceSlider> {
 
   double _lowerValue = 1;
   double _upperValue = 100;
+
+  @override
+  void initState() {
+    if (widget.controller.text.isEmpty) {
+      widget.controller.text = '${_lowerValue.round()}:${_upperValue.round()}';
+    } else {
+      _lowerValue = double.parse(widget.controller.text.split(':')[0]);
+      _upperValue = double.parse(widget.controller.text.split(':')[1]);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +109,7 @@ class _RangeDistanceSliderState extends State<RangeDistanceSlider> {
             setState(() {
               _lowerValue = lowerValue;
               _upperValue = upperValue;
+              widget.controller.text = '${lowerValue.round()}:${upperValue.round()}';
             });
           },
         ),

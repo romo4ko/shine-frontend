@@ -3,15 +3,20 @@ import 'package:flutter/material.dart';
 
 class GenderSelectButtonGroup extends StatefulWidget {
 
-  const GenderSelectButtonGroup({super.key});
+  final TextEditingController controller;
+  final List available;
+
+  const GenderSelectButtonGroup({
+    super.key,
+    required this.controller,
+    required this.available
+  });
 
   @override
   State<GenderSelectButtonGroup> createState() => _GenderSelectButtonGroupState();
 }
 
 class _GenderSelectButtonGroupState extends State<GenderSelectButtonGroup> {
-
-  var selected;
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +29,20 @@ class _GenderSelectButtonGroupState extends State<GenderSelectButtonGroup> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
+          widget.available.contains('male') ? SizedBox(
             height: 40,
-            width: (MediaQuery.of(context).size.width-40)/3,
+            width: (MediaQuery.of(context).size.width-40)/widget.available.length,
             child: ElevatedButton(
               onPressed: () => {
-                setState(() => selected = 'men')
+                setState(() => widget.controller.text = 'men')
               },
               style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(18)),
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 5),
-                backgroundColor: (selected == 'men' ? Color.fromRGBO(20, 20, 20, 0.8) : Colors.transparent),
-                foregroundColor: (selected == 'men' ? Color.fromRGBO(20, 20, 20, 0.8) : Colors.transparent),
+                backgroundColor: (widget.controller.text == 'men' ? Color.fromRGBO(20, 20, 20, 0.8) : Colors.transparent),
+                foregroundColor: (widget.controller.text == 'men' ? Color.fromRGBO(20, 20, 20, 0.8) : Colors.transparent),
                 disabledBackgroundColor: Colors.transparent,
                 disabledForegroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,
@@ -52,26 +57,26 @@ class _GenderSelectButtonGroupState extends State<GenderSelectButtonGroup> {
                       fontFamily: 'Inter',
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
-                      color: (selected == 'men' ? Colors.white : Colors.white.withOpacity(0.6))
+                      color: (widget.controller.text == 'men' ? Colors.white : Colors.white.withOpacity(0.6))
                   ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
+          ) : SizedBox(),
+          widget.available.contains('female') ? SizedBox(
             height: 40,
-            width: (MediaQuery.of(context).size.width-40)/3,
+            width: (MediaQuery.of(context).size.width-40)/widget.available.length,
             child: ElevatedButton(
               onPressed: () => {
-                setState(() => selected = 'women')
+                setState(() => {widget.controller.text = 'women'})
               },
               style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(18)),
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 5),
-                backgroundColor: (selected == 'women' ? Color.fromRGBO(20, 20, 20, 0.8) : Colors.transparent),
-                foregroundColor: (selected == 'women' ? Color.fromRGBO(20, 20, 20, 0.8) : Colors.transparent),
+                backgroundColor: (widget.controller.text == 'women' ? Color.fromRGBO(20, 20, 20, 0.8) : Colors.transparent),
+                foregroundColor: (widget.controller.text == 'women' ? Color.fromRGBO(20, 20, 20, 0.8) : Colors.transparent),
                 disabledBackgroundColor: Colors.transparent,
                 disabledForegroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,
@@ -86,26 +91,26 @@ class _GenderSelectButtonGroupState extends State<GenderSelectButtonGroup> {
                       fontFamily: 'Inter',
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
-                      color: (selected == 'women' ? Colors.white : Colors.white.withOpacity(0.6))
+                      color: (widget.controller.text == 'women' ? Colors.white : Colors.white.withOpacity(0.6))
                   ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
+          ) : SizedBox(),
+          widget.available.contains('all') ? SizedBox(
             height: 40,
-            width: (MediaQuery.of(context).size.width-40)/3,
+            width: (MediaQuery.of(context).size.width-40)/widget.available.length,
             child: ElevatedButton(
               onPressed: () => {
-                setState(() => selected = 'all')
+                setState(() => widget.controller.text = 'all')
               },
               style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(18)),
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 5),
-                backgroundColor: (selected == 'all' ? Color.fromRGBO(20, 20, 20, 0.8) : Colors.transparent),
-                foregroundColor: (selected == 'all' ? Color.fromRGBO(20, 20, 20, 0.8) : Colors.transparent),
+                backgroundColor: (widget.controller.text == 'all' ? Color.fromRGBO(20, 20, 20, 0.8) : Colors.transparent),
+                foregroundColor: (widget.controller.text == 'all' ? Color.fromRGBO(20, 20, 20, 0.8) : Colors.transparent),
                 disabledBackgroundColor: Colors.transparent,
                 disabledForegroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,
@@ -120,12 +125,12 @@ class _GenderSelectButtonGroupState extends State<GenderSelectButtonGroup> {
                       fontFamily: 'Inter',
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
-                      color: (selected == 'all' ? Colors.white : Colors.white.withOpacity(0.6))
+                      color: (widget.controller.text == 'all' ? Colors.white : Colors.white.withOpacity(0.6))
                   ),
                 ),
               ),
             ),
-          ),
+          ) : SizedBox(),
         ],
       ),
     );
