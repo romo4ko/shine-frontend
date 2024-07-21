@@ -8,6 +8,8 @@ import '../components/Common/AppBar/DefaultAppBar.dart';
 import '../models/Self.dart';
 import 'package:shine/data/api/api_service.dart';
 
+import 'document.dart';
+
 class Settings extends StatefulWidget {
   const Settings({super.key});
 
@@ -55,7 +57,7 @@ class _SettingsState extends State<Settings> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  color: Color.fromRGBO(20, 20, 20, 0.8),
+                  color: const Color.fromRGBO(20, 20, 20, 0.8),
                   borderRadius: BorderRadius.circular(10)
               ),
               child: Column(
@@ -64,21 +66,21 @@ class _SettingsState extends State<Settings> {
                   // Divider(height: 1, color: Colors.white.withOpacity(0.6)),
                   // SettingsButton(title: 'Черный список', route: '/'),
                   // Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                  SettingsButton(title: 'FAQ', route: 'faq'),
+                  const SettingsButton(title: 'FAQ', route: 'faq'),
                   Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                  SettingsButton(title: 'Сообщить о проблеме', route: 'support'),
+                  const SettingsButton(title: 'Сообщить о проблеме', route: 'support'),
                   Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                  SettingsButton(title: 'Помощь разработчикам', route: '/'),
+                  const SettingsButton(title: 'Помощь разработчикам', route: '/'),
                   Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                  SettingsButton(title: 'Политика конфиденциальности', route: '/'),
+                  const SettingsButton(title: 'Политика конфиденциальности', route: 'document', slug: 'policy'),
                   Divider(height: 1, color: Colors.white.withOpacity(0.6)),
-                  SettingsButton(title: 'Пользовательское соглашение', route: '/'),
+                  const SettingsButton(title: 'Пользовательское соглашение', route: 'document', slug: 'agreement'),
                 ],
               )
             ),
             Column(
               children: [
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 40,
@@ -94,10 +96,10 @@ class _SettingsState extends State<Settings> {
                       foregroundColor: Colors.black.withOpacity(0.5),
                       disabledBackgroundColor: Colors.black.withOpacity(1),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Выйти',
                       textAlign: TextAlign.start,
-                      style: const TextStyle(
+                      style: TextStyle(
                           height: 1,
                           fontFamily: 'Inter',
                           fontSize: 18,
@@ -106,7 +108,7 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 40,
@@ -125,10 +127,10 @@ class _SettingsState extends State<Settings> {
                       foregroundColor: Colors.black.withOpacity(0.5),
                       disabledBackgroundColor: Colors.black.withOpacity(1),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Удалить аккаунт',
                       textAlign: TextAlign.start,
-                      style: const TextStyle(
+                      style: TextStyle(
                           height: 1,
                           fontFamily: 'Inter',
                           fontSize: 18,
@@ -150,18 +152,32 @@ class SettingsButton extends StatelessWidget {
 
   final String title;
   final String route;
+  final String? slug;
 
-  const SettingsButton({super.key, required this.title, required this.route});
+  const SettingsButton({
+    super.key,
+    required this.title,
+    required this.route,
+    this.slug = null
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => {
-        Navigator.pushNamed(context, this.route)
+        if (this.route == 'document' && this.slug != null) {
+          Navigator.of(context).push(
+              MaterialPageRoute(
+                  builder: (context) => DocumentScreen(slug: this.slug ?? 'policy')
+              )
+          )
+        } else {
+          Navigator.pushNamed(context, this.route)
+        }
       },
       child: Container(
         color: Colors.transparent,
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
             horizontal: 20,
         ),
         height: 50,
@@ -172,7 +188,7 @@ class SettingsButton extends StatelessWidget {
             Text(
               this.title,
               textAlign: TextAlign.start,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   height: 1,

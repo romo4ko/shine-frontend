@@ -254,5 +254,15 @@ class ApiService {
     return response.data;
   }
 
+  Future document(Map<String, String> data) async {
+    await _getToken();
+    final response = await _dio.get(
+      '/document',
+      data: data,
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
 }
 
