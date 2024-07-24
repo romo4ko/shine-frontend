@@ -8,9 +8,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
 
-  static const API_BASE_URL = kDebugMode
+  static const API_BASE_URL = kDebugMode && false
       ? 'http://10.0.2.2:8000/api'
-      : 'http://79.174.82.139:8000/api';
+      : 'https://ultrasource.ru/api';
 
   var token;
 

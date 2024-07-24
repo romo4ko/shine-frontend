@@ -60,6 +60,19 @@ class _TapeState extends State<Tape> {
               ),
             ),
             child: loading ? CustomProgressIndicator() :
+            users.isEmpty ? const Center(
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 50),
+                  child: Text(
+                    "Ничего не нашлось",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontFamily: 'Montserrat',
+                    ),
+                  ),
+                )
+            ) :
             CardSwiper(
               controller: swipeController,
               cardsCount: cards.length,
