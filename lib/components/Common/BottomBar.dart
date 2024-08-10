@@ -49,7 +49,9 @@ class BottomBar extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, 'likes');
+              if (active != 'likes') {
+                Navigator.pushNamed(context, 'likes');
+              }
             },
             child: SizedBox(
               width: (MediaQuery.of(context).size.width)/5,
@@ -62,7 +64,9 @@ class BottomBar extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, 'tape');
+              if (active != 'tape') {
+                Navigator.pushNamed(context, 'tape');
+              }
             },
             child: SizedBox(
               width: (MediaQuery.of(context).size.width)/5,
@@ -75,7 +79,9 @@ class BottomBar extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, 'chats');
+              if (active != 'chats') {
+                Navigator.pushNamed(context, 'chats');
+              }
             },
             child: SizedBox(
               width: (MediaQuery.of(context).size.width)/5,
@@ -88,7 +94,9 @@ class BottomBar extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, 'profile');
+              if (active != 'profile') {
+                Navigator.pushNamed(context, 'profile');
+              }
             },
             child: SizedBox(
               width: (MediaQuery.of(context).size.width)/5,

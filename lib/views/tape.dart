@@ -76,7 +76,7 @@ class _TapeState extends State<Tape> {
             CardSwiper(
               controller: swipeController,
               cardsCount: cards.length,
-              numberOfCardsDisplayed: 2,
+              numberOfCardsDisplayed: users.length > 1 ? 2 : users.length,
               onSwipe: _onSwipe,
               onUndo: _onUndo,
               allowedSwipeDirection: const AllowedSwipeDirection.symmetric(horizontal: true),

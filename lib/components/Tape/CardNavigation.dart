@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shine/components/Dialogs/DefaultDialog.dart';
 
 class CardNavigation extends StatefulWidget {
 
@@ -68,7 +69,7 @@ class _CardNavigationState extends State<CardNavigation> {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, 'tape');
+              Navigator.pushNamed(context, 'premium');
             },
             child: Container(
               width: 80,
@@ -81,7 +82,7 @@ class _CardNavigationState extends State<CardNavigation> {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, 'chats');
+              DefaultDialog.showCustomDialog(context, title: 'title', text: 'HGJkhdcj; cjenkceew fferfer');
             },
             child: Container(
               width: (MediaQuery.of(context).size.width-100)/4,
