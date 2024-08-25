@@ -2,17 +2,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class UnderlineTextField extends StatefulWidget {
+class UnderlineEmailField extends StatefulWidget {
 
   final String text;
 
-  const UnderlineTextField({super.key, required this.text});
+  const UnderlineEmailField({super.key, required this.text});
 
   @override
-  State<UnderlineTextField> createState() => _UnderlineTextFieldState();
+  State<UnderlineEmailField> createState() => _UnderlineEmailFieldState();
 }
 
-class _UnderlineTextFieldState extends State<UnderlineTextField> {
+class _UnderlineEmailFieldState extends State<UnderlineEmailField> {
   String? validateEmail(String? value) {
     const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
         r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'

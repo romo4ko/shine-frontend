@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shine/components/Dialogs/DefaultDialog.dart';
+import 'package:shine/data/api/api_service.dart';
 
 class CardNavigation extends StatefulWidget {
 
@@ -20,6 +21,31 @@ class CardNavigation extends StatefulWidget {
 
 class _CardNavigationState extends State<CardNavigation> {
 
+  var api = ApiService();
+  var isVip = false;
+
+  send(text) {
+    print(text);
+    DefaultDialog.showCustomDialog(context, title: 'Отправлено!');
+  }
+
+  checkAuth() {
+    api.checkAuth().then((data) => {
+      if (data['user'] != null) {
+        setState(() {
+          isVip = data['user']['is_premium'];
+        }),
+        print(isVip)
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    checkAuth();
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -69,7 +95,11 @@ class _CardNavigationState extends State<CardNavigation> {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, 'premium');
+              if(isVip) {
+                DefaultDialog.showCustomDialog(context, title: 'Скоро добавим)');
+              } else {
+                Navigator.pushNamed(context, 'premium');
+              }
             },
             child: Container(
               width: 80,
@@ -82,7 +112,11 @@ class _CardNavigationState extends State<CardNavigation> {
           ),
           InkWell(
             onTap: () {
-              DefaultDialog.showCustomDialog(context, title: 'title', text: 'HGJkhdcj; cjenkceew fferfer');
+              DefaultDialog.showFormDialog(
+                  context,
+                  title: 'Отправить сообщение',
+                  action: (text) => { send(text) }
+              );
             },
             child: Container(
               width: (MediaQuery.of(context).size.width-100)/4,
