@@ -5,6 +5,7 @@ class ChatItemModel {
   final String last_message;
   final String time;
   final bool is_viewed;
+  final String status;
 
   ChatItemModel(
     this.id,
@@ -13,6 +14,7 @@ class ChatItemModel {
     this.last_message,
     this.time,
     this.is_viewed,
+    this.status
   );
 
   ChatItemModel.fromJson(Map<String, dynamic> json)
@@ -21,5 +23,6 @@ class ChatItemModel {
         image = json['image'],
         last_message = json['last_message'],
         time = json['time'],
-        is_viewed = json['is_viewed'];
+        is_viewed = json['is_viewed'],
+        status = json['status'];
 }

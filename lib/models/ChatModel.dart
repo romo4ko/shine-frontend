@@ -10,6 +10,7 @@ class ChatModel {
   final bool is_online;
   final bool is_viewed_by_user;
   List<Message> messages;
+  final String status;
 
   ChatModel(
     this.chat_id,
@@ -20,6 +21,7 @@ class ChatModel {
     this.is_online,
     this.is_viewed_by_user,
     this.messages,
+    this.status,
   );
 
   ChatModel.fromJson(Map<String, dynamic> json)
@@ -31,5 +33,6 @@ class ChatModel {
         is_online = json['is_online'],
         is_viewed_by_user = json['is_viewed_by_user'],
         messages = List<Message>.from(
-            json['messages'].map((message) => Message.fromJson(message)));
+            json['messages'].map((message) => Message.fromJson(message))),
+        status = json['status'];
 }

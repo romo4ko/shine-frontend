@@ -77,17 +77,19 @@ class _ChatsState extends State<Chats> {
                       },
                       blendMode: BlendMode.dstOut,
                       child: loading ? CustomProgressIndicator() :
-                        chats.isNotEmpty ? ListView.separated(
-                        physics: const BouncingScrollPhysics(),
-                        padding: const EdgeInsets.only(top: 100, bottom: 100),
-                        itemCount: chats.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ChatItem(chat: chats[index]);
-                        },
-                        separatorBuilder: (context, index) {
-                          return const Divider();
-                        },
-                      ) : const Center(
+                        chats.isNotEmpty ?
+                        ListView.separated(
+                          physics: const BouncingScrollPhysics(),
+                          padding: const EdgeInsets.only(top: 100, bottom: 100),
+                          itemCount: chats.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ChatItem(chat: chats[index]);
+                          },
+                          separatorBuilder: (context, index) {
+                            return const Divider();
+                          },
+                        )
+                        : const Center(
                           child: Padding(
                             padding: EdgeInsets.only(bottom: 50),
                             child: Text(
