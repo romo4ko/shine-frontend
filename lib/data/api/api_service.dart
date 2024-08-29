@@ -221,6 +221,16 @@ class ApiService {
     return response.data;
   }
 
+  Future requestMessage(Map<String, dynamic> data) async {
+    await _getToken();
+    final response = await _dio.post(
+      '/message/request',
+      data: data,
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
   // ##### CITIES #####
 
   Future cities(Map<String, String> input) async {

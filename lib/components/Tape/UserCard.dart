@@ -5,7 +5,9 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shine/components/Tape/CardNavigation.dart';
 
+import '../../data/api/api_service.dart';
 import '../../models/User.dart';
+import '../Dialogs/DefaultDialog.dart';
 
 class UserCard extends StatefulWidget {
 
@@ -26,8 +28,49 @@ class _UserCardState extends State<UserCard> {
 
   ScrollController scrollController = ScrollController();
 
-  void _scrollToend() {
+  _scrollToend() {
     scrollController.jumpTo(scrollController.position.maxScrollExtent);
+  }
+
+  var api = ApiService();
+  var isVip = false;
+
+  checkAuth() {
+    api.checkAuth().then((data) => {
+      if (data['user'] != null) {
+        setState(() {
+          isVip = data['user']['is_premium'];
+        }),
+      }
+    });
+  }
+
+  action(String type, dynamic data) {
+    switch (type) {
+      case 'message':
+        requestMessage(data);
+      case 'superlike':
+        if(isVip) {
+          // TODO: Реализовать логику
+          DefaultDialog.showCustomDialog(context, title: 'Скоро добавим)');
+        } else {
+          Navigator.pushNamed(context, 'premium');
+        }
+    }
+  }
+
+  requestMessage(text) {
+    api.requestMessage({
+      'whom': widget.user.id,
+      'text': text
+    }).then((data) {
+      if (data['status'] == 'success') {
+        DefaultDialog.showCustomDialog(context, title: 'Отправлено!');
+      }
+    }).catchError((error) {
+      DefaultDialog.showCustomDialog(context, title: 'Ошибка ;(');
+      print(error);
+    });
   }
 
   var currentImageIndex = 0;
@@ -59,6 +102,7 @@ class _UserCardState extends State<UserCard> {
   @override
   void initState() {
     super.initState();
+    checkAuth();
     loadImages();
     additional = collectAdditional();
   }
@@ -122,7 +166,10 @@ class _UserCardState extends State<UserCard> {
                         ),
                         Positioned(
                           bottom: 0,
-                          child: CardNavigation(swipeController: widget.swipeController)
+                          child: CardNavigation(
+                              swipeController: widget.swipeController,
+                              action: (type, data) => {action(type, data)},
+                          )
                         ),
                         Positioned(
                           bottom: 80,

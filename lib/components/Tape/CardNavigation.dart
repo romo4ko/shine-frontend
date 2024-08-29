@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shine/components/Dialogs/DefaultDialog.dart';
-import 'package:shine/data/api/api_service.dart';
 
 class CardNavigation extends StatefulWidget {
 
   final CardSwiperController swipeController;
+  final Function action;
 
   const CardNavigation({
     super.key,
-    required this.swipeController
+    required this.swipeController,
+    required this.action
   });
 
   @override
@@ -21,28 +22,8 @@ class CardNavigation extends StatefulWidget {
 
 class _CardNavigationState extends State<CardNavigation> {
 
-  var api = ApiService();
-  var isVip = false;
-
-  send(text) {
-    print(text);
-    DefaultDialog.showCustomDialog(context, title: 'Отправлено!');
-  }
-
-  checkAuth() {
-    api.checkAuth().then((data) => {
-      if (data['user'] != null) {
-        setState(() {
-          isVip = data['user']['is_premium'];
-        }),
-        print(isVip)
-      }
-    });
-  }
-
   @override
   void initState() {
-    checkAuth();
     super.initState();
   }
   
@@ -95,11 +76,7 @@ class _CardNavigationState extends State<CardNavigation> {
           ),
           InkWell(
             onTap: () {
-              if(isVip) {
-                DefaultDialog.showCustomDialog(context, title: 'Скоро добавим)');
-              } else {
-                Navigator.pushNamed(context, 'premium');
-              }
+              widget.action('superlike', null);
             },
             child: Container(
               width: 80,
@@ -115,7 +92,7 @@ class _CardNavigationState extends State<CardNavigation> {
               DefaultDialog.showFormDialog(
                   context,
                   title: 'Отправить сообщение',
-                  action: (text) => { send(text) }
+                  action: (text) => { widget.action('message', text) }
               );
             },
             child: Container(
