@@ -22,10 +22,11 @@ class _ChatItemState extends State<ChatItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (() => {
-        Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => Chat(chat_id: widget.chat.id)
-            )
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Chat(chat_id: widget.chat.id),
+          ),
         )
       }),
       child: Container(

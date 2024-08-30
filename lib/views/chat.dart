@@ -1,11 +1,9 @@
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:shine/components/Chat/ChatAppBar.dart';
-import 'package:shine/components/Common/Buttons/buttons.dart';
 import 'package:shine/components/Common/CustomProgressIndicator.dart';
 import 'package:shine/data/api/api_service.dart';
 import 'package:shine/models/ChatModel.dart';

@@ -188,7 +188,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                           Divider(height: 1, color: Colors.white.withOpacity(0.6)),
                           ExtendedDropdown(
                             items: const {
-                              'yes': 'Да',
+                              'yes': 'Есть',
                               'no': 'Нет и не планирую',
                               'would': 'Нет, но хотелось бы'
                             },
