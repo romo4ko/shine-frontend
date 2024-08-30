@@ -8,7 +8,7 @@ class ChatModel {
   final String user_name;
   final String image;
   final bool is_online;
-  final bool is_viewed_by_user;
+  final bool is_viewed;
   List<Message> messages;
   final String status;
 
@@ -19,7 +19,7 @@ class ChatModel {
     this.user_name,
     this.image,
     this.is_online,
-    this.is_viewed_by_user,
+    this.is_viewed,
     this.messages,
     this.status,
   );
@@ -31,7 +31,7 @@ class ChatModel {
         user_name = json['user_name'],
         image = json['image'],
         is_online = json['is_online'],
-        is_viewed_by_user = json['is_viewed_by_user'],
+        is_viewed = json['is_viewed'],
         messages = List<Message>.from(
             json['messages'].map((message) => Message.fromJson(message))),
         status = json['status'];

@@ -91,7 +91,7 @@ class _ChatItemState extends State<ChatItem> {
                     ],
                   ),
                   Text(
-                    widget.chat.last_message,
+                    widget.chat.last_message ?? 'Фото',
                     style: const TextStyle(
                       fontFamily: 'Inter',
                       fontSize: 14,

@@ -213,9 +213,10 @@ class ApiService {
 
   Future sendMessage(Map<String, dynamic> data) async {
     await _getToken();
+    final formData = FormData.fromMap(data);
     final response = await _dio.post(
       '/message/send',
-      data: data,
+      data: formData,
       options: Options(headers: _setHeaders()),
     );
     return response.data;

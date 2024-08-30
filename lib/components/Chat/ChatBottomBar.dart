@@ -45,7 +45,8 @@ class _ChatBottomBarState extends State<ChatBottomBar> {
             padding: EdgeInsets.only(top: 10),
             child: InkWell(
               onTap: () {
-                DefaultDialog.showCustomDialog(context, title: 'Скоро эта функция обязательно появится!');
+                widget.callback('images');
+                // DefaultDialog.showCustomDialog(context, title: 'Скоро эта функция обязательно появится!');
               },
               child: Center(
                 child: SizedBox(
@@ -96,7 +97,7 @@ class _ChatBottomBarState extends State<ChatBottomBar> {
           ),
           InkWell(
             onTap: () {
-              widget.callback();
+              widget.callback('send');
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),

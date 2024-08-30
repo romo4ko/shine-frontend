@@ -2,7 +2,7 @@ class ChatItemModel {
   final int id;
   final String name;
   final String image;
-  final String last_message;
+  final String? last_message;
   final String time;
   final bool is_viewed;
   final String status;
