@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shine/components/Common/CustomProgressIndicator.dart';
 import 'dart:async';
+
+import 'package:shine/data/api/api_service.dart';
 
 class Premium extends StatefulWidget {
   const Premium({super.key});
@@ -12,15 +15,13 @@ class Premium extends StatefulWidget {
 
 class _PremiumState extends State<Premium> {
 
-  Map<String, dynamic> prices = {
-    'first': {'cost': 280, 'price': 400, 'name': 'Неделя', 'code': 'week'},
-    'second': {'cost': 700, 'price': 1000, 'name': 'Месяц', 'code': 'month'},
-    'third': {'cost': 1400, 'price': 2000, 'name': '3 месяца', 'code': 'three_months'}
-  };
+  var api = ApiService();
 
+  bool loading = true;
+  List<dynamic>? prices;
   Timer? _timer;
-  int seconds = 604800;
-  // int seconds = 86410;
+  int seconds = 0;
+  int? discount = null;
   Map<String, dynamic> time = {
     'days': 0,
     'hours': 0,
@@ -28,10 +29,25 @@ class _PremiumState extends State<Premium> {
   };
   Map<String, dynamic>? selected;
 
+  getPrices() {
+    api.getPrices().then((data) {
+      setState(() {
+        print(data);
+        prices = data['data'];
+        selected = prices![1];
+        if (data['meta'] != null) {
+          seconds = data['meta']['seconds_left'];
+          discount = data['meta']['discount'];
+          startTimer();
+        }
+        loading = false;
+      });
+    });
+  }
+
   @override
   void initState() {
-    selected = prices['second'];
-    startTimer();
+    getPrices();
     super.initState();
   }
 
@@ -67,7 +83,6 @@ class _PremiumState extends State<Premium> {
   int getDays() {
     return (seconds~/60~/60~/24);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -117,10 +132,10 @@ class _PremiumState extends State<Premium> {
                           fontWeight: FontWeight.w200,
                           color: Colors.white),
                     ),
-                    Padding(
+                    loading ? SizedBox() : Padding(
                       padding: const EdgeInsets.only(top: 30),
                       child: Text(
-                        "приобретай премиум со скидкой и получай больше возможностей сиять",
+                        "приобретай премиум ${discount != null ? 'со скидкой' : ''}и получай больше возможностей сиять",
                         style: TextStyle(
                             height: 1,
                             fontFamily: 'kistyac',
@@ -131,7 +146,7 @@ class _PremiumState extends State<Premium> {
                     ),
                   ],
                 ),
-                Padding(
+                loading || discount == null ? SizedBox(height: 20) : Padding(
                   padding: const EdgeInsets.only(top: 15, bottom: 20),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -142,8 +157,8 @@ class _PremiumState extends State<Premium> {
                             color: Color.fromRGBO(14, 14, 14, 0.8)),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 5),
-                        child: const Text(
-                          "Скидка -30%",
+                        child: Text(
+                          "Скидка -${discount}%",
                           style: TextStyle(
                               height: 1,
                               fontFamily: 'Montserrat',
@@ -165,13 +180,11 @@ class _PremiumState extends State<Premium> {
                     ],
                   ),
                 ),
-                Row(
+                loading ? CustomProgressIndicator() : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    getSaleContainer(prices['first']),
-                    getSaleContainer(prices['second']),
-                    getSaleContainer(prices['third'])
-                  ],
+                  children: prices!.map((item) {
+                      return getSaleContainer(item);
+                    }).toList(),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 15),
@@ -225,8 +238,8 @@ class _PremiumState extends State<Premium> {
                         foregroundColor: Colors.white.withOpacity(0.3),
                         disabledBackgroundColor: Colors.white.withOpacity(0.5),
                       ),
-                      child: Text(
-                        'Подписка за ${selected?['cost'] ?? 0}₽ / ${(selected?['name'] ?? 0).toString().toLowerCase()}',
+                      child: loading ? CustomProgressIndicator() : Text(
+                        'Подписка за ${selected?['cost'] ?? selected?['price']}₽ / ${(selected?['name']).toString().toLowerCase()}',
                         textAlign: TextAlign.start,
                         style: const TextStyle(
                             height: 1,
@@ -245,7 +258,7 @@ class _PremiumState extends State<Premium> {
         ));
   }
 
-  getSaleContainer(Map<String, dynamic> price) {
+  Widget getSaleContainer(Map<String, dynamic> price) {
 
     return GestureDetector(
       onTap: () => {
@@ -277,14 +290,14 @@ class _PremiumState extends State<Premium> {
                   color: Colors.white),
             ),
             Text(
-              "${price['cost']}₽",
+              "${ price['cost'] != null ? price['cost'] : price['price']}₽",
               style: const TextStyle(
                   height: 1,
                   fontFamily: 'Montserrat',
                   fontSize: 16,
                   color: Colors.white),
             ),
-            Stack(
+            price['cost'] != null ? Stack(
               alignment: Alignment.center,
               children: [
                 Text(
@@ -302,7 +315,7 @@ class _PremiumState extends State<Premium> {
                   color: Colors.white.withOpacity(0.5),
                 )
               ],
-            ),
+            ) : SizedBox(),
           ],
         ),
       ),

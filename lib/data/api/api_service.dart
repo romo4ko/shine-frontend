@@ -284,5 +284,14 @@ class ApiService {
     return response.data;
   }
 
+  Future getPrices() async {
+    await _getToken();
+    final response = await _dio.get(
+      '/users/premium/prices',
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
 }
 
