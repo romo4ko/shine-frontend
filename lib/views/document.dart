@@ -50,7 +50,7 @@ class _DocumentScreenState extends State<DocumentScreen> {
         extendBodyBehindAppBar: true,
         resizeToAvoidBottomInset: false,
         appBar: DefaultAppBar(
-            title: loading ? '' : document['name'],
+            title: loading ? '' : document['name'].toString().toLowerCase(),
             titleSize: 16
         ),
         body: SingleChildScrollView(
@@ -78,10 +78,10 @@ class _DocumentScreenState extends State<DocumentScreen> {
                     child: Text(
                       document['text'],
                       style: TextStyle(
-                          fontFamily: 'Inter',
+                          fontFamily: 'Roboto',
                           fontSize: 16,
                           color: Colors.white.withOpacity(0.8)),
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.justify,
                     ),
                   ),
                 ],

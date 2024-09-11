@@ -37,7 +37,7 @@ class _LoginState extends State<Login> {
           if (data['filled'] == null) {
             Navigator.pushNamed(context, 'profile')
           } else {
-              Navigator.pushNamed(context, 'information')
+              Navigator.pushNamed(context, 'purpose')
           }
         }
         else {

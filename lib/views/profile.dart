@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shine/components/Common/CustomProgressIndicator.dart';
+import 'package:shine/components/Profile/EmailNotConfirmed.dart';
 import 'package:shine/components/Profile/profile.dart';
 import 'package:shine/data/api/api_service.dart';
 
@@ -66,9 +67,11 @@ class _ProfileState extends State<Profile> {
                 children: [
                   ProfileCard(user: user),
                   SizedBox(height: 10),
+                  user.is_email_confirmed ? SizedBox() :
+                  EmailNotConfirmed(),
                   (user.profile_filled < 100) ?
                   ProfileFilled(percent: user.profile_filled) :
-                  Container(),
+                  SizedBox(),
                   SizedBox(height: 10),
                   PremiumInvites(invites: user.invites ?? 0),
                   SizedBox(height: 10),

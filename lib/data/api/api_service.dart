@@ -129,6 +129,15 @@ class ApiService {
     return response.data;
   }
 
+  Future sendConfirmationEmail() async {
+    await _getToken();
+    final response = await _dio.post(
+      '/users//email/verify',
+      options: Options(headers: _setHeaders()),
+    );
+    return response.data;
+  }
+
   // ##### USERS #####
 
   Future getUsers() async {

@@ -21,6 +21,7 @@ class Self {
   final String? sign;
   final int? height;
   final bool? active;
+  final bool is_email_confirmed;
 
   Self(
       this.id,
@@ -45,6 +46,7 @@ class Self {
       this.sign,
       this.height,
       this.active,
+      this.is_email_confirmed
       );
 
   Self.fromJson(Map<String, dynamic> json)
@@ -69,5 +71,6 @@ class Self {
         education = json['education'],
         sign = json['sign'],
         height = json['height'],
-        active = json['active'];
+        active = json['active'],
+        is_email_confirmed = json['is_email_confirmed'];
 }

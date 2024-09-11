@@ -47,7 +47,7 @@ class _InformationState extends State<Information> {
       'text': _description.text,
     }).then((data) => {
       if (data['status'] != null) {
-        Navigator.pushNamed(context, 'filters')
+        Navigator.pushNamed(context, 'profile')
       }
     }).catchError((error) => {
       DefaultDialog.showCustomDialog(context, title: 'Ошибка сети')
