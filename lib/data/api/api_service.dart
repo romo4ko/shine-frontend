@@ -6,11 +6,13 @@ import 'package:flutter/foundation.dart';
 import '../../models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../config/app_config.dart';
+
 class ApiService {
 
-  static const API_BASE_URL = kDebugMode
-      ? 'http://10.0.2.2:8000/api'
-      : 'https://ultrasource.ru/api';
+  static String API_BASE_URL = kDebugMode
+      ? AppConfig.config['API']!['BaseUrl']['Debug']
+      : AppConfig.config['API']!['BaseUrl']['Release'];
 
   var token;
 

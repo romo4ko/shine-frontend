@@ -5,6 +5,7 @@ import 'package:shine/components/Common/CustomProgressIndicator.dart';
 import 'dart:async';
 
 import 'package:shine/data/api/api_service.dart';
+import 'package:shine/data/config/app_config.dart';
 
 class Premium extends StatefulWidget {
   const Premium({super.key});
@@ -228,8 +229,9 @@ class _PremiumState extends State<Premium> {
                     width: MediaQuery.of(context).size.width,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () =>
-                          {Navigator.pushNamed(context, 'premium')},
+                      onPressed: () {
+                        print(selected);
+                      },
                       style: ElevatedButton.styleFrom(
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
