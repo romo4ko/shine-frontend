@@ -6,6 +6,7 @@ import 'dart:async';
 
 import 'package:shine/data/api/api_service.dart';
 import 'package:shine/data/config/app_config.dart';
+import 'package:shine/data/payment/payment_service.dart';
 
 class Premium extends StatefulWidget {
   const Premium({super.key});
@@ -17,6 +18,7 @@ class Premium extends StatefulWidget {
 class _PremiumState extends State<Premium> {
 
   var api = ApiService();
+  var payment = PaymentService();
 
   bool loading = true;
   List<dynamic>? prices;
@@ -231,6 +233,7 @@ class _PremiumState extends State<Premium> {
                     child: ElevatedButton(
                       onPressed: () {
                         print(selected);
+                        payment.setTokenizationModuleInputData(selected?['name'], selected?['cost'] ?? selected?['price']);
                       },
                       style: ElevatedButton.styleFrom(
                         shape: const RoundedRectangleBorder(
